@@ -63,67 +63,81 @@ namespace drum_track
   {
     setup_buffers(16, 3.0);
     srand(time(NULL));
-    for (int section=0; section<4; section++)
+    // int hi_hat_array [16] = {1,1,2,0,1,2,1,0,1,1,2,0,1,1,2,0};
+    hi_hat_writer::write_from_array_at_bar(hi_hat_array, 0);
+
+    for (int channel=0; channel<main_buffer_channels; channel++)
     {
-      int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array();
-      int* kick_array = kick_generator::get_random_kick_standard();
-      int* snare_array = snare_generator::get_random_snare_standard();
-      if (section%2 == 0)
+      for (int i=0; i<main_buffer_size; i++)
       {
-        if (section != 0)
-        {
-          add_crash_to_track_at_beat_or_bar(crash1_buffer, crash1_buffer_size, main_buffer, 0, section * 4);
-        }
-      } else {
-        add_crash_to_track_at_beat_or_bar(crash2_buffer, crash2_buffer_size, main_buffer, 0, section * 4);
+        main_buffer[channel][i] += hi_hat_track[channel][i];
+        // main_buffer[channel][i] += snare_track[channel][i];
       }
-      for (int bars=0; bars<4; bars++)
-      {
-        if (bars % 4 == 3)
-        {
-          int* silence_array = new int [16];
-          for (int j=0; j<16; j++) {
-            if (j>8)
-            {
-              silence_array[j] = 1;
-            } else {
-              silence_array[j] = 0;
-            }
-          }
-          remove_hits_from_teenth_array_via_array(silence_array, hi_hat_array);
-          remove_hits_from_teenth_array_via_array(silence_array, kick_array);
-          remove_hits_from_teenth_array_via_array(silence_array, snare_array);
-        }
-        int bar = bars + (section*4);
-        // std::cout << bar << std::endl;
-        add_drum_to_track_from_teenth_array_at_bar(hi_hat_closed_buffer, hi_hat_closed_buffer_size, main_buffer, hi_hat_array, bar);
-        add_drum_to_track_from_teenth_array_at_bar(kick_buffer, kick_buffer_size, main_buffer, kick_array, bar);
-        add_drum_to_track_from_teenth_array_at_bar(snare_buffer, snare_buffer_size, main_buffer, snare_array, bar);
-      }
+    }
+
+
+    // for (int section=0; section<4; section++)
+    // {
+    //   int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array();
+    //   int* kick_array = kick_generator::get_random_kick_standard();
+    //   int* snare_array = snare_generator::get_random_snare_standard();
+    //   if (section%2 == 0)
+    //   {
+    //     if (section != 0)
+    //     {
+    //       add_crash_to_track_at_beat_or_bar(crash1_buffer, crash1_buffer_size, main_buffer, 0, section * 4);
+    //     }
+    //   } else {
+    //     add_crash_to_track_at_beat_or_bar(crash2_buffer, crash2_buffer_size, main_buffer, 0, section * 4);
+    //   }
+    //   for (int bars=0; bars<4; bars++)
+    //   {
+    //     if (bars % 4 == 3)
+    //     {
+    //       int* silence_array = new int [16];
+    //       for (int j=0; j<16; j++) {
+    //         if (j>8)
+    //         {
+    //           silence_array[j] = 1;
+    //         } else {
+    //           silence_array[j] = 0;
+    //         }
+    //       }
+    //       remove_hits_from_teenth_array_via_array(silence_array, hi_hat_array);
+    //       remove_hits_from_teenth_array_via_array(silence_array, kick_array);
+    //       remove_hits_from_teenth_array_via_array(silence_array, snare_array);
+    //     }
+    //     int bar = bars + (section*4);
+    //     // std::cout << bar << std::endl;
+    //     add_drum_to_track_from_teenth_array_at_bar(hi_hat_closed_buffer, hi_hat_closed_buffer_size, main_buffer, hi_hat_array, bar);
+    //     add_drum_to_track_from_teenth_array_at_bar(kick_buffer, kick_buffer_size, main_buffer, kick_array, bar);
+    //     add_drum_to_track_from_teenth_array_at_bar(snare_buffer, snare_buffer_size, main_buffer, snare_array, bar);
+    //   }
+
       // delete[] hi_hat_array;
       // delete[] kick_array;
       // delete[] snare_array;
-    }
+
   }
 
-  void add_drum_to_track_from_teenth_array_at_bar(double** drum, int drum_size, double** track, int teenth_array [16], int bar)
-  {
-    int bar_start_frame = audio_helper::bar_duration_in_frames() * bar;
-    for (int location=0; location<16; location++)
-    {
-      if (teenth_array[location] != 0 && teenth_array[location] == 1)
-      {
-        int frame_location = audio_helper::teenth_slice_as_frame(location) + bar_start_frame;
-        for (int channel=0; channel<main_buffer_channels; channel++)
-        {
-          for (int i=0; i<drum_size; i++)
-          {
-            track[channel][i+frame_location] += drum[channel][i];
-          }
-        }
-      }
-    }
-  }
+  // void add_drum_to_track_from_teenth_array_at_bar(double** drum, int drum_size, double** track, int teenth_array [16], int bar)
+  // {
+  //   int bar_start_frame = audio_helper::bar_duration_in_frames() * bar;
+  //   for (int location=0; location<16; location++)
+  //   {
+  //     if (teenth_array[location] != 0 && teenth_array[location] == 1)
+  //     {
+  //       int frame_location = audio_helper::teenth_slice_as_frame(location) + bar_start_frame;
+  //       for (int channel=0; channel<main_buffer_channels; channel++)
+  //       {
+  //         for (int i=0; i<drum_size; i++)
+  //         {
+  //           track[channel][i+frame_location] += drum[channel][i];
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   void add_crash_to_track_at_beat_or_bar(double** crash, int crash_size, double** track, int beat, int bar)
   {
