@@ -45,25 +45,43 @@ namespace drum_track
     }
   }
 
+  void create_tracks(int variations, int bars_per_variation)
+  {
+    int** hi_hat_arrays = new int* [variations];
+    for (int variation=0; variation<variations; variation++)
+    {
+      hi_hat_arrays[variation] = hi_hat_generator::generate_hi_hat_teenth_array ();
+    }
+    for (int variation=0; variation<variations; variation++)
+    {
+      for (int bar=0; bar<bars_per_variation; bar++)
+      {
+        int actual_bar = bar + (variation*bars_per_variation);
+        hi_hat_writer::write_from_array_at_bar(hi_hat_arrays[variation], actual_bar);
+      }
+    }
+  }
+
   void test_creation()
   {
     setup_buffers(16, 3.0);
     srand(time(NULL));
-    int silence_array [16] = {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
-    int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array ();
-    int* tom_array = tom_generator::generate_tom_teenth_array(8);
-    int* kick_array = kick_generator::get_random_kick_standard();
-    int* snare_array = snare_generator::get_random_snare_standard();
-    int* hi_hat_with_silence = audio_helper::silence_hits(silence_array, hi_hat_array);
-    int crash1_start_bar [16] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    int crash2_start_bar [16] = {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    hi_hat_writer::write_from_array_at_bar(hi_hat_array, 0);
-    hi_hat_writer::write_from_array_at_bar(hi_hat_with_silence, 1);
-    tom_writer::write_from_array_at_bar(tom_array, 1);
-    kick_writer::write_from_array_at_bar(kick_array, 2);
-    snare_writer::write_from_array_at_bar(snare_array, 3);
-    crash_writer::write_from_array_at_bar(crash1_start_bar, 4);
-    crash_writer::write_from_array_at_bar(crash2_start_bar, 5);
+    create_tracks(3, 4);
+    // int silence_array [16] = {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
+    // int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array ();
+    // int* tom_array = tom_generator::generate_tom_teenth_array(8);
+    // int* kick_array = kick_generator::get_random_kick_standard();
+    // int* snare_array = snare_generator::get_random_snare_standard();
+    // int* hi_hat_with_silence = audio_helper::silence_hits(silence_array, hi_hat_array);
+    // int crash1_start_bar [16] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    // int crash2_start_bar [16] = {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    // hi_hat_writer::write_from_array_at_bar(hi_hat_array, 0);
+    // hi_hat_writer::write_from_array_at_bar(hi_hat_with_silence, 1);
+    // tom_writer::write_from_array_at_bar(tom_array, 1);
+    // kick_writer::write_from_array_at_bar(kick_array, 2);
+    // snare_writer::write_from_array_at_bar(snare_array, 3);
+    // crash_writer::write_from_array_at_bar(crash1_start_bar, 4);
+    // crash_writer::write_from_array_at_bar(crash2_start_bar, 5);
 
     for (int channel=0; channel<main_buffer_channels; channel++)
     {
