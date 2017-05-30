@@ -65,14 +65,16 @@ namespace drum_track
     srand(time(NULL));
     // int hi_hat_array [16] = {1,1,2,0,1,2,1,0,1,1,2,0,1,1,2,0};
     int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array ();
+    int* tom_array = tom_generator::generate_tom_teenth_array(8);
     hi_hat_writer::write_from_array_at_bar(hi_hat_array, 0);
+    tom_writer::write_from_array_at_bar(tom_array, 1);
 
     for (int channel=0; channel<main_buffer_channels; channel++)
     {
       for (int i=0; i<main_buffer_size; i++)
       {
         main_buffer[channel][i] += hi_hat_track[channel][i];
-        // main_buffer[channel][i] += snare_track[channel][i];
+        main_buffer[channel][i] += tom_track[channel][i];
       }
     }
 
