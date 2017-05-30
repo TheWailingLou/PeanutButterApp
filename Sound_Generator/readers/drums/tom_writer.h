@@ -1,5 +1,5 @@
-#ifndef KICK_READER_H
-#define KICK_READER_H
+#ifndef TOM_WRITER_H
+#define TOM_WRITER_H
 
 #include <array>
 #include <math.h>
@@ -7,7 +7,7 @@
 // #include <stdlib.h>
 // #include <ctime>
 
-namespace kick_reader
+namespace tom_writer
 {
 
 }

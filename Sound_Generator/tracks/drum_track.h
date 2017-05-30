@@ -81,6 +81,11 @@ namespace drum_imports
   extern int tom_mid_high_buffer_size;
 }
 
+namespace hi_hat_writer
+{
+  extern void write_from_array_at_bar(int teenth_array [16], int bar)
+}
+
 namespace audio_helper
 {
   extern int time_as_frame(double time_in_seconds);
@@ -105,29 +110,27 @@ namespace drum_track
   double** tom_track;
 
   void setup_buffers(int total_bars, double end_hang_time);
-  // void overlay_drum_at_time(
+
+  // void add_drum_to_track_from_teenth_array_at_bar(
   //   double** drum,
   //   int drum_size,
-  //   double time_in_seconds
+  //   double** track,
+  //   int teenth_array [16],
+  //   int bar=0
   // );
-  void add_drum_to_track_from_teenth_array_at_bar(
-    double** drum,
-    int drum_size,
-    double** track,
-    int teenth_array [16],
-    int bar=0
-  );
-  void add_crash_to_track_at_beat_or_bar(
-    double** crash,
-    int crash_size,
-    double** track,
-    int beat,
-    int bar
-  );
-  void remove_hits_from_teenth_array_via_array(
-    int* silence_array,
-    int* teenth_array
-  );
+
+  // void add_crash_to_track_at_beat_or_bar(
+  //   double** crash,
+  //   int crash_size,
+  //   double** track,
+  //   int beat,
+  //   int bar
+  // );
+
+  // void remove_hits_from_teenth_array_via_array(
+  //   int* silence_array,
+  //   int* teenth_array
+  // );
   void test_creation();
   void free_all_track_memory();
 

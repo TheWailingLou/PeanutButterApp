@@ -1,5 +1,5 @@
-#ifndef CRASH_READER_H
-#define CRASH_READER_H
+#ifndef SNARE_WRITER_H
+#define SNARE_WRITER_H
 
 #include <array>
 #include <math.h>
@@ -7,7 +7,7 @@
 // #include <stdlib.h>
 // #include <ctime>
 
-namespace crash_reader
+namespace kick_writer
 {
 
 }

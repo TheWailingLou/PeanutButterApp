@@ -1,5 +1,5 @@
-#ifndef HI_HAT_READER_H
-#define HI_HAT_READER_H
+#ifndef HI_HAT_WRITER_H
+#define HI_HAT_WRITER_H
 
 #include <array>
 #include <math.h>
@@ -41,9 +41,9 @@ namespace hi_hat_generator
   extern int* get_random_hi_hat_standard();
 }
 
-namespace hi_hat_reader
+namespace hi_hat_writer
 {
-
+  void write_from_array_at_bar(int teenth_array [16], int bar)
 }
 
 #endif
