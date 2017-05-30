@@ -4,7 +4,17 @@
 #include <array>
 #include <math.h>
 #include <iostream>
-#include <stdlib.h>
-#include <ctime>
+// #include <stdlib.h>
+// #include <ctime>
+
+namespace drum_track
+{
+  
+}
+
+namespace hi_hat_reader
+{
+
+}
 
 #endif
