@@ -2,7 +2,6 @@
 
 namespace hi_hat_generator
 {
-
   int* generate_hi_hat_teenth_array ()
   {
     int* teenth_array = new int [16];
