@@ -1,0 +1,28 @@
+{
+  "name": "peanut_butter",
+  "version": "0.0.1",
+  "description": "A desktop app that procedurally generates music and outputs wav files.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "electron",
+    "node-gyp",
+    "electron-gyp",
+    "c++",
+    "desktop",
+    "music"
+  ],
+  "author": "Louis Antweiler",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.6.10"
+  },
+  "dependencies": {
+    "audiobuffer-to-wav": "^1.0.0",
+    "cloudinary": "^1.9.0",
+    "fs": "0.0.1-security",
+    "wav": "^1.0.1"
+  }
+}
