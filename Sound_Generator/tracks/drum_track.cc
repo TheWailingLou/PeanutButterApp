@@ -68,10 +68,14 @@ namespace drum_track
     int* tom_array = tom_generator::generate_tom_teenth_array(8);
     int* kick_array = kick_generator::get_random_kick_standard();
     int* snare_array = snare_generator::get_random_snare_standard();
+    int crash1_start_bar [16] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    int crash2_start_bar [16] = {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     hi_hat_writer::write_from_array_at_bar(hi_hat_array, 0);
     tom_writer::write_from_array_at_bar(tom_array, 1);
     kick_writer::write_from_array_at_bar(kick_array, 2);
     snare_writer::write_from_array_at_bar(snare_array, 3);
+    crash_writer::write_from_array_at_bar(crash1_start_bar, 4);
+    crash_writer::write_from_array_at_bar(crash2_start_bar, 5);
 
     for (int channel=0; channel<main_buffer_channels; channel++)
     {
@@ -81,6 +85,7 @@ namespace drum_track
         main_buffer[channel][i] += tom_track[channel][i];
         main_buffer[channel][i] += kick_track[channel][i];
         main_buffer[channel][i] += snare_track[channel][i];
+        main_buffer[channel][i] += crash_track[channel][i];
       }
     }
 
