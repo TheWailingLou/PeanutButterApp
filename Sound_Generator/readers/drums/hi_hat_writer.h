@@ -30,7 +30,7 @@ namespace audio_helper
 
 namespace drum_track
 {
-  double** hi_hat_track;
+  extern double** hi_hat_track;
   extern int main_buffer_size;
   extern int main_buffer_channels;
 }
@@ -43,7 +43,7 @@ namespace hi_hat_generator
 
 namespace hi_hat_writer
 {
-  void write_from_array_at_bar(int teenth_array [16], int bar)
+  void write_from_array_at_bar(int teenth_array [16], int bar);
 }
 
 #endif

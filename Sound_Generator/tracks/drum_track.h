@@ -83,7 +83,7 @@ namespace drum_imports
 
 namespace hi_hat_writer
 {
-  extern void write_from_array_at_bar(int teenth_array [16], int bar)
+  extern void write_from_array_at_bar(int teenth_array [16], int bar);
 }
 
 namespace audio_helper

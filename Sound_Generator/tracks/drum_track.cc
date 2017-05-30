@@ -63,16 +63,18 @@ namespace drum_track
   {
     setup_buffers(16, 3.0);
     srand(time(NULL));
-    int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array();
-    hi_hat_writer::write_from_array_at_bar(hi_hat_array);
+    // int hi_hat_array [16] = {1,1,2,0,1,2,1,0,1,1,2,0,1,1,2,0};
+    hi_hat_writer::write_from_array_at_bar(hi_hat_array, 0);
 
     for (int channel=0; channel<main_buffer_channels; channel++)
     {
       for (int i=0; i<main_buffer_size; i++)
       {
-        main_buffer[channel][i] = hi_hat_track[channel][i];
+        main_buffer[channel][i] += hi_hat_track[channel][i];
+        // main_buffer[channel][i] += snare_track[channel][i];
       }
     }
+
 
     // for (int section=0; section<4; section++)
     // {
@@ -115,7 +117,7 @@ namespace drum_track
       // delete[] hi_hat_array;
       // delete[] kick_array;
       // delete[] snare_array;
-    }
+
   }
 
   // void add_drum_to_track_from_teenth_array_at_bar(double** drum, int drum_size, double** track, int teenth_array [16], int bar)
