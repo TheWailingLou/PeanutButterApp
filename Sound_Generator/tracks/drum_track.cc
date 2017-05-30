@@ -46,18 +46,18 @@ namespace drum_track
     }
   }
 
-  void overlay_drum_at_time(double** drum_buffer, int drum_size, double time_in_seconds)
-  {
-    int time_as_frame = audio_helper::time_as_frame(time_in_seconds);
-
-    for (int channel=0; channel<main_buffer_channels; channel++)
-    {
-      for (int i=0; i<drum_size; i++)
-      {
-        main_buffer[channel][i+time_as_frame] += drum_buffer[channel][i];
-      }
-    }
-  }
+  // void overlay_drum_at_time(double** drum_buffer, int drum_size, double time_in_seconds)
+  // {
+  //   int time_as_frame = audio_helper::time_as_frame(time_in_seconds);
+  //
+  //   for (int channel=0; channel<main_buffer_channels; channel++)
+  //   {
+  //     for (int i=0; i<drum_size; i++)
+  //     {
+  //       main_buffer[channel][i+time_as_frame] += drum_buffer[channel][i];
+  //     }
+  //   }
+  // }
 
   void test_creation()
   {

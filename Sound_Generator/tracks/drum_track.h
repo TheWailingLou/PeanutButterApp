@@ -105,11 +105,11 @@ namespace drum_track
   double** tom_track;
 
   void setup_buffers(int total_bars, double end_hang_time);
-  void overlay_drum_at_time(
-    double** drum,
-    int drum_size,
-    double time_in_seconds
-  );
+  // void overlay_drum_at_time(
+  //   double** drum,
+  //   int drum_size,
+  //   double time_in_seconds
+  // );
   void add_drum_to_track_from_teenth_array_at_bar(
     double** drum,
     int drum_size,
