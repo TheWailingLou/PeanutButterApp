@@ -4,8 +4,6 @@
 #include <array>
 #include <math.h>
 #include <iostream>
-// #include <stdlib.h>
-// #include <ctime>
 
 namespace drum_imports
 {
@@ -20,8 +18,6 @@ namespace drum_imports
 
 namespace audio_helper
 {
-  extern int time_as_frame(double time_in_seconds);
-  extern int beat_as_frame(int beat);
   extern int teenth_slice_as_frame(int beat);
   extern int bar_duration_in_frames();
   extern int calculate_total_frames(int total_bars, double end_hang_time=3);
@@ -35,11 +31,6 @@ namespace drum_track
   extern int main_buffer_channels;
 }
 
-namespace hi_hat_generator
-{
-  extern int* generate_hi_hat_teenth_array();
-  extern int* get_random_hi_hat_standard();
-}
 
 namespace hi_hat_writer
 {
