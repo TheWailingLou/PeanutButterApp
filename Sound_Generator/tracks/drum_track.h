@@ -17,6 +17,11 @@ namespace kick_generator
   extern int* get_random_kick_standard();
 }
 
+namespace snare_generator
+{
+  extern int* get_random_snare_standard();
+}
+
 namespace tom_generator
 {
   int* generate_tom_teenth_array(int begin_at_teenth);
@@ -91,9 +96,19 @@ namespace hi_hat_writer
   extern void write_from_array_at_bar(int teenth_array [16], int bar);
 }
 
+namespace kick_writer
+{
+  extern void write_from_array_at_bar(int teenth_array [16], int bar);
+}
+
 namespace tom_writer
 {
   extern void write_from_array_at_bar(int teenth_array [16], int bar);
+}
+
+namespace snare_writer
+{
+  extern void write_from_array_at_bar(int teenth_array [16], int bar);  
 }
 
 namespace audio_helper
