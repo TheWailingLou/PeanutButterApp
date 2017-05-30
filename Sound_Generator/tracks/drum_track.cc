@@ -64,6 +64,7 @@ namespace drum_track
     setup_buffers(16, 3.0);
     srand(time(NULL));
     // int hi_hat_array [16] = {1,1,2,0,1,2,1,0,1,1,2,0,1,1,2,0};
+    int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array ();
     hi_hat_writer::write_from_array_at_bar(hi_hat_array, 0);
 
     for (int channel=0; channel<main_buffer_channels; channel++)
