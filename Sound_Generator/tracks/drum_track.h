@@ -108,7 +108,12 @@ namespace tom_writer
 
 namespace snare_writer
 {
-  extern void write_from_array_at_bar(int teenth_array [16], int bar);  
+  extern void write_from_array_at_bar(int teenth_array [16], int bar);
+}
+
+namespace crash_writer
+{
+  extern void write_from_array_at_bar(int teenth_array [16], int bar);
 }
 
 namespace audio_helper
