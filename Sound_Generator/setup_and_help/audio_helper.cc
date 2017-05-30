@@ -40,4 +40,19 @@ namespace audio_helper
     int end_hang_in_frames = time_as_frame(end_hang_time);
     return bar_duration + end_hang_in_frames;
   }
+
+  int* silence_hits(int silence_array [16], int* teenth_array)
+  {
+    int* array_with_silence = new int [16];
+    for (int i=0; i<16; i++)
+    {
+      if (silence_array[i] == 1)
+      {
+        array_with_silence[i] = 0;
+      } else {
+        array_with_silence[i] = teenth_array[i];
+      }
+    }
+    return array_with_silence;
+  }
 }
