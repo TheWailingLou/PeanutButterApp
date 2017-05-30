@@ -29,20 +29,20 @@ function loadSound(url) {
 }
 
 Promise.all([
-  loadSound('./assets/mp3/crash.mp3'),
-  loadSound('./assets/mp3/crash2.mp3'),
-  loadSound('./assets/mp3/hi-hat-closed.mp3'),
-  loadSound('./assets/mp3/hi-hat-open.mp3'),
-  loadSound('./assets/mp3/kick.mp3'),
-  loadSound('./assets/mp3/ride.mp3'),
-  loadSound('./assets/mp3/ride2.mp3'),
-  loadSound('./assets/mp3/snare.mp3'),
-  loadSound('./assets/mp3/snareSoft.mp3'),
-  loadSound('./assets/mp3/tomFloor.mp3'),
-  loadSound('./assets/mp3/tomFloor2.mp3'),
-  loadSound('./assets/mp3/tomHigh.mp3'),
-  loadSound('./assets/mp3/tomMid.mp3'),
-  loadSound('./assets/mp3/tomMidHigh.mp3')
+  loadSound('./assets/drum_samples/crash.mp3'),
+  loadSound('./assets/drum_samples/crash2.mp3'),
+  loadSound('./assets/drum_samples/hi-hat-closed.mp3'),
+  loadSound('./assets/drum_samples/hi-hat-open.mp3'),
+  loadSound('./assets/drum_samples/kick.mp3'),
+  loadSound('./assets/drum_samples/ride.mp3'),
+  loadSound('./assets/drum_samples/ride2.mp3'),
+  loadSound('./assets/drum_samples/snare.mp3'),
+  loadSound('./assets/drum_samples/snareSoft.mp3'),
+  loadSound('./assets/drum_samples/tomFloor.mp3'),
+  loadSound('./assets/drum_samples/tomFloor2.mp3'),
+  loadSound('./assets/drum_samples/tomHigh.mp3'),
+  loadSound('./assets/drum_samples/tomMid.mp3'),
+  loadSound('./assets/drum_samples/tomMidHigh.mp3')
 ]).then(function(bufferArray){
   var crash1Buff = bufferArray[0]
   var crash2Buff = bufferArray[1]
@@ -91,6 +91,6 @@ Promise.all([
   var source = context.createBufferSource()
   source.buffer = drumBuffer
   source.connect(context.destination);
-  soure.start()
-  
+  source.start()
+
 })
