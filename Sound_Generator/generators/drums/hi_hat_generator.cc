@@ -61,7 +61,7 @@ namespace hi_hat_generator
         teenth_array[i+8] = teenth_array[i];
       }
     }
-    return teenth_array;
+    return generate_openings(teenth_array);
   }
 
   int* get_random_hi_hat_standard()
@@ -69,4 +69,69 @@ namespace hi_hat_generator
     int arrnum = rand() % number_of_standards;
     return &hi_hat_standards[arrnum][0];
   }
+
+  int* generate_openings(int* teenth_array)
+  {
+    std::vector<int> possibilities;
+    int* array_with_openings = new int [16];
+    for (int i=0; i<16; i++)
+    {
+      array_with_openings[i] = teenth_array[i];
+    }
+
+    for (int i=0; i<15; i++) {
+      if (teenth_array[i] == 1 && teenth_array[i+1] == 0)
+      {
+        possibilities.push_back(i);
+      }
+    }
+
+    if (possibilities.size() == 0 || rand()%10 > 6) {
+      int random_number = rand()%16;
+      possibilities.push_back(random_number);
+    }
+    std::vector<int> openings = random_from_vector(possibilities);
+    for (int i=0; i<(int)openings.size(); i++)
+    {
+      array_with_openings[openings[i]] = 2;
+    }
+    return array_with_openings;
+  }
+
+  std::vector<int> random_from_vector(std::vector<int> possibilities)
+  {
+    int number_of_openings = rand()%((int)possibilities.size());
+    if (number_of_openings > 2)
+    {
+      number_of_openings = 2 + rand()%2;
+    }
+    std::vector<int> openings;
+    for (int i=0; i<number_of_openings; i++)
+    {
+      int random = rand()%((int)possibilities.size());
+      openings.push_back(possibilities[random]);
+    }
+    while (((int)openings.size()) > 3) {
+      openings.pop_back();
+    }
+    return openings;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

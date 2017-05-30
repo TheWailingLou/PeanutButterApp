@@ -6,6 +6,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <ctime>
+#include <vector>
 
 namespace hi_hat_generator
 {
@@ -24,6 +25,8 @@ namespace hi_hat_generator
   };
   int* generate_hi_hat_teenth_array();
   int* get_random_hi_hat_standard();
+  int* generate_openings(int* teenth_array);
+  std::vector<int> random_from_vector(std::vector<int> possibilities);
 }
 
 #endif
