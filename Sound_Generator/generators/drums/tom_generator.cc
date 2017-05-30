@@ -2,7 +2,7 @@
 
 namespace tom_generator
 {
-  int* generate_tom_teenth_array(int num_of_teenths)
+  int* generate_tom_teenth_array(int begin_at_teenth)
   {
     int* tom_array = new int [16];
     int cap;
@@ -18,7 +18,7 @@ namespace tom_generator
     int hit_streak = 0;
     for (int i=0; i<16; i++)
     {
-      if (i <= (16 - num_of_teenths) || i == 15)
+      if (i <= (16 - begin_at_teenth) || i == 15)
       {
         tom_array[i] = 0;
       } else {

@@ -9,7 +9,7 @@
 
 namespace tom_generator
 {
-  int* generate_tom_teenth_array(int num_of_teenths);
+  int* generate_tom_teenth_array(int begin_at_teenth);
 }
 
 #endif
