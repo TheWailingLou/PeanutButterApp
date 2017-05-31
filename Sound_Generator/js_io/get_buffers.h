@@ -13,6 +13,15 @@ namespace drum_track
   extern int main_buffer_channels;
   extern void test_creation();
 }
+
+namespace bass_track
+{
+  extern double** main_buffer;
+  extern int main_buffer_size;
+  extern int main_buffer_channels;
+  extern void test_creation();
+}
+
 namespace audio_setup
 {
   extern double** main_audio_buffer;
@@ -39,6 +48,7 @@ namespace get_buffers
 
   void Get_Main_Buffer(const FunctionCallbackInfo<Value>& args);
   void Get_Main_Drum_Buffer(const FunctionCallbackInfo<Value>& args);
+  void Get_Main_Bass_Buffer(const FunctionCallbackInfo<Value>& args);
 }
 
 #endif

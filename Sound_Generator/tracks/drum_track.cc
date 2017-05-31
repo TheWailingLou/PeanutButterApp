@@ -11,7 +11,7 @@ namespace drum_track
     }
     // if (main_buffer_size == 0 || total_bars != 0)
     // {
-      main_buffer_size = audio_helper::calculate_total_frames(total_bars, end_hang_time);
+    main_buffer_size = audio_helper::calculate_total_frames(total_bars, end_hang_time);
     // }
 
     main_buffer = new double* [main_buffer_channels];
@@ -66,7 +66,6 @@ namespace drum_track
   {
     setup_buffers(60, 3.0);
     srand(time(NULL));
-
     int** arrangement = new int* [5];
     for (int i=0; i<5; i++) {
       arrangement[i] = new int [12];
@@ -75,30 +74,11 @@ namespace drum_track
         arrangement[i][j] = drum_arrangement::drum_arrangement_standard_2[i][j];
       }
     }
-
-    // std::cout << arrangement[4][6] << " arrangement" << std::endl;
     drum_arrangement::create_tracks_from_arrangement(
       arrangement,
       arrangement_main::section_length_standard_2,
       12
     );
-    // create_tracks(3, 4);
-    // int silence_array [16] = {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
-    // int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array ();
-    // int* tom_array = tom_generator::generate_tom_teenth_array(8);
-    // int* kick_array = kick_generator::get_random_kick_standard();
-    // int* snare_array = snare_generator::get_random_snare_standard();
-    // int* hi_hat_with_silence = audio_helper::silence_hits(silence_array, hi_hat_array);
-    // int crash1_start_bar [16] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    // int crash2_start_bar [16] = {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    // hi_hat_writer::write_from_array_at_bar(hi_hat_array, 0);
-    // hi_hat_writer::write_from_array_at_bar(hi_hat_with_silence, 1);
-    // tom_writer::write_from_array_at_bar(tom_array, 1);
-    // kick_writer::write_from_array_at_bar(kick_array, 2);
-    // snare_writer::write_from_array_at_bar(snare_array, 3);
-    // crash_writer::write_from_array_at_bar(crash1_start_bar, 4);
-    // crash_writer::write_from_array_at_bar(crash2_start_bar, 5);
-
     for (int channel=0; channel<main_buffer_channels; channel++)
     {
       for (int i=0; i<main_buffer_size; i++)
