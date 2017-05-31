@@ -17,10 +17,12 @@ namespace audio_setup
 
   int sample_rate;
   int tempo;
+  int mode;
   double** main_audio_buffer;
   int main_audio_buffer_size;
   int main_audio_buffer_channels;
 
+  void Set_Mode(const FunctionCallbackInfo<Value>& args);
   void Set_Sample_Rate(const FunctionCallbackInfo<Value>& args);
   void Get_Sample_Rate(const FunctionCallbackInfo<Value>& args);
   void Set_Tempo(const FunctionCallbackInfo<Value>& args);

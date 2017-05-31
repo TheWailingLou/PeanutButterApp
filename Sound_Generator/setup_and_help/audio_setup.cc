@@ -7,6 +7,11 @@ namespace audio_setup
     sample_rate = args[0]->NumberValue();
   }
 
+  void Set_Mode(const FunctionCallbackInfo<Value>& args)
+  {
+    mode = args[0]->NumberValue();
+  }
+
   void Get_Sample_Rate(const FunctionCallbackInfo<Value>& args)
   {
     Isolate* isolate = args.GetIsolate();

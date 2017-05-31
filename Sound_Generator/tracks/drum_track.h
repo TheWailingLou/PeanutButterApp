@@ -68,18 +68,6 @@ namespace drum_arrangement
 {
   extern int drum_arrangement_standard_1 [5][7];
   extern int drum_arrangement_standard_2 [5][12];
-  // [5][7] = {
-  //   // hi hat
-  //   {0,1,2,1,2,3,0},
-  //   // snare
-  //   {0,1,2,1,2,3,0},
-  //   // kick
-  //   {0,1,2,1,2,3,0},
-  //   // tom fills
-  //   {-1,8,8,8,4,8,-1},
-  //   // crash
-  //   {0,0,1,2,1,2,1}
-  // };
   extern void create_tracks_from_arrangement(
     int** arrangement,
     int* section_length,
@@ -109,7 +97,6 @@ namespace drum_track
   void setup_buffers(int total_bars, double end_hang_time);
   void test_creation();
   void free_all_track_memory();
-
 }
 
 #endif

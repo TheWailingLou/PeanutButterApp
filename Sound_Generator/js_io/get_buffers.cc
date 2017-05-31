@@ -41,4 +41,16 @@ namespace get_buffers
     );
     args.GetReturnValue().Set(output_array);
   }
+
+  void Get_Main_Bass_Buffer(const FunctionCallbackInfo<Value>& args)
+  {
+    bass_track::test_creation();
+    Isolate* isolate = args.GetIsolate();
+    Local<Array> output_array = Get_Buffer(isolate,
+      bass_track::main_buffer,
+      bass_track::main_buffer_channels,
+      bass_track::main_buffer_size
+    );
+    args.GetReturnValue().Set(output_array);
+  }
 }
