@@ -6,9 +6,14 @@
 #include <iostream>
 #include <stdlib.h>
 
+namespace bass_main
+{
+  extern int bass_line_test [16][2];
+}
+
 namespace bass_writer
 {
-
+  extern void write_bass_bar(int** bass_teenth_array, int bar);
 }
 
 namespace audio_helper

@@ -17,11 +17,6 @@ using v8::Float32Array;
 
 namespace audio_setup
 {
-  // extern int sample_rate;
-  // extern int tempo;
-  // extern double** main_audio_buffer;
-  // extern int main_audio_buffer_size;
-  // extern int main_audio_buffer_channels;
   extern void Set_Mode(const FunctionCallbackInfo<Value>& args);
   extern void Set_Sample_Rate(const FunctionCallbackInfo<Value>& args);
   extern void Get_Sample_Rate(const FunctionCallbackInfo<Value>& args);
@@ -31,55 +26,11 @@ namespace audio_setup
 
 namespace drum_imports
 {
-  // extern double** kick_buffer;
-  // extern int kick_buffer_channels;
-  // extern int kick_buffer_size;
-  // extern double** crash1_buffer;
-  // extern int crash1_buffer_channels;
-  // extern int crash1_buffer_size;
-  // extern double** crash2_buffer;
-  // extern int crash2_buffer_channels;
-  // extern int crash2_buffer_size;
-  // extern double** hi_hat_closed_buffer;
-  // extern int hi_hat_closed_buffer_channels;
-  // extern int hi_hat_closed_buffer_size;
-  // extern double** hi_hat_open_buffer;
-  // extern int hi_hat_open_buffer_channels;
-  // extern int hi_hat_open_buffer_size;
-  // extern double** ride1_buffer;
-  // extern int ride1_buffer_channels;
-  // extern int ride1_buffer_size;
-  // extern double** ride2_buffer;
-  // extern int ride2_buffer_channels;
-  // extern int ride2_buffer_size;
-  // extern double** snare_buffer;
-  // extern int snare_buffer_channels;
-  // extern int snare_buffer_size;
-  // extern double** snare_soft_buffer;
-  // extern int snare_soft_buffer_channels;
-  // extern int snare_soft_buffer_size;
-  // extern double** tom_floor1_buffer;
-  // extern int tom_floor1_buffer_channels;
-  // extern int tom_floor1_buffer_size;
-  // extern double** tom_floor2_buffer;
-  // extern int tom_floor2_buffer_channels;
-  // extern int tom_floor2_buffer_size;
-  // extern double** tom_high_buffer;
-  // extern int tom_high_buffer_channels;
-  // extern int tom_high_buffer_size;
-  // extern double** tom_mid_buffer;
-  // extern int tom_mid_buffer_channels;
-  // extern int tom_mid_buffer_size;
-  // extern double** tom_mid_high_buffer;
-  // extern int tom_mid_high_buffer_channels;
-  // extern int tom_mid_high_buffer_size;
-
   extern void Set_Buffer(Local<Array> input_array,
     double*** buffer,
     int* channels,
     int* buffer_size
   );
-
   extern void Set_Kick_Buffer(const FunctionCallbackInfo<Value>& args);
   extern void Set_Crash1_Buffer(const FunctionCallbackInfo<Value>& args);
   extern void Set_Crash2_Buffer(const FunctionCallbackInfo<Value>& args);

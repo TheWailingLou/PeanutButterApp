@@ -34,6 +34,14 @@ namespace bass_track
   {
     setup_buffers(60, 3.0);
     srand(time(NULL));
+    int** bass_teenth_array = new int* [16];
+    for (int i=0; i<16; i++)
+    {
+      bass_teenth_array[i] = new int [2];
+      bass_teenth_array[i][0] = 35;
+      bass_teenth_array[i][1] = 1;
+    }
+    bass_writer::write_bass_bar(bass_teenth_array, 0);
     // int** arrangement = new int* [5];
     // for (int i=0; i<5; i++) {
     //   arrangement[i] = new int [12];
