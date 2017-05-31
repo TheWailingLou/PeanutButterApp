@@ -67,6 +67,7 @@ namespace audio_helper
 namespace drum_arrangement
 {
   extern int drum_arrangement_standard_1 [5][7];
+  extern int drum_arrangement_standard_2 [5][12];
   // [5][7] = {
   //   // hi hat
   //   {0,1,2,1,2,3,0},
@@ -89,6 +90,7 @@ namespace drum_arrangement
 namespace arrangement_main
 {
   extern int section_length_standard_1 [7];
+  extern int section_length_standard_2 [12];
 }
 
 namespace drum_track

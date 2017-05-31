@@ -83,6 +83,19 @@ namespace drum_arrangement
     {2,0,1,2,1,2,1}
   };
 
+  int drum_arrangement_standard_2 [5][12] = {
+    // hi hat
+    {1,1,2,2,1,1,2,2,3,3,1,0},
+    // snare
+    {1,1,1,1,2,2,2,2,3,1,1,0},
+    // kick
+    {1,1,1,1,2,2,2,2,3,1,1,0},
+    // tom fills
+    {4,8,4,8,4,8,8,12,-1,8,4,-1},
+    // crash
+    {0,0,2,0,1,2,1,2,1,0,2,1}
+  };
+
   void create_tracks_from_arrangement(
     int** arrangement,
     int* section_length,

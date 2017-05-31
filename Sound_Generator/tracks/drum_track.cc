@@ -9,10 +9,10 @@ namespace drum_track
     {
       main_buffer_channels = 2;
     }
-    if (main_buffer_size == 0 || total_bars != 0)
-    {
+    // if (main_buffer_size == 0 || total_bars != 0)
+    // {
       main_buffer_size = audio_helper::calculate_total_frames(total_bars, end_hang_time);
-    }
+    // }
 
     main_buffer = new double* [main_buffer_channels];
     hi_hat_track = new double* [main_buffer_channels];
@@ -64,23 +64,23 @@ namespace drum_track
 
   void test_creation()
   {
-    setup_buffers(30, 3.0);
+    setup_buffers(60, 3.0);
     srand(time(NULL));
 
     int** arrangement = new int* [5];
     for (int i=0; i<5; i++) {
-      arrangement[i] = new int [7];
-      for (int j=0; j<7; j++)
+      arrangement[i] = new int [12];
+      for (int j=0; j<12; j++)
       {
-        arrangement[i][j] = drum_arrangement::drum_arrangement_standard_1[i][j];
+        arrangement[i][j] = drum_arrangement::drum_arrangement_standard_2[i][j];
       }
     }
 
-    std::cout << arrangement[4][6] << " arrangement" << std::endl;
+    // std::cout << arrangement[4][6] << " arrangement" << std::endl;
     drum_arrangement::create_tracks_from_arrangement(
       arrangement,
-      arrangement_main::section_length_standard_1,
-      7
+      arrangement_main::section_length_standard_2,
+      12
     );
     // create_tracks(3, 4);
     // int silence_array [16] = {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};

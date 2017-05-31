@@ -145,6 +145,7 @@ namespace drum_arrangement
           crash_writer::write_crash_at_bar(crash, current_bar);
         }
 
+        // std::cout << "\ncurrent_bar " << current_bar << std::endl;
 
         if (bar == section_length[section]-1 && fill_length != -1) {
           int* silence_arr = audio_helper::silence_array(16-fill_length,16);
