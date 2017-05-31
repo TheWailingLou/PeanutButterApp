@@ -34,6 +34,7 @@ namespace drum_track
 
 namespace crash_writer
 {
+  void write_crash_at_bar(int crash, int bar);
   void write_from_array_at_bar(int teenth_array [16], int bar);
 }
 

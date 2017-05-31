@@ -64,9 +64,25 @@ namespace drum_track
 
   void test_creation()
   {
-    setup_buffers(16, 3.0);
+    setup_buffers(30, 3.0);
     srand(time(NULL));
-    create_tracks(3, 4);
+
+    int** arrangement = new int* [5];
+    for (int i=0; i<5; i++) {
+      arrangement[i] = new int [7];
+      for (int j=0; j<7; j++)
+      {
+        arrangement[i][j] = drum_arrangement::drum_arrangement_standard_1[i][j];
+      }
+    }
+
+    std::cout << arrangement[4][6] << " arrangement" << std::endl;
+    drum_arrangement::create_tracks_from_arrangement(
+      arrangement,
+      arrangement_main::section_length_standard_1,
+      7
+    );
+    // create_tracks(3, 4);
     // int silence_array [16] = {0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1};
     // int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array ();
     // int* tom_array = tom_generator::generate_tom_teenth_array(8);

@@ -20,6 +20,7 @@ namespace audio_helper
   int calculate_total_frames(int total_bars, double end_hang_time=3);
   int calculate_total_frames(int total_bars);
   int* silence_hits(int silence_array [16], int* teenth_array);
+  int* silence_array(int start_teenth, int end_teenth);
 }
 
 #endif

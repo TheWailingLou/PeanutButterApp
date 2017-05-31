@@ -55,4 +55,19 @@ namespace audio_helper
     }
     return array_with_silence;
   }
+
+  int* silence_array(int start_teenth, int end_teenth)
+  {
+    int* silent_arr = new int [16];
+    for (int i=0; i<16; i++)
+    {
+      if (i>=start_teenth && i<end_teenth)
+      {
+        silent_arr[i] = 1;
+      } else {
+        silent_arr[i] = 0;
+      }
+    }
+    return silent_arr;
+  }
 }

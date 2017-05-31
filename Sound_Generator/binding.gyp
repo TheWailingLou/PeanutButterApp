@@ -4,6 +4,8 @@
             "target_name": "peanutButter",
             "sources": [
                 "main.cc",
+                "./arrangement/arrangement_main.cc",
+                "./arrangement/drum_arrangement.cc",
                 "./generators/drums/hi_hat_generator.cc",
                 "./generators/drums/kick_generator.cc",
                 "./generators/drums/snare_generator.cc",
