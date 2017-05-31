@@ -8,7 +8,10 @@ namespace bass_writer
     {
       int note = bass_teenth_array[i][0];
       int teenth_duration = bass_teenth_array[i][1];
-      bass_voice::write_note_at_location(note, teenth_duration, i, bar);
+      if (note != -1)
+      {
+        bass_voice::write_note_at_location(note, teenth_duration, i, bar);
+      }
     }
   }
 }

@@ -8,7 +8,8 @@
 
 namespace bass_main
 {
-  extern int bass_line_test [16][2];
+  extern int** generate_test_teenth(int mode, int starting_note);
+  extern int** generate_bass_bar(int mode, int starting_note);
 }
 
 namespace bass_writer
