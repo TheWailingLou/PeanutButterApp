@@ -1,10 +1,9 @@
-#ifndef DRUM_TRACK
-#define DRUM_TRACK
+#ifndef DRUM_ARRANGMENT_H
+#define DRUM_ARRANGMENT_H
 
 #include <array>
 #include <math.h>
 #include <iostream>
-#include <stdlib.h>
 
 namespace hi_hat_generator
 {
@@ -54,60 +53,42 @@ namespace snare_writer
 
 namespace crash_writer
 {
+  extern void write_crash_at_bar(int crash, int bar);
   extern void write_from_array_at_bar(int teenth_array [16], int bar);
 }
 
 namespace audio_helper
 {
-  extern int calculate_total_frames(int total_bars, double end_hang_time=3);
-  extern int calculate_total_frames(int total_bars);
   extern int* silence_hits(int* silence_array, int* teenth_array);
-}
-
-namespace drum_arrangement
-{
-  extern int drum_arrangement_standard_1 [5][7];
-  // [5][7] = {
-  //   // hi hat
-  //   {0,1,2,1,2,3,0},
-  //   // snare
-  //   {0,1,2,1,2,3,0},
-  //   // kick
-  //   {0,1,2,1,2,3,0},
-  //   // tom fills
-  //   {-1,8,8,8,4,8,-1},
-  //   // crash
-  //   {0,0,1,2,1,2,1}
-  // };
-  extern void create_tracks_from_arrangement(
-    int** arrangement,
-    int* section_length,
-    int total_sections
-  );
+  extern int* silence_array(int start_teenth, int end_teenth);
 }
 
 namespace arrangement_main
 {
-  extern int section_length_standard_1 [7];
+  extern int section_length_standard_1;
 }
 
-namespace drum_track
+namespace drum_arrangement
 {
-  double** main_buffer;
-  int main_buffer_size;
-  int main_buffer_channels;
+  int drum_arrangement_standard_1 [5][7] = {
+    // hi hat
+    {0,1,2,1,2,3,0},
+    // snare
+    {0,1,2,1,2,3,0},
+    // kick
+    {0,1,2,1,2,3,0},
+    // tom fills
+    {-1,8,8,8,4,8,-1},
+    // crash
+    {2,0,1,2,1,2,1}
+  };
 
-  double** crash_track;
-  double** hi_hat_track;
-  double** kick_track;
-  double** ride_track;
-  double** snare_track;
-  double** tom_track;
-
-  void setup_buffers(int total_bars, double end_hang_time);
-  void test_creation();
-  void free_all_track_memory();
-
+  void create_tracks_from_arrangement(
+    int** arrangement,
+    int* section_length,
+    int total_sections
+  );
+  int num_of_unique_sections(int* arrangement, int total_sections);
 }
 
 #endif
