@@ -52,8 +52,8 @@ namespace bass_voice
           sin_frame3 = -1;
           sin_frame4 = -1;
         }
-        double super_square = 0;
-        int voices = 12;
+        double morpher_square = 0;
+        int voices = 12 - (i%5);
         for (int voice=0; voice<voices; voice++)
         {
           double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency + (((double)voice)*(frequency*2/((double)voices)))/(frequency*2));
@@ -63,11 +63,11 @@ namespace bass_voice
           } else {
             sin_frame = -1.0/((double)voices);
           }
-          super_square += sin_frame;
+          morpher_square += sin_frame;
         }
 
         // double super_square = (sin_frame + sin_frame2 + sin_frame3 + sin_frame4)/4.0;
-        bass_track::bass_track_1[channel][i+frame_location] += super_square * gain;
+        bass_track::bass_track_1[channel][i+frame_location] += morpher_square * gain;
       }
     }
   }

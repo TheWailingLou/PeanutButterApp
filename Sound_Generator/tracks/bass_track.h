@@ -9,6 +9,7 @@
 namespace music_gen
 {
   extern int** generate_bar_from_chords(int** chords, int octave);
+  extern int** modify_bar_to_new_mode_or_key(int** bar, int mode, int starting_note, int new_mode, int new_starting_note, int octave);
 }
 
 namespace chord_gen

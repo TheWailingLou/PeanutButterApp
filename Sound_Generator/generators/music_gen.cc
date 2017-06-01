@@ -79,4 +79,29 @@ namespace music_gen
     }
     return teenth_array;
   }
+
+  int** modify_bar_to_new_mode_or_key(int** bar, int mode, int starting_note, int new_mode, int new_starting_note, int octave)
+  {
+    int** new_bar = new int* [16];
+    int new_lowest_note = notes::find_lowest_note(new_starting_note);
+    int* new_scale = notes::get_single_octave(new_lowest_note, new_mode, false);
+    for (int i=0; i<16; i++)
+    {
+      new_bar[i] = new int [2];
+      int note = bar[i][0];
+      int duration = bar[i][1];
+      if (note != -1)
+      {
+        int note_val = notes::convert_to_note_value(note, mode, starting_note);
+        int new_note = new_scale[note_val] + 12*octave;
+        new_bar[i][0] = new_note;
+        new_bar[i][1] = duration;
+      } else {
+        new_bar[i][0] = -1;
+        new_bar[i][1] = duration;
+      }
+    }
+    delete[] new_scale;
+    return new_bar;
+  }
 }

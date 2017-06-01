@@ -14,6 +14,8 @@ namespace scales
 
 namespace notes
 {
+  int convert_to_note_value(int note, int mode, int starting_note);
+  int** get_note_values_from_chords(int** chords, int mode, int starting_note);
   int* get_single_octave(int starting_note, int mode, bool harmonic);
   int* get_octave_range(
     int octaves_below,
@@ -25,6 +27,7 @@ namespace notes
   int* get_all_notes(int starting_note, int mode, bool harmonic);
   int find_lowest_note(int starting_note);
   int find_highest_note(int starting_note);
+  int get_octave(int note);
 }
 
 #endif

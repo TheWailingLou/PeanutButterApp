@@ -2,6 +2,47 @@
 
 namespace notes
 {
+  int convert_to_note_value(int note, int mode, int starting_note)
+  {
+    int lowest_of_note = find_lowest_note(note);
+    int lowest_of_starting_note = find_lowest_note(starting_note);
+    int* scale = get_single_octave(lowest_of_starting_note, mode, false);
+    int note_value = -1;
+    for (int i=0; i<7; i++)
+    {
+      if (lowest_of_note == scale[i])
+      {
+        note_value = i;
+        break;
+      }
+    }
+    delete[] scale;
+    return note_value;
+  }
+  int** get_note_values_from_chords(int** chords, int mode, int starting_note)
+  {
+    int** note_values = new int* [16];
+    for (int i=0; i<16; i++)
+    {
+      note_values[i] = new int [6];
+      if (chords[i][0] == -1)
+      {
+        for (int j=0; j<6; j++)
+        {
+          note_values[i][j] = -1;
+        }
+      } else {
+        for (int j=0; j<6; j++)
+        {
+          int note = chords[i][j+1];
+          int note_val = convert_to_note_value(note, mode, starting_note);
+          note_values[i][j] = note_val;
+        }
+      }
+    }
+    return note_values;
+  }
+
   int* get_single_octave(int starting_note, int mode, bool harmonic)
   {
     int* spectrum = new int [7];
@@ -70,6 +111,21 @@ namespace notes
       i -= 12;
     }
     return i;
+  }
+  int get_octave(int note)
+  {
+    int lowest_note = notes::find_lowest_note(note);
+    int octave = 0;
+    if (lowest_note > note)
+    {
+      return -1;
+    }
+    while (lowest_note < note)
+    {
+      lowest_note += 12;
+      octave += 1;
+    }
+    return octave;
   }
 
   int find_highest_note(int starting_note)

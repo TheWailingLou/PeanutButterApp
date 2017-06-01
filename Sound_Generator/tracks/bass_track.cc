@@ -40,16 +40,24 @@ namespace bass_track
     // int** bass_teenth_array = bass_main::generate_bass_bar(0, 35);
     int** bass_teenth_array1 = music_gen::generate_bar_from_chords(chord_arr, 2);
     int** bass_teenth_array2 = music_gen::generate_bar_from_chords(chord_arr, 2);
+    int** bass_teenth_arr_mod1 = music_gen::modify_bar_to_new_mode_or_key(
+      bass_teenth_array1, 5, 36, 0, 39, 2
+    );
+    int** bass_teenth_arr_mod2 = music_gen::modify_bar_to_new_mode_or_key(
+        bass_teenth_array2, 5, 36, 0, 39, 2
+    );
 
-    // for (int i=0; i<16; i++)
-    // {
-    //   std::cout << "\n\nNote: " << i << std::endl;
-    //   for (int j=0; j<2; j++)
-    //   {
-    //     std::cout << " " << bass_teenth_array[i][j];
-    //   }
-    //   std::cout << std::endl;
-    // }
+
+    for (int i=0; i<16; i++)
+    {
+      std::cout << "\nNote: " << i << std::endl;
+      for (int j=0; j<2; j++)
+      {
+        std::cout << " " << bass_teenth_array1[i][j];
+        std::cout << " compare: " << bass_teenth_arr_mod1[i][j];
+      }
+      std::cout << std::endl;
+    }
 
     // new int* [16];
     // for (int i=0; i<16; i++)
@@ -60,11 +68,15 @@ namespace bass_track
     // }
     for (int i=0; i<8; i++)
     {
-      if (i%2 == 0)
+      if (i%4 == 0)
       {
         bass_writer::write_bass_bar(bass_teenth_array1, i);
-      } else {
+      } else if (i%4 == 1) {
         bass_writer::write_bass_bar(bass_teenth_array2, i);
+      } else if (i%4 == 2) {
+        bass_writer::write_bass_bar(bass_teenth_arr_mod1, i);
+      } else {
+        bass_writer::write_bass_bar(bass_teenth_arr_mod2, i);
       }
     }
 
