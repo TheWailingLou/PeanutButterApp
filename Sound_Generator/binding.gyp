@@ -13,6 +13,10 @@
                 "./generators/drums/tom_generator.cc",
 
                 "./generators/bass/bass_main.cc",
+                "./generators/chords/chord_gen.cc",
+
+                "./generators/music_gen.cc",
+
 
                 "./js_io/drum_imports.cc",
                 "./js_io/get_buffers.cc",

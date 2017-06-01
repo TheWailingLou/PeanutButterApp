@@ -9,7 +9,7 @@ namespace notes
     spectrum[0] = starting_note;
     for (int i=1; i<7; i++)
     {
-      int note = spectrum[i-1] + step_pattern[i%7];
+      int note = spectrum[i-1] + step_pattern[(i-1)%7];
       spectrum[i] = note;
     }
     return spectrum;
@@ -56,7 +56,7 @@ namespace notes
     spectrum[0] = lowest_note;
     for (int i=1; i<84; i++)
     {
-      int note = spectrum[i-1] + step_pattern[i%7];
+      int note = spectrum[i-1] + step_pattern[(i-1)%7];
       spectrum[i] = note;
     }
     return spectrum;

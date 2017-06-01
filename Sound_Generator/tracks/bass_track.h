@@ -6,6 +6,16 @@
 #include <iostream>
 #include <stdlib.h>
 
+namespace music_gen
+{
+  extern int** generate_bar_from_chords(int** chords, int octave);
+}
+
+namespace chord_gen
+{
+  extern int** one45_hqq(int mode, int starting_note);
+}
+
 namespace bass_main
 {
   extern int** generate_test_teenth(int mode, int starting_note);

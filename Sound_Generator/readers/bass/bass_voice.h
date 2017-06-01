@@ -5,6 +5,7 @@
 #include <math.h>
 // #include <cmath>
 #include <stdlib.h>
+#include <iostream>
 
 namespace audio_setup
 {
@@ -13,6 +14,7 @@ namespace audio_setup
 
 namespace audio_helper
 {
+  extern int time_as_frame(double time_in_seconds);
   extern int teenth_slice_as_frame(int beat);
   extern int bar_duration_in_frames();
   extern int calculate_total_frames(int total_bars, double end_hang_time=3);

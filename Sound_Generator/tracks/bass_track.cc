@@ -35,7 +35,22 @@ namespace bass_track
     setup_buffers(60, 3.0);
     srand(time(NULL));
     // int** bass_teenth_array = bass_main::generate_test_teenth(0, 35);
-    int** bass_teenth_array = bass_main::generate_bass_bar(0, 35);
+    int** chord_arr = chord_gen::one45_hqq(5, 36);
+
+    // int** bass_teenth_array = bass_main::generate_bass_bar(0, 35);
+    int** bass_teenth_array1 = music_gen::generate_bar_from_chords(chord_arr, 2);
+    int** bass_teenth_array2 = music_gen::generate_bar_from_chords(chord_arr, 2);
+
+    // for (int i=0; i<16; i++)
+    // {
+    //   std::cout << "\n\nNote: " << i << std::endl;
+    //   for (int j=0; j<2; j++)
+    //   {
+    //     std::cout << " " << bass_teenth_array[i][j];
+    //   }
+    //   std::cout << std::endl;
+    // }
+
     // new int* [16];
     // for (int i=0; i<16; i++)
     // {
@@ -43,7 +58,16 @@ namespace bass_track
     //   bass_teenth_array[i][0] = 35;
     //   bass_teenth_array[i][1] = 1;
     // }
-    bass_writer::write_bass_bar(bass_teenth_array, 0);
+    for (int i=0; i<8; i++)
+    {
+      if (i%2 == 0)
+      {
+        bass_writer::write_bass_bar(bass_teenth_array1, i);
+      } else {
+        bass_writer::write_bass_bar(bass_teenth_array2, i);
+      }
+    }
+
     // int** arrangement = new int* [5];
     // for (int i=0; i<5; i++) {
     //   arrangement[i] = new int [12];
