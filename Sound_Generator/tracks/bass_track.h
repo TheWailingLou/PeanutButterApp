@@ -6,9 +6,22 @@
 #include <iostream>
 #include <stdlib.h>
 
+namespace music_gen
+{
+  extern int** generate_bar_from_chords(int** chords, int octave);
+  extern int** modify_bar_to_new_mode_or_key(int** bar, int mode, int starting_note, int new_mode, int new_starting_note, int octave);
+}
+
+namespace chord_gen
+{
+  extern int** one45_hqq(int mode, int starting_note);
+  extern int** solid_three_chords(int mode, int starting_note);
+}
+
 namespace bass_main
 {
-  extern int bass_line_test [16][2];
+  extern int** generate_test_teenth(int mode, int starting_note);
+  extern int** generate_bass_bar(int mode, int starting_note);
 }
 
 namespace bass_writer
@@ -27,8 +40,10 @@ namespace bass_arrangement
 {
   // extern int bass_arrangement_standard_1 [5][7];
   // extern int bass_arrangement_standard_2 [5][12];
-  extern void create_tracks_from_arrangement(
-    int** arrangement,
+  extern void create_tracks_from_arrangement_and_chords(
+    int** key_arrangement,
+    int* chord_arrangemnt,
+    int* bass_arrangement,
     int* section_length,
     int total_sections
   );

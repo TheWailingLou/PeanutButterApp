@@ -66,6 +66,7 @@ namespace audio_helper
 namespace arrangement_main
 {
   extern int section_length_standard_1;
+  extern int num_of_unique_sections(int* arrangement, int total_sections);
 }
 
 namespace drum_arrangement
@@ -101,7 +102,7 @@ namespace drum_arrangement
     int* section_length,
     int total_sections
   );
-  int num_of_unique_sections(int* arrangement, int total_sections);
+  // int num_of_unique_sections(int* arrangement, int total_sections);
 }
 
 #endif

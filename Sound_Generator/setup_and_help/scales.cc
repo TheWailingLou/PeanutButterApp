@@ -13,11 +13,11 @@ namespace scales
     }
 
 
-    int* step_pattern = new int [8];
-    step_pattern[0] = 0;
+    int* step_pattern = new int [7];
+    // step_pattern[0] = 0;
     for (int i=0; i<7; i++)
     {
-      step_pattern[i+1] = untampered_pattern[(i+mode)%7];
+      step_pattern[i] = untampered_pattern[(i+mode)%7];
     }
     return step_pattern;
   }

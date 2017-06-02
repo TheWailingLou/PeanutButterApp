@@ -75,9 +75,9 @@ namespace drum_arrangement
 
   void create_tracks_from_arrangement(int** arrangement, int* section_length, int total_sections)
   {
-    int hi_hat_sections = num_of_unique_sections(arrangement[0], total_sections);
-    int kick_sections = num_of_unique_sections(arrangement[1], total_sections);
-    int snare_sections = num_of_unique_sections(arrangement[2], total_sections);
+    int hi_hat_sections = arrangement_main::num_of_unique_sections(arrangement[0], total_sections);
+    int kick_sections = arrangement_main::num_of_unique_sections(arrangement[1], total_sections);
+    int snare_sections = arrangement_main::num_of_unique_sections(arrangement[2], total_sections);
 
     int** hi_hat_arrays = new int* [hi_hat_sections];
     for (int unique_bar=0; unique_bar<hi_hat_sections; unique_bar++)

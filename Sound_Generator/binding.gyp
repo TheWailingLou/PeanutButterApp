@@ -6,6 +6,8 @@
                 "main.cc",
                 "./arrangement/arrangement_main.cc",
                 "./arrangement/drum_arrangement.cc",
+                "./arrangement/key_and_chord_arrangement.cc",
+                "./arrangement/bass_arrangement.cc",
 
                 "./generators/drums/hi_hat_generator.cc",
                 "./generators/drums/kick_generator.cc",
@@ -13,6 +15,9 @@
                 "./generators/drums/tom_generator.cc",
 
                 "./generators/bass/bass_main.cc",
+                "./generators/chords/chord_gen.cc",
+
+                "./generators/music_gen.cc",
 
                 "./js_io/drum_imports.cc",
                 "./js_io/get_buffers.cc",
