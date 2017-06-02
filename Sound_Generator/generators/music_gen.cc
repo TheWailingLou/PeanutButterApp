@@ -77,11 +77,23 @@ namespace music_gen
       current_chord_duration -= 1;
       note_remaining_duration -= 1;
     }
+    for (int i=0; i<16; i++)
+    {
+      std::cout << "{  " << teenth_array[i][0] <<" " << teenth_array[i][1] << " }" << std::endl;
+
+    }
+
     return teenth_array;
   }
 
   int** modify_bar_to_new_mode_or_key(int** bar, int mode, int starting_note, int new_mode, int new_starting_note, int octave)
   {
+    std::cout << "\nNEW MODE " << new_mode << "CURRENT MODE " << mode << std::endl;
+    if (mode == new_mode && starting_note == new_starting_note)
+    {
+      std::cout << "\nReturning bar...\n" << std::endl;
+      return bar;
+    }
     int** new_bar = new int* [16];
     int new_lowest_note = notes::find_lowest_note(new_starting_note);
     int* new_scale = notes::get_single_octave(new_lowest_note, new_mode, false);
@@ -94,6 +106,8 @@ namespace music_gen
       {
         int note_val = notes::convert_to_note_value(note, mode, starting_note);
         int new_note = new_scale[note_val] + 12*octave;
+        std::cout << "NOTE: " << note << " NEW_NOTE: " << new_note << std::endl;
+        std::cout << "note_val: " << note_val << std::endl;
         new_bar[i][0] = new_note;
         new_bar[i][1] = duration;
       } else {

@@ -15,6 +15,7 @@ namespace music_gen
 namespace chord_gen
 {
   extern int** one45_hqq(int mode, int starting_note);
+  extern int** solid_three_chords(int mode, int starting_note);
 }
 
 namespace bass_main
@@ -39,8 +40,10 @@ namespace bass_arrangement
 {
   // extern int bass_arrangement_standard_1 [5][7];
   // extern int bass_arrangement_standard_2 [5][12];
-  extern void create_tracks_from_arrangement(
-    int** arrangement,
+  extern void create_tracks_from_arrangement_and_chords(
+    int** key_arrangement,
+    int* chord_arrangemnt,
+    int* bass_arrangement,
     int* section_length,
     int total_sections
   );

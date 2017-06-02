@@ -17,6 +17,7 @@ namespace chord_gen
     int new_mode,
     int new_starting_note
   );
+  extern int** solid_three_chords(int mode, int starting_note);
 }
 
 namespace key_and_chord_arrangement
@@ -51,7 +52,7 @@ namespace key_and_chord_arrangement
     {0,36}
   };
   int chord_arrangement_standard_2 [12] = {1,1,1,1,1,1,1,1,1,1,1,1};
-  int*** create_chords_from_arrangement(int* chord_arrangemnt, int** key_arrangement, int* section_lengths, int num_of_sections);
+  // int*** create_chords_from_arrangement(int* chord_arrangemnt, int** key_arrangement, int* section_lengths, int num_of_sections);
 }
 
 #endif

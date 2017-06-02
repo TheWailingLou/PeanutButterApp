@@ -22,9 +22,8 @@ namespace notes
 
 namespace chord_gen
 {
+  int* chord_notes(int chord_root, int mode, int starting_note);
   int** one45_hqq(int mode, int starting_note);
-
-
   int** modify_chords(
     int** chord_arr,
     int mode,
@@ -32,6 +31,8 @@ namespace chord_gen
     int new_mode,
     int new_starting_note
   );
+  int** solid_three_chords(int mode, int starting_note);
+  // int** generate_random_chord_bar(int mode, int starting_note, int num_of_chords);
 }
 
 #endif

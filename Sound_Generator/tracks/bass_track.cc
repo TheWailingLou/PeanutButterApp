@@ -35,29 +35,52 @@ namespace bass_track
     setup_buffers(60, 3.0);
     srand(time(NULL));
     // int** bass_teenth_array = bass_main::generate_test_teenth(0, 35);
-    int** chord_arr = chord_gen::one45_hqq(5, 36);
-
-    // int** bass_teenth_array = bass_main::generate_bass_bar(0, 35);
-    int** bass_teenth_array1 = music_gen::generate_bar_from_chords(chord_arr, 2);
-    int** bass_teenth_array2 = music_gen::generate_bar_from_chords(chord_arr, 2);
-    int** bass_teenth_arr_mod1 = music_gen::modify_bar_to_new_mode_or_key(
-      bass_teenth_array1, 5, 36, 0, 39, 2
-    );
-    int** bass_teenth_arr_mod2 = music_gen::modify_bar_to_new_mode_or_key(
-        bass_teenth_array2, 5, 36, 0, 39, 2
-    );
-
-
-    for (int i=0; i<16; i++)
+    // int** chord_arr = chord_gen::one45_hqq(5, 36);
+    // int** chord_arr = chord_gen::solid_three_chords(5, 36);
+    //
+    // // int** bass_teenth_array = bass_main::generate_bass_bar(0, 35);
+    // int** bass_teenth_array1 = music_gen::generate_bar_from_chords(chord_arr, 2);
+    // int** bass_teenth_array2 = music_gen::generate_bar_from_chords(chord_arr, 2);
+    // int** bass_teenth_arr_mod1 = music_gen::modify_bar_to_new_mode_or_key(
+    //   bass_teenth_array1, 5, 36, 0, 39, 2
+    // );
+    // int** bass_teenth_arr_mod2 = music_gen::modify_bar_to_new_mode_or_key(
+    //     bass_teenth_arr_mod1, 0, 39, 5, 36, 2
+    // );
+    int total_sections = 4;
+    int** key_arrangement = new int* [total_sections];
+    int* chord_arrangemnt = new int [total_sections];
+    int* bass_arrangement = new int [total_sections];
+    int* section_length = new int [total_sections];
+    for (int i=0; i<total_sections; i++)
     {
-      std::cout << "\nNote: " << i << std::endl;
-      for (int j=0; j<2; j++)
-      {
-        std::cout << " " << bass_teenth_array1[i][j];
-        std::cout << " compare: " << bass_teenth_arr_mod1[i][j];
-      }
-      std::cout << std::endl;
+      key_arrangement[i] = new int [2];
+      key_arrangement[i][0] = 0 + ((i%2)*5);
+      key_arrangement[i][1] = 36 + ((i%2)*9);
+      chord_arrangemnt[i] = 1;
+      bass_arrangement[i] = 1;
+      section_length[i] = 2;
     }
+
+    bass_arrangement::create_tracks_from_arrangement_and_chords(
+      key_arrangement,
+      chord_arrangemnt,
+      bass_arrangement,
+      section_length,
+      total_sections
+    );
+
+
+    // for (int i=0; i<16; i++)
+    // {
+    //   std::cout << "\nNote: " << i << std::endl;
+    //   for (int j=0; j<2; j++)
+    //   {
+    //     std::cout << " " << bass_teenth_array1[i][j];
+    //     std::cout << " compare: " << bass_teenth_arr_mod1[i][j];
+    //   }
+    //   std::cout << std::endl;
+    // }
 
     // new int* [16];
     // for (int i=0; i<16; i++)
@@ -66,19 +89,22 @@ namespace bass_track
     //   bass_teenth_array[i][0] = 35;
     //   bass_teenth_array[i][1] = 1;
     // }
-    for (int i=0; i<8; i++)
-    {
-      if (i%4 == 0)
-      {
-        bass_writer::write_bass_bar(bass_teenth_array1, i);
-      } else if (i%4 == 1) {
-        bass_writer::write_bass_bar(bass_teenth_array2, i);
-      } else if (i%4 == 2) {
-        bass_writer::write_bass_bar(bass_teenth_arr_mod1, i);
-      } else {
-        bass_writer::write_bass_bar(bass_teenth_arr_mod2, i);
-      }
-    }
+    // for (int i=0; i<8; i++)
+    // {
+    //   if (i%4 == 0)
+    //   {
+    //     // bass_writer::write_bass_bar(bass_teenth_array2, i);
+    //     bass_writer::write_bass_bar(bass_teenth_arr_mod2, i);
+    //   } else if (i%4 == 1) {
+    //     bass_writer::write_bass_bar(bass_teenth_array1, i);
+    //   } else if (i%4 == 2) {
+    //     bass_writer::write_bass_bar(bass_teenth_arr_mod2, i);
+    //     // bass_writer::write_bass_bar(bass_teenth_arr_mod1, i);
+    //   } else {
+    //     bass_writer::write_bass_bar(bass_teenth_array1, i);
+    //     // bass_writer::write_bass_bar(bass_teenth_arr_mod2, i);
+    //   }
+    // }
 
     // int** arrangement = new int* [5];
     // for (int i=0; i<5; i++) {
