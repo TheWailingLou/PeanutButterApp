@@ -45,7 +45,8 @@ namespace bass_arrangement
     int* chord_arrangemnt,
     int* bass_arrangement,
     int* section_length,
-    int total_sections
+    int total_sections,
+    int*** kick_drum_arrangement
   );
 }
 
@@ -54,6 +55,40 @@ namespace arrangement_main
   extern int section_length_standard_1 [7];
   extern int section_length_standard_2 [12];
 }
+
+///
+
+namespace drum_arrangement
+{
+  extern int drum_arrangement_standard_1 [5][7];
+  extern int drum_arrangement_standard_2 [5][12];
+  extern int*** create_tracks_from_arrangement(
+    int** arrangement,
+    int* section_length,
+    int total_sections
+  );
+}
+
+
+
+namespace drum_track
+{
+  // extern double** main_buffer;
+  // extern int main_buffer_size;
+  // extern int main_buffer_channels;
+
+  extern double** crash_track;
+  extern double** hi_hat_track;
+  extern double** kick_track;
+  extern double** ride_track;
+  extern double** snare_track;
+  extern double** tom_track;
+
+  extern void setup_buffers(int total_bars, double end_hang_time);
+  extern void free_all_track_memory();
+}
+
+///
 
 namespace bass_track
 {

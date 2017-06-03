@@ -55,21 +55,67 @@ namespace bass_voice
         //   sin_frame4 = -1;
         // }
         double morpher_square = 0;
-        int voices = 7 - (i%5);
-        for (int voice=0; voice<voices; voice++)
-        {
-          double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency + (((double)voice)*(frequency*2/((double)voices)))/(frequency*2));
-          double sin_frame = sin(sin_x);
-          if (sin_frame > 0) {
-            sin_frame = 1.0/((double)voices);
-          } else {
-            sin_frame = -1.0/((double)voices);
-          }
-          morpher_square += sin_frame;
+
+        // int voices = 7;
+        // for (int voice=0; voice<voices; voice++)
+        // {
+        //   double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency + (((double)voice)*(frequency*2/((double)voices)))/(frequency*2));
+        //   double sin_frame = sin(sin_x);
+        //   if (sin_frame > 0) {
+        //     sin_frame = 1.0/((double)voices);
+        //   } else {
+        //     sin_frame = -1.0/((double)voices);
+        //   }
+        //   morpher_square += sin_frame;
+        // }
+        //
+
+        double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency * 2);
+
+        // int triangle = ((int)i)%((int)frequency);
+        // if (sin(sin_x) > 0) {
+        //   morpher_square = (4*((double)triangle))/((double)audio_setup::sample_rate * M_PI);
+        // } else {
+        //   morpher_square = (-4*((double)triangle))/((double)audio_setup::sample_rate * M_PI);
+        // }
+
+        ///// TRIANGLE :: // Fuck yeah!!
+        int sr_f = (int)((double)audio_setup::sample_rate/(frequency*2));
+        while (sr_f%4 != 0) {
+          sr_f +=1;
+        }
+        int sr_f2 = sr_f/2;
+
+        int sr_f4 = sr_f/4;
+        double i_m_sr_f = (double)(i % sr_f);
+        double i_m_sr_f2 = (double)(i % sr_f2);
+        double i_m_sr_f4 = (double)(i % sr_f4);
+
+        double triangle = 1 - (i_m_sr_f - (i_m_sr_f2 * ((i_m_sr_f- i_m_sr_f2)/sr_f4)))/((double)sr_f4);
+
+        if (triangle > 1) {
+          triangle = 1;
+        } else if (triangle < -1) {
+          triangle = -1;
         }
 
+
+
+        morpher_square = triangle;
+
+
+
+
+        // morpher_square = sin(sin_x);
+        //
+        // if (morpher_square > 0) {
+        //   morpher_square = 1;
+        // } else {
+        //   morpher_square = -1;
+        // }
+
         // double super_square = (sin_frame + sin_frame2 + sin_frame3 + sin_frame4)/4.0;
-        bass_track::bass_track_1[channel][i+frame_location] += morpher_square * gain;
+        bass_track::bass_track_1[channel][i+frame_location] += morpher_square * gain * 0.9;
         // bass_track::bass_track_1[channel][i+frame_location] += sin_frame * gain;
       }
     }

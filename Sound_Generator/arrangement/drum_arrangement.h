@@ -97,7 +97,7 @@ namespace drum_arrangement
     {0,0,2,0,1,2,1,2,1,0,2,1}
   };
 
-  void create_tracks_from_arrangement(
+  int*** create_tracks_from_arrangement(
     int** arrangement,
     int* section_length,
     int total_sections

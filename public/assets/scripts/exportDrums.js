@@ -77,7 +77,7 @@ Promise.all([
   peanutButter.setSampleRate(44100)
   peanutButter.setTempo(120)
 
-  var drumTrack = peanutButter.getMainDrumBuffer()
+  var drumTrack = peanutButter.getMainBassBuffer()
   var drumBuffer = context.createBuffer(drumTrack.length, drumTrack[0].length, 44100)
   drumTrack.forEach(function(channel, j) {
     var buffSize = channel.length

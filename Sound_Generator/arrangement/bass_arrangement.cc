@@ -15,7 +15,7 @@ namespace bass_arrangement
     return unique_sections;
   }
 
-  void create_tracks_from_arrangement_and_chords(int** key_arrangement, int* chord_arrangemnt, int* bass_arrangement, int* section_length, int total_sections)
+  void create_tracks_from_arrangement_and_chords(int** key_arrangement, int* chord_arrangemnt, int* bass_arrangement, int* section_length, int total_sections, int*** drum_arrangement)
   {
     int** used_chords = new int* [total_sections];
     int** used_riffs = new int* [total_sections];
@@ -41,10 +41,15 @@ namespace bass_arrangement
     {
       int start_note = key_arrangement[section][1];
       int mode = key_arrangement[section][0];
+      // int* scale = notes::get_single_octave()
       int current_chord = chord_arrangemnt[section];
       int current_riff = bass_arrangement[section];
       int** chord_bar;
       int** riff_bar;
+
+      int* kick = drum_arrangement[0][section];
+      int* snare = drum_arrangement[1][section];
+      int* hi_hat = drum_arrangement[2][section];
 
       std::cout << "iterating through sections.." << current_chord << std::endl;
 
@@ -68,11 +73,15 @@ namespace bass_arrangement
             used_riffs[current_riff-1][2],
             mode,
             start_note,
-            2
+            1
           );
         } else {
           std::cout << "3" << std::endl;
-          riff_bar = music_gen::generate_bar_from_chords(chord_bar, 2);
+          // riff_bar = music_gen::generate_bar_from_chords(chord_bar, 1);
+          riff_bar = music_gen::generate_bar_from_chords_and_drums(
+            kick, snare, hi_hat,
+            chord_bar, 1
+          );
           all_riffs[current_riff-1] = riff_bar;
           used_riffs[current_riff-1][0] = current_riff;
           used_riffs[current_riff-1][1] = mode;
@@ -80,7 +89,12 @@ namespace bass_arrangement
         }
       } else {
         std::cout << "4" << std::endl;
-        chord_bar = chord_gen::solid_three_chords(mode, start_note);
+        // chord_bar = chord_gen::solid_three_chords(mode, start_note);
+        chord_bar = chord_gen::chords_from_kick(
+          drum_arrangement[0][section],
+          mode,
+          start_note
+        );
         all_chords[current_chord-1] = chord_bar;
         used_chords[current_chord-1][0] = current_chord;
         used_chords[current_chord-1][1] = mode;
@@ -95,11 +109,15 @@ namespace bass_arrangement
             used_riffs[current_riff-1][2],
             mode,
             start_note,
-            2
+            1
           );
         } else {
           std::cout << "6" << std::endl;
-          riff_bar = music_gen::generate_bar_from_chords(chord_bar, 2);
+          // riff_bar = music_gen::generate_bar_from_chords(chord_bar, 1);
+          riff_bar = music_gen::generate_bar_from_chords_and_drums(
+            kick, snare, hi_hat,
+            chord_bar, 1
+          );
           all_riffs[current_riff-1] = riff_bar;
           used_riffs[current_riff-1][0] = current_riff;
           used_riffs[current_riff-1][1] = mode;

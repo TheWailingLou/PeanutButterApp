@@ -193,4 +193,134 @@ namespace chord_gen
     }
     return chord_teenth;
   }
+
+  int** chords_from_kick(int* kick_teenth, int mode, int starting_note)
+  {
+    int main_structures [4][3] = {
+      {1,4,5},
+      {1,2,5},
+      {1,4,7},
+      {1,2,5}
+    };
+    int secondaries [3][3] = {
+      {1,2,7},
+      {1,2,3},
+      {1,6,7}
+    };
+    int tertiaries [5][3] = {
+      {1,2,6},
+      {1,2,4},
+      {1,5,6},
+      {1,3,4},
+      {1,2,4}
+    };
+    int* three_chords;
+    if (rand()%100 < 80) {
+      three_chords = main_structures[rand()%4];
+    } else {
+      if (rand()%100 < 70)
+      {
+        three_chords = secondaries[rand()%3];
+      } else {
+        three_chords = tertiaries[rand()%5];
+      }
+    }
+    std::cout << three_chords[0] << three_chords[1] << three_chords[2] << std::endl;
+
+    int* chord_1 = chord_notes(three_chords[0]-1, mode, starting_note);
+    int* chord_2 = chord_notes(three_chords[1]-1, mode, starting_note);
+    int* chord_3 = chord_notes(three_chords[2]-1, mode, starting_note);
+
+    int** chord_teenth = new int* [16];
+    for (int i=0; i<16; i++)
+    {
+      chord_teenth[i] = new int [7];
+      chord_teenth[i][0] = -1;
+      for (int j=0; j<6; j++)
+      {
+        chord_teenth[i][j+1] = 0;
+      }
+    }
+
+    int chord2_index = -1;
+    int chord3_index = -1;
+
+    for (int j=1; j<16; j++)
+    {
+      if (kick_teenth[j] == 1)
+      {
+        if (chord2_index == -1)
+        {
+          chord2_index = j;
+        } else {
+          if (chord3_index == -1)
+          {
+            chord3_index = j;
+          } else {
+            chord2_index = j;
+          }
+        }
+      }
+    }
+
+    if (chord2_index == -1)
+    {
+      chord2_index = 1 + rand()%15;
+    }
+
+    if (chord3_index == -1)
+    {
+      chord3_index = chord2_index;
+    }
+
+
+
+
+    if (chord2_index != chord3_index)
+    {
+      int chord1_duration;
+      int chord2_duration;
+      int chord3_duration;
+
+      if (chord2_index < chord3_index) {
+        chord1_duration = chord2_index;
+        chord2_duration = chord3_index - chord2_index;
+        chord3_duration = 16 - chord3_index;
+      } else {
+        chord1_duration = chord3_index;
+        chord3_duration = chord2_index - chord3_index;
+        chord2_duration = 16 - chord2_index;
+      }
+      chord_teenth[0][0] = chord1_duration;
+      chord_teenth[chord2_index][0] = chord2_duration;
+      chord_teenth[chord3_index][0] = chord3_duration;
+      for (int j=0; j<6; j++)
+      {
+        chord_teenth[0][j+1] = chord_1[j];
+        chord_teenth[chord2_index][j+1] = chord_2[j];
+        chord_teenth[chord3_index][j+1] = chord_3[j];
+      }
+      // std::cout << "duration: " << chord1_duration << " " << chord2_duration << " " << chord3_duration << std::endl;
+      // std::cout << "index: " << chord2_index << " " << chord3_index <<  std::endl;
+    } else {
+      if (rand()%2 == 0) {
+        chord_teenth[0][0] = chord2_index;
+        chord_teenth[chord2_index][0] = 16 - chord2_index;
+        for (int j=0; j<6; j++)
+        {
+          chord_teenth[0][j+1] = chord_1[j];
+          chord_teenth[chord2_index][j+1] = chord_2[j];
+        }
+      } else {
+        chord_teenth[0][0] = chord3_index;
+        chord_teenth[chord3_index][0] = 16 - chord3_index;
+        for (int j=0; j<6; j++)
+        {
+          chord_teenth[0][j+1] = chord_1[j];
+          chord_teenth[chord3_index][j+1] = chord_3[j];
+        }
+      }
+    }
+    return chord_teenth;
+  }
 }
