@@ -148,9 +148,17 @@ namespace bass_arrangement
     int current_bar = 0;
     for (int section=0; section<total_sections; section++)
     {
+      int* fill = drum_arrangement[3][section];
       for (int bar=0; bar<section_length[section]; bar++)
       {
-        bass_writer::write_bass_bar(all_riffs_to_write[section], current_bar);
+        int** bass_bar;
+        if (bar < section_length[section]-1)
+        {
+          bass_bar = all_riffs_to_write[section];
+        } else {
+          bass_bar = music_gen::modify_bar_for_fill(all_riffs_to_write[section], fill);
+        }
+        bass_writer::write_bass_bar(bass_bar, current_bar);
         current_bar += 1;
       }
     }

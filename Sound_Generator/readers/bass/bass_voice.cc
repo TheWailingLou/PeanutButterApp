@@ -70,7 +70,7 @@ namespace bass_voice
         // }
         //
 
-        double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency * 2);
+
 
         // int triangle = ((int)i)%((int)frequency);
         // if (sin(sin_x) > 0) {
@@ -103,9 +103,7 @@ namespace bass_voice
 
         morpher_square = triangle;
 
-
-
-
+        // double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency * 2);
         // morpher_square = sin(sin_x);
         //
         // if (morpher_square > 0) {

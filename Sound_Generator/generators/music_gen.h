@@ -29,6 +29,7 @@ namespace music_gen
   int** generate_bar_from_chords(int** chords, int octave);
   int** modify_bar_to_new_mode_or_key(int** bar, int mode, int starting_note, int new_mode, int new_starting_note, int octave);
   int** generate_bar_from_chords_and_drums(int* kick, int* snare, int* hi_hat, int** chords, int octave);
+  int** modify_bar_for_fill(int** bar, int* fill);
 }
 
 #endif
