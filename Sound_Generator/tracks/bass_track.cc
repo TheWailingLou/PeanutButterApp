@@ -48,7 +48,7 @@ namespace bass_track
     // int** bass_teenth_arr_mod2 = music_gen::modify_bar_to_new_mode_or_key(
     //     bass_teenth_arr_mod1, 0, 39, 5, 36, 2
     // );
-    int total_sections = 32;
+    int total_sections = 12;
     int** key_arrangement = new int* [total_sections];
     int* chord_arrangemnt = new int [total_sections];
     int* bass_arrangement = new int [total_sections];
@@ -67,24 +67,11 @@ namespace bass_track
       key_arrangement[i] = new int [2];
       key_arrangement[i][0] = 5;
       key_arrangement[i][1] = 36;
-      if (i >= 8 && i < 16)
-      {
-        key_arrangement[i][0] = 5;
-        key_arrangement[i][1] = 43;
-      }
       chord_arrangemnt[i] = 1;
       bass_arrangement[i] = 1 + (i%2);
-      if (i%16 >= 4 && i%16 < 8) {
-        bass_arrangement[i] = 3 + (i%2);
-        chord_arrangemnt[i] = 2;
+      if (i%8 > 3) {
+        bass_arrangement[i] += 2;
       }
-      if (i >= 16 && i < 24) {
-        bass_arrangement[i] = 5 + (i%2);
-        chord_arrangemnt[i] = 3;
-      }
-      // else if (i%16 >= 4 && i%16 < 8) {
-      //   bass_arrangement[i] += 2;
-      // }
       section_length[i] = 1;
 
       // drum_arrangement[0][i] = 1 + (i%2);
@@ -104,17 +91,17 @@ namespace bass_track
 
 
 
-    int drum_arrangement_stand [5][32] = {
+    int drum_arrangement_stand [5][13] = {
       // hi hat
-      {1,1,1,1,2,2,2,2,1,1,1,1,  2,2,2,2,3,4,3,4,3,4,3,4,  3,4,3,4,1,1,1,1},
+      {0,1,1,1,1,2,2,2,2,1,1,1,1},
       // snare
-      {1,1,1,1,2,2,2,2,1,1,1,1,  2,2,2,2,3,4,3,4,3,4,3,4, 1,2,1,2,1,1,1,1},
+      {0,1,1,1,1,2,2,2,2,1,1,1,1},
       // kick
-      {1,1,1,1,2,2,2,2,1,1,1,1,  2,2,2,2,3,4,3,4,3,4,3,4, 1,2,1,2,1,1,1,1},
+      {0,1,1,1,1,2,2,2,2,1,1,1,1},
       // tom fills
-      {-1,-1,-1,8,-1,-1,-1,8,-1,-1,-1,8, -1,4,8,12,-1,-1,-1,8,-1,-1,8,12, -1,-1,8,12,-1,-1,-1,8},
+      {4,-1,-1,-1,8,-1,-1,-1,8,-1,-1,-1,8},
       // crash
-      {0,0,0,0,2,0,0,0,1,0,0,0, 2,0,0,2,1,0,0,0,2,0,0,2, 1,0,0,0,1,0,1,2}
+      {0,0,0,0,0,1,0,0,0,2,0,1,0}
     };
 
 
@@ -122,13 +109,13 @@ namespace bass_track
 
     int** drum_arr = new int* [5];
     for (int i=0; i<5; i++) {
-      drum_arr[i] = new int [32];
-      for (int j=0; j<32; j++)
+      drum_arr[i] = new int [12];
+      for (int j=0; j<12; j++)
       {
         drum_arr[i][j] = drum_arrangement_stand[i][j];
       }
     }
-    int*** all_drum_arrangement = drum_arrangement::create_tracks_from_arrangement(
+    int** kick_drum_arrangement = drum_arrangement::create_tracks_from_arrangement(
       drum_arr,
       section_length,
       total_sections
@@ -140,7 +127,7 @@ namespace bass_track
       bass_arrangement,
       section_length,
       total_sections,
-      all_drum_arrangement
+      kick_drum_arrangement
     );
 
 

@@ -106,7 +106,7 @@ namespace drum_arrangement
       empty_array[i] = 0;
     }
 
-    int num_of_drums = 3; //kick, snare, hi_hat;
+    int num_of_drums = 4; //kick, snare, hi_hat;
     int*** all_drum_arrangements = new int** [num_of_drums];
 
     for (int drum=0; drum<num_of_drums; drum++)
@@ -155,6 +155,7 @@ namespace drum_arrangement
       all_drum_arrangements[1][section] = snare;
       all_drum_arrangements[2][section] = hi_hat;
 
+
       for (int bar=0; bar<section_length[section]; bar++)
       {
         if (crash != 0 && crash != -1 && bar == 0)
@@ -169,8 +170,8 @@ namespace drum_arrangement
           int* hi_hat_silence = audio_helper::silence_hits(silence_arr, hi_hat);
           int* kick_silence = audio_helper::silence_hits(silence_arr, kick);
           int* snare_silence = audio_helper::silence_hits(silence_arr, snare);
-
           int* tom_array = tom_generator::generate_tom_teenth_array(fill_length);
+          all_drum_arrangements[3][section] = tom_array;
           tom_writer::write_from_array_at_bar(tom_array, current_bar);
           hi_hat_writer::write_from_array_at_bar(hi_hat_silence, current_bar);
           snare_writer::write_from_array_at_bar(snare_silence, current_bar);
@@ -179,6 +180,7 @@ namespace drum_arrangement
           hi_hat_writer::write_from_array_at_bar(hi_hat, current_bar);
           snare_writer::write_from_array_at_bar(snare, current_bar);
           kick_writer::write_from_array_at_bar(kick, current_bar);
+          all_drum_arrangements[3][section] = empty_array;
         }
         current_bar += 1;
       }

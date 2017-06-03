@@ -295,4 +295,82 @@ namespace music_gen
     delete[] new_scale;
     return new_bar;
   }
+
+  int** modify_bar_for_fill(int** bar, int* fill)
+  {
+    int fill_start = -1;
+    for (int i=0; i<16; i++)
+    {
+      if (fill[i] != 0)
+      {
+        fill_start = i;
+        break;
+      }
+    }
+    if (fill_start == -1)
+    {
+      return bar;
+    }
+
+    int** new_bar = new int* [16];
+
+    for (int i=0; i<16; i++)
+    {
+      new_bar[i] = new int [2];
+
+      int stored_note = 0;
+      if (i < fill_start)
+      {
+        new_bar[i][0] = bar[i][0];
+        if (bar[i][1] + i > fill_start)
+        {
+          new_bar[i][1] = fill_start - i;
+        } else {
+          new_bar[i][1] = bar[i][1];
+        }
+        stored_note = bar[i][0];
+      } else {
+        if (fill[i] != 0 && bar[i][0] != -1)
+        {
+          new_bar[i][0] = bar[i][0];
+          stored_note = bar[i][0];
+          if (rand()%100 > 50)
+          {
+            new_bar[i][1] = bar[i][1];
+          } else {
+            new_bar[i][1] = 1;
+          }
+        } else {
+          if (fill[i] == 0 && bar[i][0] != -1)
+          {
+            if (rand()%100 > 70)
+            {
+              new_bar[i][0] = bar[i][0];
+              stored_note = bar[i][0];
+              if (rand()%100 > 30)
+              {
+                new_bar[i][1] = 1;
+              } else {
+                new_bar[i][1] = bar[i][1];
+              }
+            }
+          } else if (fill[i] != 0 && bar[i][0] == -1) {
+            if (rand()%100 > 40)
+            {
+              new_bar[i][0] = stored_note;
+              new_bar[i][1] = 1;
+            } else {
+              new_bar[i][0] = -1;
+              new_bar[i][1] = 1;
+            }
+          } else {
+            new_bar[i][0] = -1;
+            new_bar[i][1] = 1;
+          }
+        }
+      }
+    }
+
+    return new_bar;
+  }
 }
