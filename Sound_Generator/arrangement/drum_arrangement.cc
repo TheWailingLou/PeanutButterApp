@@ -73,7 +73,7 @@ namespace drum_arrangement
     return unique_sections;
   }
 
-  void create_tracks_from_arrangement(int** arrangement, int* section_length, int total_sections)
+  int*** create_tracks_from_arrangement(int** arrangement, int* section_length, int total_sections)
   {
     int hi_hat_sections = arrangement_main::num_of_unique_sections(arrangement[0], total_sections);
     int kick_sections = arrangement_main::num_of_unique_sections(arrangement[1], total_sections);
@@ -106,40 +106,57 @@ namespace drum_arrangement
       empty_array[i] = 0;
     }
 
+    int num_of_drums = 3; //kick, snare, hi_hat;
+    int*** all_drum_arrangements = new int** [num_of_drums];
+
+    for (int drum=0; drum<num_of_drums; drum++)
+    {
+      all_drum_arrangements[drum] = new int* [total_sections];
+    }
+
+    // int** kick_arrangement = new int* [total_sections];
+    // int** snare_arrangement = new int* [total_sections];
+    // int** hi_hat_arrangement = new int* [total_sections];
+
     int current_bar = 0;
     for (int section=0; section<total_sections; section++)
     {
+
+      int hi_hat_index = arrangement[0][section];
+      int* hi_hat;
+      if (hi_hat_index != 0)
+      {
+        hi_hat = hi_hat_arrays[hi_hat_index-1];
+      } else {
+        hi_hat = empty_array;
+      }
+      int snare_index = arrangement[1][section];
+      int* snare;
+      if (snare_index != 0)
+      {
+        snare = snare_arrays[snare_index-1];
+      } else {
+        snare = empty_array;
+      }
+
+      int kick_index = arrangement[2][section];
+      int* kick;
+      if (snare_index != 0)
+      {
+        kick = kick_arrays[kick_index-1];
+      } else {
+        kick = empty_array;
+      }
+
+      int fill_length = arrangement[3][section];
+      int crash = arrangement[4][section];
+
+      all_drum_arrangements[0][section] = kick;
+      all_drum_arrangements[1][section] = snare;
+      all_drum_arrangements[2][section] = hi_hat;
+
       for (int bar=0; bar<section_length[section]; bar++)
       {
-        int hi_hat_index = arrangement[0][section];
-        int* hi_hat;
-        if (hi_hat_index != 0)
-        {
-          hi_hat = hi_hat_arrays[hi_hat_index-1];
-        } else {
-          hi_hat = empty_array;
-        }
-        int snare_index = arrangement[1][section];
-        int* snare;
-        if (snare_index != 0)
-        {
-          snare = snare_arrays[snare_index-1];
-        } else {
-          snare = empty_array;
-        }
-
-        int kick_index = arrangement[2][section];
-        int* kick;
-        if (snare_index != 0)
-        {
-          kick = kick_arrays[kick_index-1];
-        } else {
-          kick = empty_array;
-        }
-
-        int fill_length = arrangement[3][section];
-        int crash = arrangement[4][section];
-
         if (crash != 0 && crash != -1 && bar == 0)
         {
           crash_writer::write_crash_at_bar(crash, current_bar);
@@ -166,5 +183,6 @@ namespace drum_arrangement
         current_bar += 1;
       }
     }
+    return all_drum_arrangements;
   }
 }

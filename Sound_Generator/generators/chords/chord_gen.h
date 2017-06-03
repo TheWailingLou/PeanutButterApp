@@ -32,6 +32,7 @@ namespace chord_gen
     int new_starting_note
   );
   int** solid_three_chords(int mode, int starting_note);
+  int** chords_from_kick(int* kick_teenth, int mode, int starting_note);
   // int** generate_random_chord_bar(int mode, int starting_note, int num_of_chords);
 }
 

@@ -13,6 +13,7 @@ namespace music_gen
 {
   extern int** generate_bar_from_chords(int** chords, int octave);
   extern int** modify_bar_to_new_mode_or_key(int** bar, int mode, int starting_note, int new_mode, int new_starting_note, int octave);
+  extern int** generate_bar_from_chords_and_drums(int* kick, int* snare, int* hi_hat, int** chords, int octave);
 }
 
 namespace chord_gen
@@ -27,6 +28,7 @@ namespace chord_gen
     int new_starting_note
   );
   extern int** solid_three_chords(int mode, int starting_note);
+  extern int** chords_from_kick(int* kick_teenth, int mode, int starting_note);
 }
 
 namespace bass_writer
@@ -42,7 +44,8 @@ namespace bass_arrangement
     int* chord_arrangemnt,
     int* bass_arrangement,
     int* section_length,
-    int total_sections
+    int total_sections,
+    int*** drum_arrangement
   );
 }
 
