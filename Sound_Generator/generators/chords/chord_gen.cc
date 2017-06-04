@@ -84,13 +84,13 @@ namespace chord_gen
     int lowest_note = notes::find_lowest_note(starting_note);
     int* scale = notes::get_single_octave(lowest_note, mode, false);
     int* chord = new int [6];
-    std::cout << "\nChord Notes: ";
+    // std::cout << "\nChord Notes: ";
     for (int i=0; i<6; i++) {
       int scale_index = (((i*2)%6) + chord_root) % 7;
-      std::cout << " " << scale[scale_index];
+      // std::cout << " " << scale[scale_index];
       chord[i] = scale[scale_index];
     }
-    std::cout << "\n\n" << std::endl;
+    // std::cout << "\n\n" << std::endl;
     return chord;
   }
 
@@ -125,7 +125,7 @@ namespace chord_gen
         three_chords = tertiaries[rand()%5];
       }
     }
-    std::cout << three_chords[0] << three_chords[1] << three_chords[2] << std::endl;
+    // std::cout << three_chords[0] << three_chords[1] << three_chords[2] << std::endl;
 
     int* chord_1 = chord_notes(three_chords[0]-1, mode, starting_note);
     int* chord_2 = chord_notes(three_chords[1]-1, mode, starting_note);
@@ -225,7 +225,7 @@ namespace chord_gen
         three_chords = tertiaries[rand()%5];
       }
     }
-    std::cout << three_chords[0] << three_chords[1] << three_chords[2] << std::endl;
+    // std::cout << three_chords[0] << three_chords[1] << three_chords[2] << std::endl;
 
     int* chord_1 = chord_notes(three_chords[0]-1, mode, starting_note);
     int* chord_2 = chord_notes(three_chords[1]-1, mode, starting_note);

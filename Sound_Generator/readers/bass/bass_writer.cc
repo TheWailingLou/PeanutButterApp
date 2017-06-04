@@ -16,8 +16,8 @@ namespace bass_writer
         int frame_duration = audio_helper::teenth_slice_as_frame(teenth_duration);
         // bass_voice::write_note_at_location(note, teenth_duration, i, bar);
         // bass_voice::super_square_at_location(note, frame_duration, frame_location);
-        // bass_voice::triangle_at_location(note, frame_duration, frame_location);
-        bass_voice::sine_at_location(note, frame_duration, frame_location);
+        bass_voice::triangle_at_location(note, frame_duration, frame_location);
+        // bass_voice::sine_at_location(note, frame_duration, frame_location);
       }
     }
   }
