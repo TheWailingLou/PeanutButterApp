@@ -48,7 +48,7 @@ namespace bass_track
     // int** bass_teenth_arr_mod2 = music_gen::modify_bar_to_new_mode_or_key(
     //     bass_teenth_arr_mod1, 0, 39, 5, 36, 2
     // );
-    int total_sections = 12;
+    int total_sections = 32;
     int** key_arrangement = new int* [total_sections];
     int* chord_arrangemnt = new int [total_sections];
     int* bass_arrangement = new int [total_sections];
