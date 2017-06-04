@@ -10,6 +10,15 @@ namespace tones
   extern double convert_note_to_tone(int note);
 }
 
+namespace audio_helper
+{
+  extern int time_as_frame(double time_in_seconds);
+  extern int teenth_slice_as_frame(int beat);
+  extern int bar_duration_in_frames();
+  extern int calculate_total_frames(int total_bars, double end_hang_time=3);
+  extern int calculate_total_frames(int total_bars);
+}
+
 namespace bass_track
 {
   extern double** bass_track_1;
@@ -21,12 +30,19 @@ namespace bass_track
 
 namespace bass_voice
 {
-  void write_note_at_location(
+  extern void write_note_at_location(
     int note,
     int teenth_duration,
     int teenth_location,
     int bar
   );
+  extern void super_square_at_location(
+    int note,
+    int frame_duration,
+    int frame_location
+  );
+  extern void triangle_at_location(int note, int frame_duration, int frame_location);
+  extern void sine_at_location(int note, int frame_duration, int frame_location);
 }
 
 namespace bass_writer

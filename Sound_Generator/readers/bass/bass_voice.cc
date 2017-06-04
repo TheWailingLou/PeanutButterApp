@@ -56,18 +56,18 @@ namespace bass_voice
         // }
         double morpher_square = 0;
 
-        int voices = 7;
-        for (int voice=0; voice<voices; voice++)
-        {
-          double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency + (((double)voice)*(frequency*2/((double)voices)))/(frequency*2));
-          double sin_frame = sin(sin_x);
-          if (sin_frame > 0) {
-            sin_frame = 1.0/((double)voices);
-          } else {
-            sin_frame = -1.0/((double)voices);
-          }
-          morpher_square += sin_frame;
-        }
+        // int voices = 7;
+        // for (int voice=0; voice<voices; voice++)
+        // {
+        //   double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency + (((double)voice)*(frequency*2/((double)voices)))/(frequency*2));
+        //   double sin_frame = sin(sin_x);
+        //   if (sin_frame > 0) {
+        //     sin_frame = 1.0/((double)voices);
+        //   } else {
+        //     sin_frame = -1.0/((double)voices);
+        //   }
+        //   morpher_square += sin_frame;
+        // }
         //
 
 
@@ -80,18 +80,31 @@ namespace bass_voice
         // }
 
         ///// TRIANGLE :: // Fuck yeah!!
-        // int sr_f = (int)((double)audio_setup::sample_rate/(frequency*2));
-        // while (sr_f%4 != 0) {
-        //   sr_f +=1;
-        // }
-        // int sr_f2 = sr_f/2;
-        //
-        // int sr_f4 = sr_f/4;
-        // double i_m_sr_f = (double)(i % sr_f);
-        // double i_m_sr_f2 = (double)(i % sr_f2);
-        // double i_m_sr_f4 = (double)(i % sr_f4);
-        //
-        // double triangle = 1 - (i_m_sr_f - (i_m_sr_f2 * ((i_m_sr_f- i_m_sr_f2)/sr_f4)))/((double)sr_f4);
+
+        int voices = 1;
+
+        double morphed_triangle = 0;
+
+        for (int voice=0; voice<voices; voice++)
+        {
+          double frequency_detune = (12) - (2*12*(((double)voice+1)/(double)voices));
+
+          int sr_f = (int)((double)audio_setup::sample_rate/(frequency*2 + frequency_detune));
+
+          while (sr_f%4 != 0) {
+            sr_f +=1;
+          }
+          int sr_f2 = sr_f/2;
+
+          int sr_f4 = sr_f/4;
+          double i_m_sr_f = (double)(i % sr_f);
+          double i_m_sr_f2 = (double)(i % sr_f2);
+          // double i_m_sr_f4 = (double)(i % sr_f4);
+
+          double triangle = 1 - (i_m_sr_f - (i_m_sr_f2 * ((i_m_sr_f- i_m_sr_f2)/sr_f4)))/((double)sr_f4);
+          morphed_triangle += triangle/(double)voices;
+        }
+
         //
         // if (triangle > 1) {
         //   triangle = 1;
@@ -101,20 +114,117 @@ namespace bass_voice
 
 
 
-        // morpher_square = triangle;
+
 
         // double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency * 2);
-        // morpher_square = sin(sin_x);
-        //
-        // if (morpher_square > 0) {
-        //   morpher_square = 1;
+        // double sine = sin(sin_x);
+        // double square = 0;
+        // //
+        // if (sine > 0) {
+        //   square = 1;
         // } else {
-        //   morpher_square = -1;
+        //   square = -1;
         // }
+
+        morpher_square = morphed_triangle;
+
+        // double
+        // if (i%3 == 0)
+        // {
+        //   morpher_square = square;
+        // } else if (i%3 == 1) {
+        //   morpher_square = (square + sine)/2.0; //+ square
+        // } else {
+        //   morpher_square = sine;
+        // }
+
 
         // double super_square = (sin_frame + sin_frame2 + sin_frame3 + sin_frame4)/4.0;
         bass_track::bass_track_1[channel][i+frame_location] += morpher_square * gain * 0.9;
         // bass_track::bass_track_1[channel][i+frame_location] += sin_frame * gain;
+      }
+    }
+  }
+  // attack and decay are in frames;
+  double envelope_gain(int i, int attack, int decay, int frame_duration)
+  {
+    double gain = 0.9;
+    if (i<attack)
+    {
+      gain *= ((double)i) / ((double)attack);
+    } else if (i > (frame_duration - decay)) {
+      gain *= ((double)frame_duration-(double)i)/((double)decay);
+    } else {
+      gain = 0.9;
+    }
+    return gain;
+  }
+
+  void super_square_at_location(int note, int frame_duration, int frame_location)
+  {
+    double frequency = tones::convert_note_to_tone(note);
+    int attack = audio_helper::time_as_frame(0.009);
+    int decay = audio_helper::time_as_frame(0.008);
+    for (int channel=0; channel<bass_track::main_buffer_channels; channel++)
+    {
+      for (int i=0; i<frame_duration; i++)
+      {
+        double gain = envelope_gain(i, attack, decay, frame_duration);
+        double morpher_square = 0;
+        int voices = 7;
+        for (int voice=0; voice<voices; voice++)
+        {
+          double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency + (((double)voice)*(frequency*2/((double)voices)))/(frequency*2));
+          double sin_frame = sin(sin_x);
+          if (sin_frame > 0) {
+            sin_frame = 1.0/((double)voices);
+          } else {
+            sin_frame = -1.0/((double)voices);
+          }
+          morpher_square += sin_frame;
+        }
+        bass_track::bass_track_1[channel][i+frame_location] += morpher_square * gain * 0.9;
+      }
+    }
+  }
+
+  void triangle_at_location(int note, int frame_duration, int frame_location)
+  {
+    double frequency = tones::convert_note_to_tone(note);
+    int attack = audio_helper::time_as_frame(0.009);
+    int decay = audio_helper::time_as_frame(0.008);
+    for (int channel=0; channel<bass_track::main_buffer_channels; channel++)
+    {
+      for (int i=0; i<frame_duration; i++)
+      {
+        double gain = envelope_gain(i, attack, decay, frame_duration);
+        int sr_f = (int)((double)audio_setup::sample_rate/(frequency*2));
+        while (sr_f%4 != 0) {
+          sr_f +=1;
+        }
+        int sr_f2 = sr_f/2;
+        int sr_f4 = sr_f/4;
+        double i_m_sr_f = (double)(i % sr_f);
+        double i_m_sr_f2 = (double)(i % sr_f2);
+        // double i_m_sr_f4 = (double)(i % sr_f4);
+        double triangle = 1 - (i_m_sr_f - (i_m_sr_f2 * ((i_m_sr_f - i_m_sr_f2)/sr_f4)))/((double)sr_f4);
+        bass_track::bass_track_1[channel][i+frame_location] += triangle * gain * 0.9;
+      }
+    }
+  }
+  void sine_at_location(int note, int frame_duration, int frame_location)
+  {
+    double frequency = tones::convert_note_to_tone(note);
+    int attack = audio_helper::time_as_frame(0.009);
+    int decay = audio_helper::time_as_frame(0.008);
+    for (int channel=0; channel<bass_track::main_buffer_channels; channel++)
+    {
+      for (int i=0; i<frame_duration; i++)
+      {
+        double gain = envelope_gain(i, attack, decay, frame_duration);
+        double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency*2);
+        double sine = sin(sin_x);
+        bass_track::bass_track_1[channel][i+frame_location] += sine * gain * 0.9;
       }
     }
   }

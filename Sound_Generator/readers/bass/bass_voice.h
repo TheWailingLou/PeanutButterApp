@@ -43,6 +43,12 @@ namespace bass_voice
     int teenth_location,
     int bar
   );
+
+  double envelope_gain(int i, int attack, int decay, int frame_duration);
+
+  void super_square_at_location(int note, int frame_duration, int frame_location);
+  void triangle_at_location(int note, int frame_duration, int frame_location);
+  void sine_at_location(int note, int frame_duration, int frame_location);
 }
 
 #endif
