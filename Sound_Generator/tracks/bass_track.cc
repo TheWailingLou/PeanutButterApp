@@ -67,11 +67,24 @@ namespace bass_track
       key_arrangement[i] = new int [2];
       key_arrangement[i][0] = 5;
       key_arrangement[i][1] = 36;
+      if (i >= 8 && i < 16)
+      {
+        key_arrangement[i][0] = 5;
+        key_arrangement[i][1] = 43;
+      }
       chord_arrangemnt[i] = 1;
       bass_arrangement[i] = 1 + (i%2);
-      if (i%8 > 3) {
-        bass_arrangement[i] += 2;
+      if (i%16 >= 4 && i%16 < 8) {
+        bass_arrangement[i] = 3 + (i%2);
+        chord_arrangemnt[i] = 2;
       }
+      if (i >= 16 && i < 24) {
+        bass_arrangement[i] = 5 + (i%2);
+        chord_arrangemnt[i] = 3;
+      }
+      // else if (i%16 >= 4 && i%16 < 8) {
+      //   bass_arrangement[i] += 2;
+      // }
       section_length[i] = 1;
 
       // drum_arrangement[0][i] = 1 + (i%2);
@@ -109,13 +122,13 @@ namespace bass_track
 
     int** drum_arr = new int* [5];
     for (int i=0; i<5; i++) {
-      drum_arr[i] = new int [12];
-      for (int j=0; j<12; j++)
+      drum_arr[i] = new int [32];
+      for (int j=0; j<32; j++)
       {
         drum_arr[i][j] = drum_arrangement_stand[i][j];
       }
     }
-    int** kick_drum_arrangement = drum_arrangement::create_tracks_from_arrangement(
+    int*** all_drum_arrangement = drum_arrangement::create_tracks_from_arrangement(
       drum_arr,
       section_length,
       total_sections
@@ -127,7 +140,7 @@ namespace bass_track
       bass_arrangement,
       section_length,
       total_sections,
-      kick_drum_arrangement
+      all_drum_arrangement
     );
 
 
