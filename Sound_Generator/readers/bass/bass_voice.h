@@ -49,6 +49,9 @@ namespace bass_voice
   void super_square_at_location(int note, int frame_duration, int frame_location);
   void triangle_at_location(int note, int frame_duration, int frame_location);
   void sine_at_location(int note, int frame_duration, int frame_location);
+  void half_sine_at_location(int note, int frame_duration, int frame_location);
+  void half_cos_at_location(int note, int frame_duration, int frame_location);
+  void tone_play(int note, int frame_duration, int frame_location);
 }
 
 #endif

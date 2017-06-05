@@ -43,6 +43,9 @@ namespace bass_voice
   );
   extern void triangle_at_location(int note, int frame_duration, int frame_location);
   extern void sine_at_location(int note, int frame_duration, int frame_location);
+  extern void half_sine_at_location(int note, int frame_duration, int frame_location);
+  extern void half_cos_at_location(int note, int frame_duration, int frame_location);
+  extern void tone_play(int note, int frame_duration, int frame_location);
 }
 
 namespace bass_writer
