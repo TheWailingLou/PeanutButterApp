@@ -265,6 +265,151 @@ namespace bass_voice
       }
     }
   }
+
+  void fourier_tone(int note, int frame_duration, int frame_location)
+  {
+    double frequency = tones::convert_note_to_tone(note);
+    int attack = audio_helper::time_as_frame(0.009);
+    int decay = audio_helper::time_as_frame(0.02);
+    for (int channel=0; channel<bass_track::main_buffer_channels; channel++)
+    {
+      for (int i=0; i<frame_duration; i++)
+      {
+        double gain = envelope_gain(i, attack, decay, frame_duration);
+
+        double f_sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency*2);
+        double f_sin_x2 = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency);
+        double sine = sin(f_sin_x);
+        double sine2 = sin(f_sin_x2);
+
+        double sr = (double)audio_setup::sample_rate;
+
+        double gain_redux = 1;
+        double all_comps = 0.0;
+        int n = 20;
+        for (int j=1; j<(n+1); j++)
+        {
+
+          double fnt = (M_PI*2*i*j*frequency)/sr;
+          double an = (n-j)*sin(j/M_PI);
+          double bn = 0.1 + (((double)(rand()%500))/1000.0);//sin((j*2*(M_PI*2))/n);
+          double sine_part = an*sin(fnt);
+          double cos_part = bn*cos(fnt);
+          gain_redux += abs(an) + abs(bn);
+          double comp = (sine_part + cos_part);
+          all_comps += comp;
+        }
+        if (gain_redux < 1)
+        {
+          gain_redux = 1;
+        }
+        double piano_attempt = (all_comps)/gain_redux;
+        piano_attempt = (piano_attempt + sine + sine2)/3;
+
+        bass_track::bass_track_1[channel][i+frame_location] += piano_attempt * gain * 0.9;
+      }
+    }
+  }
+  void fourier_tone_2(int note, int frame_duration, int frame_location)
+  {
+    double frequency = tones::convert_note_to_tone(note);
+    int attack = audio_helper::time_as_frame(0.009);
+    int decay = audio_helper::time_as_frame(0.02);
+    for (int channel=0; channel<bass_track::main_buffer_channels; channel++)
+    {
+      for (int i=0; i<frame_duration; i++)
+      {
+        double gain = envelope_gain(i, attack, decay, frame_duration);
+
+        double f_sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency*2);
+        double f_sin_x2 = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency*1);
+        double sine = sin(f_sin_x);
+        double sine2 = sin(f_sin_x2);
+
+        double sr = (double)audio_setup::sample_rate;
+
+        double gain_redux = 1;
+        double all_comps = 0.0;
+        int n = 20;
+        for (int j=1; j<(n+1); j++)
+        {
+          double fnt = (M_PI*2*i*j*frequency)/sr;
+          double an = ((j*M_PI)-n)*sin(j/(M_PI*2));
+          double bn = 0.1 + (((double)(rand()%500))/1000.0);//sin((j*2*(M_PI*2))/n);
+          double sine_part = an*sin(fnt);
+          double cos_part = bn*cos(fnt);
+          gain_redux += abs(an) + abs(bn);
+          double comp = (sine_part + cos_part);
+          all_comps += comp;
+        }
+        if (gain_redux < 1)
+        {
+          gain_redux = 1;
+        }
+        double piano_attempt = (all_comps)/gain_redux;
+        piano_attempt = (piano_attempt + sine + sine2)/3;
+
+        bass_track::bass_track_1[channel][i+frame_location] += piano_attempt * gain * 0.9;
+
+
+      }
+    }
+  }
+
+  void fourier_tone_3(int note, int frame_duration, int frame_location)
+  {
+    double frequency = tones::convert_note_to_tone(note);
+    int attack = audio_helper::time_as_frame(0.009);
+    int decay = audio_helper::time_as_frame(0.02);
+    for (int channel=0; channel<bass_track::main_buffer_channels; channel++)
+    {
+      for (int i=0; i<frame_duration; i++)
+      {
+        double gain = envelope_gain(i, attack, decay, frame_duration);
+
+        double sr_f_sin = (double)audio_setup::sample_rate/(frequency*1.0);
+        double modulo = i % (int)sr_f_sin;
+        double h_sin_x = M_PI * ((double)modulo/sr_f_sin);
+        double half_sin = (2*sin(h_sin_x))-1;
+
+        double f_sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency*2);
+        double f_sin_x2 = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency*4);
+        double sine = sin(f_sin_x);
+        double sine2 = sin(f_sin_x2);
+
+        double sr = (double)audio_setup::sample_rate;
+
+        double gain_redux = 1;
+        double all_comps = 0.0;
+        int n = 4;
+        for (int j=1; j<(n+1); j++)
+        {
+          double mod = (double)(j % (int)n);
+          double half_sine_a = M_PI * ((double)modulo/n);
+
+          double fnt = (M_PI*2*i*j*frequency)/sr;
+          double an = 5*((n-j)/n);
+          double bn = .1*(cos(j/(M_PI*2)));//sin((j*2*(M_PI*2))/n);
+          double sine_part = an*sin(fnt);
+          double cos_part = bn*cos(fnt);
+          gain_redux += abs(an) + abs(bn);
+          double comp = (sine_part + cos_part);
+          all_comps += comp;
+        }
+        if (gain_redux < 1)
+        {
+          gain_redux = 1;
+        }
+        double piano_attempt = (all_comps)/gain_redux;
+        piano_attempt = ((2*piano_attempt) + half_sin + (sine*2) + sine2)/6.0;
+
+        bass_track::bass_track_1[channel][i+frame_location] += piano_attempt * gain * 0.9;
+
+
+      }
+    }
+  }
+
   void tone_play(int note, int frame_duration, int frame_location)
   {
     double frequency = tones::convert_note_to_tone(note);
@@ -288,14 +433,14 @@ namespace bass_voice
 
 
 
-        double sr_f_sin = (double)audio_setup::sample_rate/(frequency*2.0);
-        double sr_f_cos = (double)audio_setup::sample_rate/(frequency*4.0);
+        double sr_f_sin = (double)audio_setup::sample_rate/(frequency*1.0);
+        double sr_f_cos = (double)audio_setup::sample_rate/(frequency*1.0);
         double modulo = i % (int)sr_f_sin;
         double h_sin_x = M_PI * ((double)modulo/sr_f_sin);
         double h_cos_x = M_PI * ((double)modulo/sr_f_cos);
 
         double f_sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency*2);
-        double f_sin_x2 = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency);
+        double f_sin_x2 = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency*4);
         double sine = sin(f_sin_x);
         double sine2 = sin(f_sin_x2);
         double square_sin = sin(f_sin_x);
@@ -331,15 +476,15 @@ namespace bass_voice
         int harmonics = 12;
         double gain_redux = 1;
         double all_comps = 0.0;
-        int n = 20;
+        int n = 4;
         for (int j=1; j<(n+1); j++)
         {
           double mod = (double)(j % (int)n);
           double half_sine_a = M_PI * ((double)modulo/n);
 
           double fnt = (M_PI*2*i*j*frequency)/sr;
-          double an = (n-j)*sin(j/M_PI);
-          double bn = 0.1 + (((double)(rand()%500))/1000.0);//sin((j*2*(M_PI*2))/n);
+          double an = 5*((n-j)/n);
+          double bn = .1*(cos(j/(M_PI*2)));//sin((j*2*(M_PI*2))/n);
           double sine_part = an*sin(fnt);
           double cos_part = bn*cos(fnt);
           gain_redux += abs(an) + abs(bn);
@@ -351,7 +496,7 @@ namespace bass_voice
           gain_redux = 1;
         }
         double piano_attempt = (all_comps)/gain_redux;
-        piano_attempt = (piano_attempt + sine + sine2)/3;
+        piano_attempt = ((3*piano_attempt) + half_sin + (sine*2) + sine2)/7.0;
 
         double new_tone = (square + triangle)/2.0;
         bass_track::bass_track_1[channel][i+frame_location] += piano_attempt * gain * 0.9;

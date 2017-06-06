@@ -2,6 +2,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var context = new AudioContext();
 const peanutButter = require('../Sound_Generator/build/Release/peanutButter.node')
+const fs = require('fs')
+const toWav = require('audiobuffer-to-wav')
+
 
 function formatBuffer(audioBuffer) {
   var formattedBufferArray = []
@@ -88,9 +91,59 @@ Promise.all([
     }
     drumBuffer.copyToChannel(float32, j)
   })
-  var source = context.createBufferSource()
-  source.buffer = drumBuffer
-  source.connect(context.destination);
-  source.start()
+
+  $(".clickMe").attr('class', 'clickMe ready')
+  $(".clickMe").text('Sound Ready')
+  $(".download").attr('class', 'download ready')
+  $(".download").text('Save Wav File')
+
+  var source;
+  var started = false;
+  $(".clickMe").click(function(){
+    if (started)
+    {
+      source.stop();
+      started = false;
+    } else {
+      source = context.createBufferSource()
+      source.buffer = drumBuffer
+      source.connect(context.destination);
+      source.start()
+      started = true;
+    }
+
+  })
+  $(".clickMe").hover(function(){
+    if (started)
+    {
+      $(this).text('Click To Stop.')
+    }
+  }, function(){
+    if (started)
+    {
+      $(this).text('Sound Playing')
+    } else {
+      $(this).text('Sound Ready')
+    }
+  })
+
+  $('.download').click(function(){
+
+    var wav = toWav(drumBuffer)
+    var wavBuff = new Uint8Array(wav)
+    var blob = new window.Blob([ new DataView(wav) ], {
+      type: 'audio/wav'
+    })
+    var url = window.URL.createObjectURL(blob)
+    var anchor = document.createElement('a')
+    document.body.appendChild(anchor)
+    anchor.style = 'display: none'
+    anchor.href = url
+    anchor.download = 'Bass and drum test.wav'
+    anchor.click()
+    window.URL.revokeObjectURL(url)
+  })
+
+
 
 })

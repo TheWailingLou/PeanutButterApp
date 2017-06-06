@@ -51,7 +51,11 @@ namespace bass_voice
   void sine_at_location(int note, int frame_duration, int frame_location);
   void half_sine_at_location(int note, int frame_duration, int frame_location);
   void half_cos_at_location(int note, int frame_duration, int frame_location);
+  void fourier_tone(int note, int frame_duration, int frame_location);
+  void fourier_tone_2(int note, int frame_duration, int frame_location);
+  void fourier_tone_3(int note, int frame_duration, int frame_location);
   void tone_play(int note, int frame_duration, int frame_location);
+
 }
 
 #endif

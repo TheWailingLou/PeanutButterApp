@@ -54,6 +54,8 @@ namespace arrangement_main
 {
   extern int section_length_standard_1 [7];
   extern int section_length_standard_2 [12];
+  // extern void generate_arrangements_and_create_tracks();
+  extern void generate_arrangements_and_create_tracks(int mode, int starting_note);
 }
 
 ///

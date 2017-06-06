@@ -20,7 +20,11 @@ namespace bass_writer
         // bass_voice::sine_at_location(note, frame_duration, frame_location);
         // bass_voice::half_sine_at_location(note, frame_duration, frame_location);
         // bass_voice::half_cos_at_location(note, frame_duration, frame_location);
-        bass_voice::tone_play(note, frame_duration, frame_location);
+        bass_voice::fourier_tone(note, frame_duration, frame_location);
+        // bass_voice::fourier_tone_2(note, frame_duration, frame_location);
+        // bass_voice::fourier_tone_3(note, frame_duration, frame_location);
+
+        // bass_voice::tone_play(note, frame_duration, frame_location);
       }
     }
   }

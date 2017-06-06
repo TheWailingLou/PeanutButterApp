@@ -75,26 +75,26 @@ namespace drum_arrangement
 
   int*** create_tracks_from_arrangement(int** arrangement, int* section_length, int total_sections)
   {
-    int hi_hat_sections = arrangement_main::num_of_unique_sections(arrangement[0], total_sections);
-    int kick_sections = arrangement_main::num_of_unique_sections(arrangement[1], total_sections);
-    int snare_sections = arrangement_main::num_of_unique_sections(arrangement[2], total_sections);
+    // int hi_hat_sections = arrangement_main::num_of_unique_sections(arrangement[0], total_sections);
+    // int kick_sections = arrangement_main::num_of_unique_sections(arrangement[1], total_sections);
+    // int snare_sections = arrangement_main::num_of_unique_sections(arrangement[2], total_sections);
 
-    int** hi_hat_arrays = new int* [hi_hat_sections];
-    for (int unique_bar=0; unique_bar<hi_hat_sections; unique_bar++)
+    int** hi_hat_arrays = new int* [total_sections];
+    for (int unique_bar=0; unique_bar<total_sections; unique_bar++)
     {
       int* hi_hat_array = hi_hat_generator::generate_hi_hat_teenth_array();
       hi_hat_arrays[unique_bar] = hi_hat_array;
     }
 
-    int** kick_arrays = new int* [kick_sections];
-    for (int unique_bar=0; unique_bar<kick_sections; unique_bar++)
+    int** kick_arrays = new int* [total_sections];
+    for (int unique_bar=0; unique_bar<total_sections; unique_bar++)
     {
       int* kick_array = kick_generator::get_random_kick_standard();
       kick_arrays[unique_bar] = kick_array;
     }
 
-    int** snare_arrays = new int* [snare_sections];
-    for (int unique_bar=0; unique_bar<snare_sections; unique_bar++)
+    int** snare_arrays = new int* [total_sections];
+    for (int unique_bar=0; unique_bar<total_sections; unique_bar++)
     {
       int* snare_array = snare_generator::get_random_snare_standard();
       snare_arrays[unique_bar] = snare_array;
@@ -106,7 +106,7 @@ namespace drum_arrangement
       empty_array[i] = 0;
     }
 
-    int num_of_drums = 4; //kick, snare, hi_hat;
+    int num_of_drums = 4; //kick, snare, hi_hat, toms;
     int*** all_drum_arrangements = new int** [num_of_drums];
 
     for (int drum=0; drum<num_of_drums; drum++)
@@ -121,10 +121,9 @@ namespace drum_arrangement
     int current_bar = 0;
     for (int section=0; section<total_sections; section++)
     {
-
       int hi_hat_index = arrangement[0][section];
       int* hi_hat;
-      if (hi_hat_index != 0)
+      if (hi_hat_index > 0)
       {
         hi_hat = hi_hat_arrays[hi_hat_index-1];
       } else {
@@ -132,7 +131,7 @@ namespace drum_arrangement
       }
       int snare_index = arrangement[1][section];
       int* snare;
-      if (snare_index != 0)
+      if (snare_index > 0)
       {
         snare = snare_arrays[snare_index-1];
       } else {
@@ -141,7 +140,7 @@ namespace drum_arrangement
 
       int kick_index = arrangement[2][section];
       int* kick;
-      if (snare_index != 0)
+      if (kick_index > 0)
       {
         kick = kick_arrays[kick_index-1];
       } else {
