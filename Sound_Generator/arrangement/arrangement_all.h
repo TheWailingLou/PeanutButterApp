@@ -33,12 +33,25 @@ namespace drum_arrangement
   );
 }
 
+namespace bass_writer
+{
+  extern void final_note(int note, int duration, int octave, int bar);
+}
+
+namespace snare_writer
+{
+  extern void write_from_array_at_bar(int teenth_array [16], int bar);
+}
+
 namespace arrangement_all
 {
   int mod_four_bars_bass (int** key_arrangement, int* chord_arrangement, int* bass_arrangement, int current_section, int main_start);
   void mod_four_bars_drums (int** drum_arrangement, int current_section, int main_start, int root_section);
   void create_tracks(int starting_note, int mode);
   void intro_bars (int* bass_arrangement, int** drum_arrangement, int main_start);
+  void end_bars (int* bass_arrangement, int** key_arrangement, int** drum_arrangement, int end_length, int total_length, int main_start);
 }
+
+
 
 #endif

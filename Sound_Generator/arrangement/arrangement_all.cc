@@ -6,15 +6,16 @@ namespace arrangement_all
   {
     srand(time(NULL));
 
-    std::cout << "Rand test: " << rand()%10 << rand()%10 << std::endl;
+    std::cout << "Rand test: " << rand()%10 << " " << rand()%10 << std::endl;
     int main_start = 4*(rand()%3);
     // int breakdown_length = 4*(rand()%3);
-    // int end_length = 1 + (4*rand()%3);
+    int end_length = 5 + (4*(rand()%3));
 
+    std::cout << "(14) END_LENGTH " << end_length << std::endl;
     int main_sections = 12 + rand()%13;
 
     // int main_start = 0;
-    int end_length = 0;
+    // int end_length = 0;
     int breakdown_length = 0;
 
     int total_sections = main_start + (main_sections*4) + end_length;
@@ -30,7 +31,7 @@ namespace arrangement_all
     int* chord_arrangement = new int [total_sections];
     int* bass_arrangement = new int [total_sections];
     int* section_length = new int [total_sections];
-    for (int i=0; i<total_sections; i++)
+    for (int i=0; i<total_sections+1; i++)
     {
       drum_arrangement[0][i] = 0;
       drum_arrangement[1][i] = 0;
@@ -107,6 +108,25 @@ namespace arrangement_all
         crash += 1;
         drum_arrangement[3][i*4 + main_start - 1] = 4 + (4*(rand()%3));
       }
+
+      int note1 = key_arrangement[i*4 + main_start][1];
+      int note2 = key_arrangement[i*4 + main_start+1][1];
+      int mode1 = key_arrangement[i*4 + main_start][0];
+      int mode2 = key_arrangement[i*4 + main_start+1][0];
+
+      int comp_note1 = key_arrangement[i*4 + main_start-2][1];
+      int comp_note2 = key_arrangement[i*4 + main_start-1][1];
+      int comp_mode1 = key_arrangement[i*4 + main_start-2][0];
+      int comp_mode2 = key_arrangement[i*4 + main_start-1][0];
+
+      bool note_diff = (note1 != comp_note1 || note2 != comp_note2);
+      bool mode_diff = (mode1 != comp_mode1 || mode2 != comp_mode2);
+      if ((note_diff || mode_diff) && (rand()%100 > 50))
+      {
+        drum_arrangement[4][i*4 + main_start] = (crash%2) + 1;
+        crash += 1;
+        drum_arrangement[3][i*4 + main_start - 1] = 4 + (4*(rand()%3));
+      }
     }
 
     bool tom_fill_to_start = (main_start > 0) && (rand()%100 > 60);
@@ -126,6 +146,11 @@ namespace arrangement_all
       std::cout << bass_arrangement[i] << " ";
     }
     std::cout << '\n\n' << std::endl;
+
+    std::cout << "(129) END_LENGTH " << end_length << std::endl;
+    end_bars (bass_arrangement, key_arrangement, drum_arrangement, end_length, total_sections, main_start);
+
+    std::cout << "finishing generating ending" << std::endl;
 
     int*** all_drum_tracks = drum_arrangement::create_tracks_from_arrangement(
       drum_arrangement,
@@ -236,6 +261,195 @@ namespace arrangement_all
           drum_arrangement[1][i] = drum_arrangement[0][(i%4)+main_start];
         }
       }
+    }
+  }
+
+  void end_bars (int* bass_arrangement, int** key_arrangement, int** drum_arrangement, int end_length, int total_length, int main_start)
+  {
+    std::cout << "\n\nKEY ARR PROBLEM ??? k: " << key_arrangement[total_length-1][1] << std::endl;
+    std::cout << "total_length -1: " << total_length - 1 << std::endl;
+    std::cout << "\n\n\n\nEND LENGTH: " << end_length << "\n\n\n\n" << std::endl;
+    // if (end_length == 0)
+    // {
+    //   return;
+    // }
+    int what_end = rand()%5;
+    int current_bar = total_length-end_length;
+    for (int i=0; i<end_length-1; i++)
+    {
+      bass_arrangement[current_bar+i] = bass_arrangement[main_start+(i%4)];
+      drum_arrangement[0][current_bar+i] = bass_arrangement[main_start+(i%4)];
+      drum_arrangement[1][current_bar+i] = bass_arrangement[main_start+(i%4)];
+      drum_arrangement[2][current_bar+i] = bass_arrangement[main_start+(i%4)];
+      drum_arrangement[3][current_bar+i] = -1;
+      drum_arrangement[4][current_bar+i] = 0;
+    }
+    bass_arrangement[total_length-1] = 0;
+    drum_arrangement[0][total_length-1] = 0;
+    drum_arrangement[1][total_length-1] = 0;
+    drum_arrangement[2][total_length-1] = 0;
+    drum_arrangement[3][total_length-1] = -1;
+    drum_arrangement[4][total_length-1] = 0;
+    if (what_end == 0)
+    {
+      std::cout << "Ending 1" << std::endl;
+      // drum intensify;
+      for (int i=0; i<end_length-1; i++)
+      {
+
+        if (i >= 4)
+        {
+          if (i%2 == 0)
+          {
+            drum_arrangement[4][current_bar+i] = 2;
+          } else {
+            drum_arrangement[3][current_bar+i] = 4;
+          }
+        }
+
+        if (i >= 8)
+        {
+          if (i%2 == 0 || i%4==3)
+          {
+            drum_arrangement[4][current_bar+i] = 2;
+          }
+          if (i%4 > 0)
+          {
+            drum_arrangement[3][current_bar+i] = 4;
+          }
+        }
+        if (i%4 == 0)
+        {
+          drum_arrangement[4][current_bar+i] = 1;
+        } else if (i%4 == 3) {
+          drum_arrangement[3][current_bar+i] = 8;
+        }
+      }
+      drum_arrangement[4][total_length-1] = 1;
+      bass_writer::final_note(key_arrangement[total_length-1][1], 16, 1, total_length-1);
+    } else if (what_end == 1) {
+      // drum intensify2;
+      std::cout << "Ending 2" << std::endl;
+      for (int i=0; i<end_length-1; i++)
+      {
+
+        if (i >= 4)
+        {
+          if (i%2 == 0)
+          {
+            drum_arrangement[4][current_bar+i] = 2;
+          } else {
+            drum_arrangement[3][current_bar+i] = 4;
+          }
+        }
+
+        if (i >= 8)
+        {
+          if (i%2 == 0 || i%4==3)
+          {
+            drum_arrangement[4][current_bar+i] = 2;
+          }
+          if (i%4 > 0)
+          {
+            drum_arrangement[3][current_bar+i] = 4;
+          }
+        }
+        if (i%4 == 0)
+        {
+          drum_arrangement[4][current_bar+i] = 1;
+        } else if (i%4 == 3) {
+          drum_arrangement[3][current_bar+i] = 8;
+        }
+      }
+      drum_arrangement[4][total_length-1] = 0;
+      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
+      if (rand()%2 == 0)
+      {
+        int snare_end [16] = {1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        snare_writer::write_from_array_at_bar(snare_end, total_length-1);
+        bass_writer::final_note(key_arrangement[total_length-1][1], 2, 1, total_length-1);
+      } else {
+        int snare_end [16] = {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        snare_writer::write_from_array_at_bar(snare_end, total_length-1);
+        bass_writer::final_note(key_arrangement[total_length-1][1], 1, 1, total_length-1);
+      }
+      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
+    } else if (what_end == 2) {
+
+      std::cout << "Ending 3" << std::endl;
+      // bass_solo_after4
+      for (int i=0; i<end_length-1; i++)
+      {
+        if (i%4 == 0)
+        {
+          drum_arrangement[4][current_bar+i] = 2;
+        } else if (i%4 == 3) {
+          drum_arrangement[3][current_bar+i] = 6;
+        }
+        if (i >= 4)
+        {
+          drum_arrangement[0][current_bar+i] = 0;
+          drum_arrangement[1][current_bar+i] = 0;
+          drum_arrangement[2][current_bar+i] = 0;
+          drum_arrangement[3][current_bar+i] = -1;
+          drum_arrangement[4][current_bar+i] = 0;
+        }
+        if (i == 4) {
+          drum_arrangement[4][total_length-1] = 1;
+        }
+      }
+
+      bass_writer::final_note(key_arrangement[total_length-1][1], 8, 1, total_length-1);
+      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
+    } else if (what_end == 3) {
+      std::cout << "Ending 4" << std::endl;
+      // bass_solo_after8
+      for (int i=0; i<end_length-1; i++)
+      {
+        if (i%4 == 0)
+        {
+          drum_arrangement[4][current_bar+i] = 2;
+        } else if (i%4 == 3) {
+          drum_arrangement[3][current_bar+i] = 6;
+        }
+        if (i >= 8)
+        {
+          drum_arrangement[0][current_bar+i] = 0;
+          drum_arrangement[1][current_bar+i] = 0;
+          drum_arrangement[2][current_bar+i] = 0;
+          drum_arrangement[3][current_bar+i] = -1;
+          drum_arrangement[4][current_bar+i] = 0;
+        }
+        if (i == 8) {
+          drum_arrangement[4][current_bar+i] = 1;
+        }
+      }
+      if (rand()%2 == 0)
+      {
+        bass_writer::final_note(key_arrangement[total_length-1][1], 8, 1, total_length-1);
+      } else {
+        bass_writer::final_note(key_arrangement[total_length-1][1], 2, 1, total_length-1);
+      }
+
+      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
+    } else if (what_end == 4) {
+      std::cout << "Ending 5" << std::endl;
+      // bass_solo_entire
+      for (int i=0; i<end_length-1; i++)
+      {
+        drum_arrangement[0][current_bar+i] = 0;
+        drum_arrangement[1][current_bar+i] = 0;
+        drum_arrangement[2][current_bar+i] = 0;
+        drum_arrangement[3][current_bar+i] = -1;
+        drum_arrangement[4][current_bar+i] = 0;
+      }
+      if (rand()%2 == 0)
+      {
+        bass_writer::final_note(key_arrangement[total_length-1][1], 8, 1, total_length-1);
+      } else {
+        bass_writer::final_note(key_arrangement[total_length-1][1], 2, 1, total_length-1);
+      }
+      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
     }
   }
 

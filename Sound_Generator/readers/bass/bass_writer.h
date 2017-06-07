@@ -11,6 +11,11 @@ namespace tones
   extern double convert_note_to_tone(int note);
 }
 
+namespace notes
+{
+  extern int find_lowest_note(int starting_note);
+}
+
 namespace audio_helper
 {
   extern int time_as_frame(double time_in_seconds);
@@ -56,6 +61,7 @@ namespace bass_voice
 namespace bass_writer
 {
   void write_bass_bar(int** bass_teenth_array, int bar);
+  void final_note(int note, int duration, int octave, int bar);
 }
 
 #endif
