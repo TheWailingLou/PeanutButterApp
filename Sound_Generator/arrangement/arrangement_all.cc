@@ -11,7 +11,7 @@ namespace arrangement_all
     // int breakdown_length = 4*(rand()%3);
     // int end_length = 1 + (4*rand()%3);
 
-    int main_sections = 8 + rand()%9;
+    int main_sections = 12 + rand()%13;
 
     // int main_start = 0;
     int end_length = 0;
