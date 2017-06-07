@@ -33,8 +33,8 @@ namespace bass_track
   {
     setup_buffers(128, 3.0);
     drum_track::setup_buffers(128, 3.0);
-    arrangement_main::generate_arrangements_and_create_tracks(5, 37);
-
+    // arrangement_main::generate_arrangements_and_create_tracks(5, 37);
+    arrangement_all::create_tracks(36, 5);
 
     // for (int i=0; i<16; i++)
     // {

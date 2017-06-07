@@ -420,7 +420,7 @@ namespace music_gen
       {
         int note_val = notes::convert_to_note_value(note, mode, starting_note);
         int new_note = new_scale[note_val] + 12*octave;
-        // std::cout << "NOTE: " << note << " NEW_NOTE: " << new_note << std::endl;
+        // std::cout << " " << note << " NEW_NOTE: " << new_note << std::endl;
         // std::cout << "note_val: " << note_val << std::endl;
         new_bar[i][0] = new_note;
         new_bar[i][1] = duration;

@@ -4,6 +4,7 @@
 #include <array>
 #include <math.h>
 #include <stdlib.h>
+#include <iostream>
 
 namespace tones
 {

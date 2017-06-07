@@ -141,6 +141,10 @@ namespace bass_arrangement
               start_note,
               1
             );
+            // all_riffs[current_riff-1] = riff_bar;
+            // used_riffs[current_riff-1][0] = current_riff;
+            // used_riffs[current_riff-1][1] = mode;
+            // used_riffs[current_riff-1][2] = start_note;
           } else {
             // riff_bar = music_gen::generate_bar_from_chords(chord_bar, 1);
             std::cout << "145 " << std::endl;
@@ -166,7 +170,7 @@ namespace bass_arrangement
                 kick = drum_arrangement[0][desired_section];
                 snare = drum_arrangement[1][desired_section];
                 hi_hat = drum_arrangement[2][desired_section];
-                riff_bar = music_gen::stick_to_root(
+                riff_bar = music_gen::generate_bar_from_chords_and_drums(
                   kick, snare, hi_hat,
                   chord_bar, 1
                 );
@@ -177,7 +181,7 @@ namespace bass_arrangement
               }
             } else {
               std::cout << "178 " << std::endl;
-              riff_bar = music_gen::stick_to_root(
+              riff_bar = music_gen::generate_bar_from_chords_and_drums(
                 kick, snare, hi_hat,
                 chord_bar, 1
               );
@@ -192,11 +196,23 @@ namespace bass_arrangement
             //   chord_bar, 1
             // );
             std::cout << "193 " << std::endl;
-            all_riffs[current_riff-1] = riff_bar;
-            used_riffs[current_riff-1][0] = current_riff;
-            used_riffs[current_riff-1][1] = mode;
-            used_riffs[current_riff-1][2] = start_note;
+            // all_riffs[current_riff-1] = riff_bar;
+            // used_riffs[current_riff-1][0] = current_riff;
+            // if (used_riffs[current_riff-1][1] == -1)
+            // {
+            //   used_riffs[current_riff-1][1] = mode;
+            // }
+            // if (used_riffs[current_riff-1][2] == -1)
+            // {
+            //   used_riffs[current_riff-1][2] = start_note;
+            // }
+
+
           }
+          // all_riffs[current_riff-1] = riff_bar;
+          // used_riffs[current_riff-1][0] = current_riff;
+          // used_riffs[current_riff-1][1] = mode;
+          // used_riffs[current_riff-1][2] = start_note;
         } else {
           std::cout << "200 " << std::endl;
           // chord_bar = chord_gen::solid_three_chords(mode, start_note);
@@ -220,6 +236,10 @@ namespace bass_arrangement
               start_note,
               1
             );
+            // all_riffs[current_riff-1] = riff_bar;
+            // used_riffs[current_riff-1][0] = current_riff;
+            // used_riffs[current_riff-1][1] = mode;
+            // used_riffs[current_riff-1][2] = start_note;
           } else {
             std::cout << "223 " << std::endl;
             // riff_bar = music_gen::generate_bar_from_chords(chord_bar, 1);
@@ -259,6 +279,10 @@ namespace bass_arrangement
                 // used_riffs[current_riff-1][1] = mode;
                 // used_riffs[current_riff-1][2] = start_note;
               }
+              // all_riffs[current_riff-1] = riff_bar;
+              // used_riffs[current_riff-1][0] = current_riff;
+              // used_riffs[current_riff-1][1] = mode;
+              // used_riffs[current_riff-1][2] = start_note;
             } else {
               std::cout << "262 " << std::endl;
               riff_bar = music_gen::generate_bar_from_chords_and_drums(
@@ -275,12 +299,28 @@ namespace bass_arrangement
             //   chord_bar, 1
             // );
             std::cout << "275 " << std::endl;
-            all_riffs[current_riff-1] = riff_bar;
-            used_riffs[current_riff-1][0] = current_riff;
-            used_riffs[current_riff-1][1] = mode;
-            used_riffs[current_riff-1][2] = start_note;
+
           }
         }
+        // if (all_riffs)
+
+
+        if (used_riffs[current_riff-1][0] == -1)
+        {
+          all_riffs[current_riff-1] = riff_bar;
+          used_riffs[current_riff-1][0] = current_riff;
+        }
+        if (used_riffs[current_riff-1][1] == -1)
+        {
+          used_riffs[current_riff-1][1] = mode;
+        }
+        if (used_riffs[current_riff-1][2] == -1)
+        {
+          used_riffs[current_riff-1][2] = start_note;
+        }
+
+
+
       }
       std::cout << "284 " << std::endl;
       all_riffs_to_write[section] = riff_bar;
@@ -290,31 +330,32 @@ namespace bass_arrangement
     int current_bar = 0;
     for (int section=0; section<total_sections; section++)
     {
-      // std::cout << "292 " << std::endl;
+      std::cout << "292 " << std::endl;
       int* fill = drum_arrangement[3][section];
       for (int bar=0; bar<section_length[section]; bar++)
       {
         int** bass_bar;
         if (bar < section_length[section]-1)
         {
-          // std::cout << "299 " << std::endl;
+          std::cout << "299 " << std::endl;
           bass_bar = all_riffs_to_write[section];
         } else {
-          // std::cout << "302 " << std::endl;
+          std::cout << "302 " << std::endl;
           bass_bar = music_gen::modify_bar_for_fill(all_riffs_to_write[section], fill);
         }
         bass_writer::write_bass_bar(bass_bar, current_bar);
         current_bar += 1;
+
+        std::cout << "writing bar" << std::endl;
       }
+      std::cout << "349 section: " << section << " of " << total_sections << std::endl;
     }
 
 
-
-
-    for (int i=0; i<16; i++)
-    {
-      delete[] all_riffs[0][i];
-      delete[] all_chords[0][i];
-    }
+    // for (int i=0; i<16; i++)
+    // {
+    //   delete[] all_riffs[0][i];
+    //   delete[] all_chords[0][i];
+    // }
   }
 }

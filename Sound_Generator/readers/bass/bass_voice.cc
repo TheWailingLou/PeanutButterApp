@@ -306,7 +306,7 @@ namespace bass_voice
         double piano_attempt = (all_comps)/gain_redux;
         piano_attempt = (piano_attempt + sine + sine2)/3;
 
-        bass_track::bass_track_1[channel][i+frame_location] += piano_attempt * gain * 0.9;
+        bass_track::bass_track_1[channel][i+frame_location] += piano_attempt * gain * 1.0;
       }
     }
   }

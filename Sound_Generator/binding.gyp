@@ -5,6 +5,7 @@
             "sources": [
                 "main.cc",
                 "./arrangement/arrangement_main.cc",
+                "./arrangement/arrangement_all.cc",
                 "./arrangement/drum_arrangement.cc",
                 "./arrangement/key_and_chord_arrangement.cc",
                 "./arrangement/bass_arrangement.cc",

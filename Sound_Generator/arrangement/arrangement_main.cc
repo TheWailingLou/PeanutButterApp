@@ -458,10 +458,15 @@ namespace arrangement_main
 
     int split = middle_length/2;
     int split2 = split/2 + ((1-(rand()%3))*(split/4));
+
     if (middle_length == 64)
     {
       split2 = split/2;
     }
+
+    int current_note = starting_note;
+    int current_mode = mode;
+
     for (int i=0; i<middle_length; i++)
     {
       // std::cout << "iterating middle (line 423). i: " << i << " middle length: " << middle_length << std::endl;
@@ -484,6 +489,17 @@ namespace arrangement_main
             stored_highest_hi_hat = highest_hi_hat;
             stored_highest_snare = highest_snare;
           }
+          //3
+          if (i==split2 || i==split+split2)
+          {
+            current_mode = mode;
+            current_note = starting_note;
+          } else if ((i%split)%split2 >= 4) {
+            current_mode = mode;
+            current_note = starting_note + 7;
+          }
+          key_arrangement_all[i][0] = current_mode;
+          key_arrangement_all[i][1] = current_note;
 
           int section = 1;
           if (alternate_section3)
@@ -520,6 +536,17 @@ namespace arrangement_main
           }
           // section2 here.
         } else {
+          //4
+          if (i==split || i==0)
+          {
+            current_mode = mode;
+            current_note = starting_note;
+          } else if (i%split >= 4) {
+            current_mode = mode;
+            current_note = starting_note + 7;
+          }
+          key_arrangement_all[i][0] = current_mode;
+          key_arrangement_all[i][1] = current_note;
           // section 1.
           if (mid_continues_intro && intro_length > 0 && ((i < split) || (!eight_part_mid && !six_part_mid)))
           {
@@ -657,6 +684,18 @@ namespace arrangement_main
       } else {
         if (i >= split)
         {
+          //2
+          if (i==split)
+          {
+            current_mode = mode;
+            current_note = starting_note;
+          } else if (i%split >= 4) {
+            current_mode = mode;
+            current_note = starting_note + 5;
+          }
+          key_arrangement_all[i][0] = current_mode;
+          key_arrangement_all[i][1] = current_note;
+
           if (i == split)
           {
             stored_highest_bass = highest_bass;
@@ -692,6 +731,18 @@ namespace arrangement_main
           }
           //section2
         } else {
+
+          // 1
+          if (i==0 || i == split)
+          {
+            current_mode = mode;
+            current_note = starting_note;
+          } else if (i%split >= 4) {
+            current_mode = mode;
+            current_note = starting_note + 7;
+          }
+          key_arrangement_all[i][0] = current_mode;
+          key_arrangement_all[i][1] = current_note;
           //section 1
           if (mid_continues_intro && intro_length > 0)
           {

@@ -7,11 +7,11 @@ namespace get_buffers
   {
     std::cout << "(8) get_buffers, channels: " << buffer_channels << std::endl;
     std::cout << "\n(8) size: " << buffer_size << std::endl;
-    Local<Array> output_array = Array::New(isolate);
+    Local<Array> output_array = Array::New(isolate, buffer_channels);
     for (int channel=0; channel<buffer_channels; channel++)
     {
       std::cout << "(12) channels " << std::endl;
-      Local<Array> channel_array = Array::New(isolate);
+      Local<Array> channel_array = Array::New(isolate, buffer_size);
       for (int i=0; i<buffer_size; i++)
       {
         Local<Number> num = Number::New(isolate, buffer[channel][i]);

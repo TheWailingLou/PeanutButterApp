@@ -58,6 +58,11 @@ namespace arrangement_main
   extern void generate_arrangements_and_create_tracks(int mode, int starting_note);
 }
 
+namespace arrangement_all
+{
+ extern void create_tracks(int starting_note, int mode);
+}
+
 ///
 
 namespace drum_arrangement

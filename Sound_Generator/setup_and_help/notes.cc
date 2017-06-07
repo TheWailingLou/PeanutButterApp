@@ -10,15 +10,29 @@ namespace notes
     int note_value = -1;
     for (int i=0; i<7; i++)
     {
-      if (lowest_of_note == scale[i])
+      if (lowest_of_note == scale[i] || (lowest_of_note+12 == scale[i]))
       {
         note_value = i;
         break;
       }
     }
     delete[] scale;
+    if (note_value == -1)
+    {
+      std::cout << "NOTE CONVERSION FAILED: -1" << std::endl;
+      std::cout << "NOTE: " << note << " STARTING NOTE: " << starting_note << std::endl;
+      std::cout << "LOWEST OF: " << lowest_of_note << " LOWEST OF START " << lowest_of_starting_note << std::endl;
+      std::cout << "MODE " <<  mode << std::endl;
+      std::cout << "SCALE: ";
+      for (int j=0; j<7; j++)
+      {
+        std::cout << " " << scale[j];
+      }
+      std::cout << "\n" << std::endl;
+    }
     return note_value;
   }
+
   int** get_note_values_from_chords(int** chords, int mode, int starting_note)
   {
     int** note_values = new int* [16];

@@ -4,6 +4,7 @@ namespace bass_writer
 {
   void write_bass_bar(int** bass_teenth_array, int bar)
   {
+    std::cout << "in the bass bar";
     for (int i=0; i<16; i++)
     {
       int note = bass_teenth_array[i][0];
@@ -27,5 +28,6 @@ namespace bass_writer
         // bass_voice::tone_play(note, frame_duration, frame_location);
       }
     }
+    std::cout << "past the bass_bar" << std::endl;
   }
 }
