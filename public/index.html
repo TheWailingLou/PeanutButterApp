@@ -14,16 +14,171 @@
       src="./assets/scripts/dependencies/jquery-3.2.1.min.js"
       type="text/javascript">
     </script>
-    <script src='./assets/scripts/exportDrums.js' type='text/javascript'></script>
+    <script src='./assets/scripts/main.js' type='text/javascript'></script>
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <!-- <script type="text/javascript" src='./assets/scripts/bassRead.js'></script> -->
   </head>
   <body>
     <nav>
-      <h1>Welcome To Peanut Butter</h1>
+      <div class="nav_box nav_left">
+        <img id="logo" class="logo" src="./assets/images/logo1.png" alt="Peanut Butter Logo">
+        <img id="logo" class="logo-spin" src="./assets/images/logo1red.png" alt="Peanut Butter Logo">
+      </div>
+      <div class="nav_box nav_right">
+        <h1>PEANUT BUTTER</h1>
+      </div>
+      <!-- <div class="nav_box nav_right"></div> -->
     </nav>
     <main>
-      <h2 class='clickMe'>Sound Loading...</h2>
-      <h2 class='download'>Sound Loading...</h2>
+      <div class="main_left">
+        <div class='create_tracks'>
+          <h2 class='generate_sound'>CREATE</h2>
+        </div>
+
+        <div class="single_creation_spec">
+          <div class="single_line_spec">
+            <h3>Key:</h3>
+            <select>
+              <option value="random" selected>Random</option>
+              <option value="0">C</option>
+              <option value="1">C#/Db</option>
+              <option value="2">D</option>
+              <option value="3">D#/Eb</option>
+              <option value="4">E</option>
+              <option value="5">F</option>
+              <option value="6">F#/Gb</option>
+              <option value="7">G</option>
+              <option value="8">G#/Ab</option>
+              <option value="9">A</option>
+              <option value="10">A#/Bb</option>
+              <option value="11">B</option>
+            </select>
+          </div>
+        </div>
+        <div class="single_creation_spec">
+          <div class="single_line_spec">
+            <h3>Mode:</h3>
+            <select>
+              <option value="random">Random</option>
+              <option value="0">Major</option>
+              <option value="5" selected>Minor</option>
+              <option value="0" class="advanced_mode">(I - Major) Ionian</option>
+              <option value="1" class="advanced_mode">(II) Dorian</option>
+              <option value="2" class="advanced_mode">(III) Phrygian</option>
+              <option value="3" class="advanced_mode">(IV) Lydian</option>
+              <option value="4" class="advanced_mode">(V) Mixolydian</option>
+              <option value="5" class="advanced_mode">(VI - Minor) Aeolian</option>
+              <option value="6" class="advanced_mode">(VII) Locrian</option>
+            </select>
+          </div>
+          <div class="single_line_spec">
+            <h4>Allow All Modes</h4>
+            <input class="toggle_modes" type="checkbox"></input>
+          </div>
+        </div>
+        <div class="single_creation_spec">
+          <div class="single_line_spec">
+            <h3>Tempo:</h3>
+            <input type="Number"></input>
+          </div>
+        </div>
+        <div class="single_creation_spec">
+          <div class="single_line_spec">
+            <h3>Bass Voice:</h3>
+            <select>
+              <option value="random" selected>Random</option>
+              <option value="fourier1">Bump Bass</option>
+              <option value="super_square">Super Square</option>
+              <option value="half_sine">Half Sine</option>
+              <option value="sine" class="basic_voice">Sine</option>
+              <option value="triangle" class="basic_voice">Triangle</option>
+              <option value="square" class="basic_voice">Square</option>
+              <option value="sawtooth" class="basic_voice">Sawtooth</option>
+            </select>
+          </div>
+          <div class="single_line_spec">
+            <h4>Allow Primitive Voices</h4>
+            <input class="toggle_voices" type="checkbox"></input>
+          </div>
+          <div class="single_line_spec">
+            <h4>Sample Tone</h4>
+            <div class="play_sample_tone"><h4>Play</h4></div>
+          </div>
+        </div>
+        <div>
+          <div class="single_creation_spec">
+            <h3 class="progress_text">Peanuts Crushed...</h3>
+            <progress class="progress_bar" value="0" max="100">0%</progress>
+          </div>
+        </div>
+
+
+        <!-- <h3 class='clickMe'>Play Sound</h3>
+        <h3 class='download'>Download</h3> -->
+
+      </div>
+      <div class="main_right">
+        <div class="all_tracks">
+          <div class="single_track_whole_main">
+            <div class="mute_button_main">
+            </div>
+            <div class="main_track">
+              <h3 class="drums">MAIN</h3>
+            </div>
+            <div class="save_button_main">
+              <h3>SAVE</h3>
+            </div>
+            <div class="save_button_main">
+              <h3>Upload</h3>
+            </div>
+          </div>
+        </div>
+        <div class="all_tracks">
+          <div class="single_track_whole">
+            <div class="mute_button">
+            </div>
+            <div class="single_track">
+              <h3 class="drums">Drums</h3>
+            </div>
+            <div class="save_button">
+              <h3>SAVE</h3>
+            </div>
+            <div class="save_button">
+              <h3>Upload</h3>
+            </div>
+          </div>
+          <div class="single_track_whole">
+            <div class="mute_button">
+            </div>
+            <div class="single_track">
+              <h3 class="drums">Bass</h3>
+            </div>
+            <div class="save_button">
+              <h3>SAVE</h3>
+            </div>
+            <div class="save_button">
+              <h3>Upload</h3>
+            </div>
+          </div>
+          <div class="single_track_whole">
+            <div class="mute_button">
+            </div>
+            <div class="single_track">
+              <h3 class="drums">Mids</h3>
+            </div>
+            <div class="save_button">
+              <h3>SAVE</h3>
+            </div>
+            <div class="save_button">
+              <h3>Upload</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <h3>another font</h3>
+      <h4>another font</h4> -->
     </main>
   </body>
   <script>

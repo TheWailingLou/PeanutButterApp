@@ -1,13 +1,15 @@
+'use strict'
+
 const electron = require('electron')
 const app = electron.app
 const path = require('path')
 const BrowserWindow = electron.BrowserWindow
 const url = require('url')
 
-let mainWindow
+let mainWindow = null;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({width: 800, height:600})
+  mainWindow = new BrowserWindow({width:1200, height:750})
 
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'public/index.html'),
