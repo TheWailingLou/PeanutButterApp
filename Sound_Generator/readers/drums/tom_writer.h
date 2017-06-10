@@ -38,7 +38,8 @@ namespace audio_helper
 
 namespace drum_track
 {
-  extern double** tom_track;
+  // extern double** tom_track;
+  extern double** other_drum_tracks; 
   extern int main_buffer_size;
   extern int main_buffer_channels;
 }

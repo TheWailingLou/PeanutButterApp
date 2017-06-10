@@ -2,6 +2,10 @@
 
 namespace audio_setup
 {
+  void Set_Key(const FunctionCallbackInfo<Value>& args) 
+  {
+    key = args[0]->NumberValue();
+  }
   void Set_Sample_Rate(const FunctionCallbackInfo<Value>& args)
   {
     sample_rate = args[0]->NumberValue();

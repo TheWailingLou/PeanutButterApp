@@ -15,7 +15,8 @@ namespace tom_writer
         {
           for (int i=0; i<drum_imports::tom_floor1_buffer_size; i++)
           {
-            drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_floor1_buffer[channel][i];
+            drum_track::other_drum_tracks[channel][i+frame_location] += drum_imports::tom_floor1_buffer[channel][i];
+            // drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_floor1_buffer[channel][i];
           }
         }
       } else if (teenth_array[location] == 2) {
@@ -23,7 +24,8 @@ namespace tom_writer
         {
           for (int i=0; i<drum_imports::tom_floor2_buffer_size; i++)
           {
-            drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_floor2_buffer[channel][i];
+            drum_track::other_drum_tracks[channel][i+frame_location] += drum_imports::tom_floor2_buffer[channel][i];
+            // drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_floor2_buffer[channel][i];
           }
         }
       } else if (teenth_array[location] == 3) {
@@ -31,7 +33,8 @@ namespace tom_writer
         {
           for (int i=0; i<drum_imports::tom_mid_buffer_size; i++)
           {
-            drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_mid_buffer[channel][i];
+            drum_track::other_drum_tracks[channel][i+frame_location] += drum_imports::tom_mid_buffer[channel][i];
+            // drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_mid_buffer[channel][i];
           }
         }
       } else if (teenth_array[location] == 4) {
@@ -39,7 +42,8 @@ namespace tom_writer
         {
           for (int i=0; i<drum_imports::tom_mid_high_buffer_size; i++)
           {
-            drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_mid_high_buffer[channel][i];
+            drum_track::other_drum_tracks[channel][i+frame_location] += drum_imports::tom_mid_high_buffer[channel][i];
+            // drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_mid_high_buffer[channel][i];
           }
         }
       } else if (teenth_array[location] == 5) {
@@ -47,7 +51,8 @@ namespace tom_writer
         {
           for (int i=0; i<drum_imports::tom_high_buffer_size; i++)
           {
-            drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_high_buffer[channel][i];
+            drum_track::other_drum_tracks[channel][i+frame_location] += drum_imports::tom_high_buffer[channel][i];
+            // drum_track::tom_track[channel][i+frame_location] += drum_imports::tom_high_buffer[channel][i];
           }
         }
       }

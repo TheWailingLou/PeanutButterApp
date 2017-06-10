@@ -17,6 +17,7 @@ using v8::Float32Array;
 
 namespace audio_setup
 {
+  extern void Set_Key(const FunctionCallbackInfo<Value>& args);
   extern void Set_Mode(const FunctionCallbackInfo<Value>& args);
   extern void Set_Sample_Rate(const FunctionCallbackInfo<Value>& args);
   extern void Get_Sample_Rate(const FunctionCallbackInfo<Value>& args);
@@ -59,11 +60,16 @@ namespace get_buffers
   extern void Get_Main_Buffer(const FunctionCallbackInfo<Value>& args);
   extern void Get_Main_Drum_Buffer(const FunctionCallbackInfo<Value>& args);
   extern void Get_Main_Bass_Buffer(const FunctionCallbackInfo<Value>& args);
+  extern void Create_All_Tracks(const FunctionCallbackInfo<Value>& args);
 }
 
-
-
-
+namespace free_memory
+{
+  extern void Free_All_Memory(const FunctionCallbackInfo<Value>& args);
+  extern void Free_Bass_Memory(const FunctionCallbackInfo<Value>& args);
+  extern void Free_Drum_Memory(const FunctionCallbackInfo<Value>& args);
+  extern void Free_Main_Memory(const FunctionCallbackInfo<Value>& args);
+}
 
 namespace sound_gen_main
 {
@@ -84,18 +90,23 @@ namespace sound_gen_main
     NODE_SET_METHOD(exports, "setTomMid", drum_imports::Set_Tom_Mid_Buffer);
     NODE_SET_METHOD(exports, "setTomMidHigh", drum_imports::Set_Tom_Mid_High_Buffer);
 
-    NODE_SET_METHOD(exports, "freeAllMemory", drum_imports::Free_Drum_Memory);
+    NODE_SET_METHOD(exports, "freeAllMemory", free_memory::Free_All_Memory);
+    NODE_SET_METHOD(exports, "freeBassMemory", free_memory::Free_Bass_Memory);
+    NODE_SET_METHOD(exports, "freeDrumMemory", free_memory::Free_Drum_Memory);
+    NODE_SET_METHOD(exports, "freeMainTrackMemory", free_memory::Free_Main_Memory);
 
     NODE_SET_METHOD(exports, "setSampleRate", audio_setup::Set_Sample_Rate);
     NODE_SET_METHOD(exports, "getSampleRate", audio_setup::Get_Sample_Rate);
     NODE_SET_METHOD(exports, "setTempo", audio_setup::Set_Tempo);
     NODE_SET_METHOD(exports, "getTempo", audio_setup::Get_Tempo);
     NODE_SET_METHOD(exports, "setMode", audio_setup::Set_Mode);
+    NODE_SET_METHOD(exports, "setKey", audio_setup::Set_Key);
 
     NODE_SET_METHOD(exports, "getMainDrumBuffer", get_buffers::Get_Main_Drum_Buffer);
     NODE_SET_METHOD(exports, "getMainBassBuffer", get_buffers::Get_Main_Bass_Buffer);
     NODE_SET_METHOD(exports, "getMainBuffer", get_buffers::Get_Main_Buffer);
 
+    NODE_SET_METHOD(exports, "createAllTracks", get_buffers::Create_All_Tracks);
   }
 
   NODE_MODULE(soundGen, init)

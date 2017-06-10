@@ -99,7 +99,6 @@ namespace bass_voice
           int sr_f4 = sr_f/4;
           double i_m_sr_f = (double)(i % sr_f);
           double i_m_sr_f2 = (double)(i % sr_f2);
-          // double i_m_sr_f4 = (double)(i % sr_f4);
 
           double triangle = 1 - (i_m_sr_f - (i_m_sr_f2 * ((i_m_sr_f- i_m_sr_f2)/sr_f4)))/((double)sr_f4);
           morphed_triangle += triangle/(double)voices;

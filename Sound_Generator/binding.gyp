@@ -39,7 +39,10 @@
                 "./setup_and_help/tones.cc",
 
                 "./tracks/drum_track.cc",
-                "./tracks/bass_track.cc"
+                "./tracks/bass_track.cc",
+                "./tracks/main_track.cc",
+
+                "./memory_management/free_memory.cc"
             ]
         }
     ]

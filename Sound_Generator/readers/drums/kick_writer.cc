@@ -14,7 +14,8 @@ namespace kick_writer
         {
           for (int i=0; i<drum_imports::kick_buffer_size; i++)
           {
-            drum_track::kick_track[channel][i+frame_location] += drum_imports::kick_buffer[channel][i];
+            drum_track::other_drum_tracks[channel][i+frame_location] += drum_imports::kick_buffer[channel][i];
+            // drum_track::kick_track[channel][i+frame_location] += drum_imports::kick_buffer[channel][i];
           }
         }
       }

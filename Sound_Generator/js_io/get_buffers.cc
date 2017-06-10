@@ -24,20 +24,25 @@ namespace get_buffers
     return output_array;
   }
 
+  void Create_All_Tracks(const FunctionCallbackInfo<Value>& args)
+  {
+    main_track::test_creation();
+  }
+
   void Get_Main_Buffer(const FunctionCallbackInfo<Value>& args)
   {
     Isolate* isolate = args.GetIsolate();
     Local<Array> output_array = Get_Buffer(isolate,
-      audio_setup::main_audio_buffer,
-      audio_setup::main_audio_buffer_channels,
-      audio_setup::main_audio_buffer_size
+      main_track::main_buffer,
+      main_track::main_buffer_channels,
+      main_track::main_buffer_size
     );
     args.GetReturnValue().Set(output_array);
   }
 
   void Get_Main_Drum_Buffer(const FunctionCallbackInfo<Value>& args)
   {
-    drum_track::test_creation();
+    // drum_track::test_creation();
     Isolate* isolate = args.GetIsolate();
     Local<Array> output_array = Get_Buffer(isolate,
       drum_track::main_buffer,
@@ -49,7 +54,7 @@ namespace get_buffers
 
   void Get_Main_Bass_Buffer(const FunctionCallbackInfo<Value>& args)
   {
-    bass_track::test_creation();
+    // bass_track::test_creation();
     Isolate* isolate = args.GetIsolate();
     std::cout << "(49--getbuffers)" << std::endl;
     Local<Array> output_array = Get_Buffer(isolate,

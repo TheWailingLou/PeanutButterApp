@@ -39,7 +39,7 @@
         <div class="single_creation_spec">
           <div class="single_line_spec">
             <h3>Key:</h3>
-            <select>
+            <select class="selectKey">
               <option value="random" selected>Random</option>
               <option value="0">C</option>
               <option value="1">C#/Db</option>
@@ -59,7 +59,7 @@
         <div class="single_creation_spec">
           <div class="single_line_spec">
             <h3>Mode:</h3>
-            <select>
+            <select class="selectMode">
               <option value="random">Random</option>
               <option value="0">Major</option>
               <option value="5" selected>Minor</option>
@@ -74,103 +74,115 @@
           </div>
           <div class="single_line_spec">
             <h4>Allow All Modes</h4>
-            <input class="toggle_modes" type="checkbox"></input>
+            <input id="toggle_modes" class="toggle_modes" type="checkbox"></input>
           </div>
         </div>
         <div class="single_creation_spec">
           <div class="single_line_spec">
             <h3>Tempo:</h3>
-            <input type="Number"></input>
+            <input class="setTempo" type="Number" value="120"></input>
+          </div>
+          <div class="single_line_spec">
+            <h4>Set Random Tempo</h4>
+            <input id="toggle_random_tempo" class="toggle_random_tempo" type="checkbox"></input>
           </div>
         </div>
         <div class="single_creation_spec">
           <div class="single_line_spec">
             <h3>Bass Voice:</h3>
-            <select>
+            <select class="selectBassVoice">
               <option value="random" selected>Random</option>
-              <option value="fourier1">Bump Bass</option>
-              <option value="super_square">Super Square</option>
-              <option value="half_sine">Half Sine</option>
-              <option value="sine" class="basic_voice">Sine</option>
-              <option value="triangle" class="basic_voice">Triangle</option>
-              <option value="square" class="basic_voice">Square</option>
-              <option value="sawtooth" class="basic_voice">Sawtooth</option>
+              <option value="0">Bump Bass</option>
+              <option value="1">Super Square</option>
+              <option value="2">Half Sine</option>
+              <option value="3" class="basic_voice">Sine</option>
+              <option value="4" class="basic_voice">Triangle</option>
+              <option value="5" class="basic_voice">Square</option>
+              <option value="6" class="basic_voice">Sawtooth</option>
             </select>
           </div>
           <div class="single_line_spec">
             <h4>Allow Primitive Voices</h4>
-            <input class="toggle_voices" type="checkbox"></input>
+            <input id="toggle_voices" class="toggle_voices" type="checkbox"></input>
           </div>
           <div class="single_line_spec">
             <h4>Sample Tone</h4>
             <div class="play_sample_tone"><h4>Play</h4></div>
           </div>
         </div>
-        <div>
-          <div class="single_creation_spec">
-            <h3 class="progress_text">Peanuts Crushed...</h3>
-            <progress class="progress_bar" value="0" max="100">0%</progress>
-          </div>
+
+        <div class="single_creation_spec">
+          <h3 class="progress_text">Crushing Peanuts...</h3>
+          <progress class="progress_bar" value="0" max="100">0%</progress>
         </div>
-
-
-        <!-- <h3 class='clickMe'>Play Sound</h3>
-        <h3 class='download'>Download</h3> -->
-
       </div>
+
+
+
+
+
       <div class="main_right">
         <div class="all_tracks">
-          <div class="single_track_whole_main">
-            <div class="mute_button_main">
+          <div class="single_creation_spec play_button_div">
+            <div class="play_button">
+              <h2>PLAY</h2>
             </div>
-            <div class="main_track">
+          </div>
+          <div class="single_track_whole_main">
+            <div class="mute_button_main unloaded_track">
+              <img class="mute_symbol" src="./assets/images/muteSymbol.png" alt="muteSymbol">
+            </div>
+            <div class="main_track unloaded_track">
               <h3 class="drums">MAIN</h3>
             </div>
-            <div class="save_button_main">
+            <div class="save_button_main unloaded_track saveMain">
               <h3>SAVE</h3>
             </div>
-            <div class="save_button_main">
+            <div class="save_button_main unloaded_track">
               <h3>Upload</h3>
             </div>
           </div>
         </div>
         <div class="all_tracks">
           <div class="single_track_whole">
-            <div class="mute_button">
+            <div class="mute_button unloaded_track muteDrums">
+              <img class="mute_symbol" src="./assets/images/muteSymbol.png" alt="muteSymbol">
             </div>
-            <div class="single_track">
+            <div class="single_track unloaded_track">
               <h3 class="drums">Drums</h3>
             </div>
-            <div class="save_button">
+            <div class="save_button unloaded_track saveDrums">
               <h3>SAVE</h3>
             </div>
-            <div class="save_button">
+            <div class="save_button unloaded_track">
               <h3>Upload</h3>
             </div>
           </div>
           <div class="single_track_whole">
-            <div class="mute_button">
+            <div class="mute_button unloaded_track muteBass">
+              <img class="mute_symbol" src="./assets/images/muteSymbol.png" alt="muteSymbol">
             </div>
-            <div class="single_track">
+            <div class="single_track unloaded_track">
               <h3 class="drums">Bass</h3>
             </div>
-            <div class="save_button">
+            <div class="save_button unloaded_track saveBass">
               <h3>SAVE</h3>
             </div>
-            <div class="save_button">
+            <div class="save_button unloaded_track">
               <h3>Upload</h3>
             </div>
           </div>
           <div class="single_track_whole">
-            <div class="mute_button">
+            <div class="mute_button unloaded_track">
+              <img class="mute_symbol" src="./assets/images/muteSymbol.png" alt="muteSymbol">
             </div>
-            <div class="single_track">
+            <div class="single_track unloaded_track">
               <h3 class="drums">Mids</h3>
             </div>
-            <div class="save_button">
+            <div class="save_button unloaded_track">
               <h3>SAVE</h3>
             </div>
-            <div class="save_button">
+            <div class="save_button unloaded_track">
               <h3>Upload</h3>
             </div>
           </div>

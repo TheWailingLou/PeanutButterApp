@@ -6,6 +6,11 @@
 #include <iostream>
 #include <stdlib.h>
 
+namespace audio_setup {
+  extern int mode;
+  extern int key;
+}
+
 namespace music_gen
 {
   extern int** generate_bar_from_chords(int** chords, int octave);
@@ -60,7 +65,8 @@ namespace arrangement_main
 
 namespace arrangement_all
 {
- extern void create_tracks(int starting_note, int mode);
+ extern int* get_section_lengths();
+ extern void create_tracks(int starting_note, int mode, int* section_lengths_arr);
 }
 
 ///
@@ -84,18 +90,16 @@ namespace drum_track
   // extern int main_buffer_size;
   // extern int main_buffer_channels;
 
-  extern double** crash_track;
-  extern double** hi_hat_track;
-  extern double** kick_track;
-  extern double** ride_track;
-  extern double** snare_track;
-  extern double** tom_track;
+  // extern double** crash_track;
+  // extern double** hi_hat_track;
+  // extern double** kick_track;
+  // extern double** ride_track;
+  // extern double** snare_track;
+  // extern double** tom_track;
 
   extern void setup_buffers(int total_bars, double end_hang_time);
   extern void free_all_track_memory();
 }
-
-///
 
 namespace bass_track
 {
@@ -104,10 +108,10 @@ namespace bass_track
   int main_buffer_channels;
 
   double** bass_track_1;
-  double** bass_track_2;
+  // double** bass_track_2;
 
   void setup_buffers(int total_bars, double end_hang_time);
-  void test_creation();
+  void copy_to_track();
   void free_all_track_memory();
 }
 

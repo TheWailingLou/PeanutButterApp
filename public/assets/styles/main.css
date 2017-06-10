@@ -76,7 +76,6 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-
   /*border: 1px solid #fff;*/
 }
 
@@ -157,7 +156,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .single_track_whole {
@@ -182,6 +181,9 @@ main {
   border: 2px solid #66C8F4;
   width:35px;
   height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .mute_button_main {
@@ -189,6 +191,14 @@ main {
   border: 2px solid #66C8F4;
   width:35px;
   height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mute_symbol {
+  width: 20px;
+  height: 20px;
 }
 
 .save_button {
@@ -300,6 +310,42 @@ h2 {
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-.ready {
-  background-color: #F00;
+.unloaded_track {
+  border-radius: 5px;
+}
+
+.loaded-track {
+  background-color: #E7A53A;
+  border: 2px solid #AF7E2D;
+  border-radius: 5px;
+}
+
+.play_button_div {
+  /*display: none;*/
+  opacity: 0;
+}
+
+.play_button {
+  border: 2px solid #AF7E2D;
+  border-radius: 5px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  color: #111115;
+  font-size: 20px;
+  font-family: audiowide;
+  background-color: #E7A53A;
+}
+
+.play_button h2 {
+  color: #111115;
+  font-size: 25px;
+  font-family: audiowide;
+}
+
+.stop_button {
+  background-color: #51B2E5;
+  border-color: #66C8F4;
 }

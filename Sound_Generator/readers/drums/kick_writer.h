@@ -22,9 +22,12 @@ namespace audio_helper
 
 namespace drum_track
 {
-  extern double** kick_track;
+  // extern double** kick_track;
+  // extern int main_buffer_size;
+  // extern int main_buffer_channels;
   extern int main_buffer_size;
   extern int main_buffer_channels;
+  extern double** other_drum_tracks; 
 }
 
 namespace kick_writer

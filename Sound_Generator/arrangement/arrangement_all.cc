@@ -2,23 +2,38 @@
 
 namespace arrangement_all
 {
-  void create_tracks(int starting_note, int mode)
+  int* get_section_lengths()
   {
-    srand(time(NULL));
+    int main_start = 4*(rand()%3);
+    int end_length = 5 + (4*(rand()%3));
+    int main_sections = 12 + rand()%13;
+    int breakdown_length = 0;
+    int total_sections = main_start + (main_sections*4) + end_length;
+    int* section_lengths_arr = new int [5];
+    section_lengths_arr[0] = main_start;
+    section_lengths_arr[1] = end_length;
+    section_lengths_arr[2] = main_sections;
+    section_lengths_arr[3] = breakdown_length;
+    section_lengths_arr[4] = total_sections;
+    return section_lengths_arr;
+  }
+  void create_tracks(int starting_note, int mode, int* section_lengths_arr)
+  {
+
 
     std::cout << "Rand test: " << rand()%10 << " " << rand()%10 << std::endl;
-    int main_start = 4*(rand()%3);
+    int main_start = section_lengths_arr[0];
     // int breakdown_length = 4*(rand()%3);
-    int end_length = 5 + (4*(rand()%3));
+    int end_length = section_lengths_arr[1];
 
     std::cout << "(14) END_LENGTH " << end_length << std::endl;
-    int main_sections = 12 + rand()%13;
+    int main_sections = section_lengths_arr[2];
 
     // int main_start = 0;
     // int end_length = 0;
-    int breakdown_length = 0;
+    int breakdown_length = section_lengths_arr[3];
 
-    int total_sections = main_start + (main_sections*4) + end_length;
+    int total_sections = section_lengths_arr[4];
 
     // set up all the sections
 

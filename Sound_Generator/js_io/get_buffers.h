@@ -1,12 +1,12 @@
-#ifndef GET_BUFFERS
-#define GET_BUFFERS
+#ifndef GET_BUFFERS_H
+#define GET_BUFFERS_H
 
 #include <node.h>
 #include <array>
 #include <math.h>
 #include <iostream>
 
-namespace drum_track
+namespace main_track
 {
   extern double** main_buffer;
   extern int main_buffer_size;
@@ -14,12 +14,20 @@ namespace drum_track
   extern void test_creation();
 }
 
+namespace drum_track
+{
+  extern double** main_buffer;
+  extern int main_buffer_size;
+  extern int main_buffer_channels;
+  // extern void test_creation();
+}
+
 namespace bass_track
 {
   extern double** main_buffer;
   extern int main_buffer_size;
   extern int main_buffer_channels;
-  extern void test_creation();
+  // extern void test_creation();
 }
 
 namespace audio_setup
@@ -46,6 +54,7 @@ namespace get_buffers
     int buffer_size
   );
 
+  void Create_All_Tracks(const FunctionCallbackInfo<Value>& args);
   void Get_Main_Buffer(const FunctionCallbackInfo<Value>& args);
   void Get_Main_Drum_Buffer(const FunctionCallbackInfo<Value>& args);
   void Get_Main_Bass_Buffer(const FunctionCallbackInfo<Value>& args);
