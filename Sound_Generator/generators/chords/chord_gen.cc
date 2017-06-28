@@ -28,7 +28,6 @@ namespace chord_gen
           int note_val = note_values[i][j];
           if (note_val == -1)
           {
-            std::cout << "note was -1 ERROR" << std::endl;
             note_val = 0;
           }
           new_chords[i][j+1] = new_scale[note_val];
@@ -84,13 +83,11 @@ namespace chord_gen
     int lowest_note = notes::find_lowest_note(starting_note);
     int* scale = notes::get_single_octave(lowest_note, mode, false);
     int* chord = new int [6];
-    // std::cout << "\nChord Notes: ";
+
     for (int i=0; i<6; i++) {
       int scale_index = (((i*2)%6) + chord_root) % 7;
-      // std::cout << " " << scale[scale_index];
       chord[i] = scale[scale_index];
     }
-    // std::cout << "\n\n" << std::endl;
     return chord;
   }
 
@@ -125,7 +122,6 @@ namespace chord_gen
         three_chords = tertiaries[rand()%5];
       }
     }
-    // std::cout << three_chords[0] << three_chords[1] << three_chords[2] << std::endl;
 
     int* chord_1 = chord_notes(three_chords[0]-1, mode, starting_note);
     int* chord_2 = chord_notes(three_chords[1]-1, mode, starting_note);
@@ -164,14 +160,13 @@ namespace chord_gen
       chord_teenth[0][0] = chord1_duration;
       chord_teenth[chord2_index][0] = chord2_duration;
       chord_teenth[chord3_index][0] = chord3_duration;
+
       for (int j=0; j<6; j++)
       {
         chord_teenth[0][j+1] = chord_1[j];
         chord_teenth[chord2_index][j+1] = chord_2[j];
         chord_teenth[chord3_index][j+1] = chord_3[j];
       }
-      // std::cout << "duration: " << chord1_duration << " " << chord2_duration << " " << chord3_duration << std::endl;
-      // std::cout << "index: " << chord2_index << " " << chord3_index <<  std::endl;
     } else {
       if (rand()%2 == 0) {
         chord_teenth[0][0] = chord2_index;
@@ -225,7 +220,6 @@ namespace chord_gen
         three_chords = tertiaries[rand()%5];
       }
     }
-    // std::cout << three_chords[0] << three_chords[1] << three_chords[2] << std::endl;
 
     int* chord_1 = chord_notes(three_chords[0]-1, mode, starting_note);
     int* chord_2 = chord_notes(three_chords[1]-1, mode, starting_note);
@@ -273,9 +267,6 @@ namespace chord_gen
       chord3_index = chord2_index;
     }
 
-
-
-
     if (chord2_index != chord3_index)
     {
       int chord1_duration;
@@ -294,14 +285,13 @@ namespace chord_gen
       chord_teenth[0][0] = chord1_duration;
       chord_teenth[chord2_index][0] = chord2_duration;
       chord_teenth[chord3_index][0] = chord3_duration;
+      
       for (int j=0; j<6; j++)
       {
         chord_teenth[0][j+1] = chord_1[j];
         chord_teenth[chord2_index][j+1] = chord_2[j];
         chord_teenth[chord3_index][j+1] = chord_3[j];
       }
-      // std::cout << "duration: " << chord1_duration << " " << chord2_duration << " " << chord3_duration << std::endl;
-      // std::cout << "index: " << chord2_index << " " << chord3_index <<  std::endl;
     } else {
       if (rand()%2 == 0) {
         chord_teenth[0][0] = chord2_index;
