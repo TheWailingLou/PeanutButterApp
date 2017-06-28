@@ -10,7 +10,6 @@ namespace snare_generator
 
   int* get_random_snare_standard()
   {
-    // srand(time(NULL));
     int arrnum = rand() % number_of_standards;
     return &snare_standards[arrnum][0];
   }

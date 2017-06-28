@@ -7,7 +7,7 @@ namespace bass_main
   {
     int** teenth_arr = new int* [16];
     int* notes_in_scale = notes::get_octave_range(1, 1, starting_note, mode, false);
-    // int note_length = 21;
+
     for (int i=0; i<16; i++) {
       teenth_arr[i] = new int [2];
       if (i%2 == 0)
@@ -23,25 +23,23 @@ namespace bass_main
   {
     int** teenth_arr = new int* [16];
     int* notes_in_scale = notes::get_octave_range(1, 1, starting_note, mode, false);
-    // int note_length = 21;
+
     int note_end = 0;
-    // notes_in_scale[(i/2)+4]; // 5th
+
     for (int i=0; i<16; i++)
     {
       teenth_arr[i] = new int [2];
       int note = -1;
       int arrnote = -1;
-      // int random = rand()%100;
+
       if (i == 0)
       {
         if (rand()%100 < 60) {
           arrnote = 7;
-          // note = notes_in_scale[7];
         } else {
           if (rand()%100 < 50)
           {
             arrnote = 11;
-            // note = notes_in_scale[]
           } else {
             if (rand()%100 < 80)
             {
@@ -117,8 +115,6 @@ namespace bass_main
         note_end = i +duration;
       }
 
-
-      // std::cout << "arrnote " << arrnote << "note " << note << "duration " << duration << std::endl;
       teenth_arr[i][1] = duration;
     }
     return teenth_arr;

@@ -2,65 +2,6 @@
 
 namespace drum_arrangement
 {
-  // int** generate_drum_arrangement(int unique_sections, int total_sections)
-  // {
-  //   int num_of_tracks = 5;
-  //   int sections_included = 0;
-  //   int** arrangement_array = new int* [num_of_tracks+1];
-  //   arrangement_array[0] = new int [total_sections];
-  //   for (int section=0; section<total_sections; section++)
-  //   {
-  //     // section_length;
-  //     arrangement_array[0][section] = pow (2, (rand()%3)+1);
-  //   }
-  //   for (int track=1; track<num_of_tracks+1; track++)
-  //   {
-  //     arrangement_array[track] = new int [total_sections];
-  //
-  //     int section_selection;
-  //     if (sections_included == 0) {
-  //       sections_included = 1;
-  //       section_selection = 1;
-  //     } else {
-  //       section_selection = (rand()%(sections_included+1))+1;
-  //     }
-  //     if (section_selection > sections_included) {
-  //       sections_included = section_selection
-  //     }
-  //     for (int section=0; section<total_sections; section++)
-  //     {
-  //       if (track < 4)
-  //       {
-  //         arrangement_array[track][section] = section_selection;
-  //       } else if (track == 4) {
-  //         arrangement_array[track][section] =
-  //       }
-  //     }
-  //   }
-  //
-  //   // for (int track=0; track<num_of_tracks; track++)
-  //   // {
-  //   //   arrangement_array[track] = new int* [total_sections];
-  //   //   for (int section=0; section<total_sections; section++)
-  //   //   {
-  //   //     int section_length = ((rand()%2)+1)*4;
-  //   //     arrangement[track][section] = new int [2];
-  //   //     if (track < 3)
-  //   //     {
-  //   //       arrangement[track][section][0] = rand()%(unique_sections+1);
-  //   //       arrangement[track][section][1] =
-  //   //     } else if (track == 3) {
-  //   //       if (arrangement[track-1][section][0] == 0) {
-  //   //         arrangement[track][section][0] = rand()%unique_sections;
-  //   //       }
-  //   //
-  //   //       arrangement[track][section][1] = ((rand()%2)+1)*4;
-  //   //     } else if (track == 4) {
-  //   //
-  //   //     }
-  //   //   }
-  //   // }
-  // }
   int num_of_unique_sections(int* arrangement, int total_sections)
   {
     int unique_sections = 0;
@@ -75,10 +16,6 @@ namespace drum_arrangement
 
   int*** create_tracks_from_arrangement(int** arrangement, int* section_length, int total_sections)
   {
-    // int hi_hat_sections = arrangement_main::num_of_unique_sections(arrangement[0], total_sections);
-    // int kick_sections = arrangement_main::num_of_unique_sections(arrangement[1], total_sections);
-    // int snare_sections = arrangement_main::num_of_unique_sections(arrangement[2], total_sections);
-
     int** hi_hat_arrays = new int* [total_sections];
     for (int unique_bar=0; unique_bar<total_sections; unique_bar++)
     {
@@ -113,10 +50,6 @@ namespace drum_arrangement
     {
       all_drum_arrangements[drum] = new int* [total_sections];
     }
-
-    // int** kick_arrangement = new int* [total_sections];
-    // int** snare_arrangement = new int* [total_sections];
-    // int** hi_hat_arrangement = new int* [total_sections];
 
     int current_bar = 0;
     for (int section=0; section<total_sections; section++)
@@ -161,8 +94,6 @@ namespace drum_arrangement
         {
           crash_writer::write_crash_at_bar(crash, current_bar);
         }
-
-        // std::cout << "\ncurrent_bar " << current_bar << std::endl;
 
         if (bar == section_length[section]-1 && fill_length != -1) {
           int* silence_arr = audio_helper::silence_array(16-fill_length,16);

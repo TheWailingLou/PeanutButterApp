@@ -47,7 +47,6 @@ namespace hi_hat_generator
     int random2 = rand() % 100;
     if (random1 > 60)
     {
-      // std::cout << "doubled up end" << std::endl;
       for (int i=4; i<8; i++)
       {
         teenth_array[i+8] = teenth_array[i];
@@ -55,7 +54,6 @@ namespace hi_hat_generator
     }
     if (random2 > 80)
     {
-      // std::cout << "doubled up beginning" << std::endl;
       for (int i=0; i<4; i++)
       {
         teenth_array[i+8] = teenth_array[i];
@@ -117,21 +115,3 @@ namespace hi_hat_generator
     return openings;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//

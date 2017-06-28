@@ -43,8 +43,6 @@ namespace audio_helper
 
 namespace bass_arrangement
 {
-  // extern int bass_arrangement_standard_1 [5][7];
-  // extern int bass_arrangement_standard_2 [5][12];
   extern void create_tracks_from_arrangement_and_chords(
     int** key_arrangement,
     int* chord_arrangemnt,
@@ -59,7 +57,6 @@ namespace arrangement_main
 {
   extern int section_length_standard_1 [7];
   extern int section_length_standard_2 [12];
-  // extern void generate_arrangements_and_create_tracks();
   extern void generate_arrangements_and_create_tracks(int mode, int starting_note);
 }
 
@@ -68,8 +65,6 @@ namespace arrangement_all
  extern int* get_section_lengths();
  extern void create_tracks(int starting_note, int mode, int* section_lengths_arr);
 }
-
-///
 
 namespace drum_arrangement
 {

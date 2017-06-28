@@ -35,7 +35,6 @@ namespace main_track
 
     for (int channel=0; channel<main_buffer_channels; channel++)
     {
-      std::cout << "getting to main channels.." << std::endl;
       for (int i=0; i<main_buffer_size; i++)
       {
         main_buffer[channel][i] += bass_track::main_buffer[channel][i];

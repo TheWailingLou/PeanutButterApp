@@ -87,13 +87,8 @@ namespace drum_track
   int main_buffer_size;
   int main_buffer_channels;
 
-  // double** crash_track;
   double** hi_hat_track;
   double** other_drum_tracks;
-  // double** kick_track;
-  // double** ride_track;
-  // double** snare_track;
-  // double** tom_track;
 
   void setup_buffers(int total_bars, double end_hang_time);
   void copy_to_track();

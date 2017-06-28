@@ -10,7 +10,6 @@ namespace kick_generator
 
   int* get_random_kick_standard()
   {
-    // srand(time(NULL));
     int arrnum = rand() % number_of_standards;
     return &kick_standards[arrnum][0];
   }

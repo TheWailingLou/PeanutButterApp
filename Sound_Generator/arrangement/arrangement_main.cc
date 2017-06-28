@@ -28,16 +28,6 @@ namespace arrangement_main
     int middle_length = pow(2, (rand()%3)+4);
     int end_length = pow(2, rand()%5);
 
-    // if (middle_length == 64)
-
-
-    // bool breakdown = (rand()%100 < 20);
-    // int breakdown_length = 0;
-    // if (breakdown)
-    // {
-    //   breakdown_length = pow(2, 1+ (rand()%4));
-    // }
-
     bool double_intro = false;
 
     int double_middle_mult = 1;
@@ -85,14 +75,9 @@ namespace arrangement_main
       double_intro_mult = 2;
     }
 
-    std::cout << "debugging on line 79 " << std::endl;
     bool alternate_sections = (rand()%100 > 50);
     bool alternate_section2 = (rand()%100 > 50);
     bool alternate_section3 = (rand()%100 > 50);
-
-    // bool alternate_sections = true;
-    // bool alternate_section2 = true;
-    // bool alternate_section3 = true;
 
     if (intro_length == 1 && alternate_sections)
     {
@@ -105,7 +90,6 @@ namespace arrangement_main
       + end_length
     );
 
-    // set up entire arrangement;
     int** drum_arrangement_all = new int* [5];
     for (int i=0; i<5; i++)
     {
@@ -134,8 +118,6 @@ namespace arrangement_main
       drum_arrangement_all[4][i] = 0;
     }
 
-    std::cout << "Made it to line 117. " <<std::endl;
-
     int highest_snare = 0;
     int highest_kick = 0;
     int highest_hi_hat = 0;
@@ -148,8 +130,6 @@ namespace arrangement_main
 
     if (intro_length > 0)
     {
-      std::cout << "Made it into intro (line 131). " <<std::endl;
-
       int bass_start_ord = rand()%4;
       int hi_hat_start_ord = rand()%4;
       int kick_start_ord = rand()%4;
@@ -221,16 +201,6 @@ namespace arrangement_main
         }
       }
 
-      // int** intro_key_arrangement = new int* [intro_length];
-      // int* intro_chord_arrangement = new int* [intro_length];
-      // int* intro_bass_arrangement = new int [intro_length];
-      //
-      // int** intro_drum_arrangement = new int * [5];
-      // for (int i=0; i<5; i++)
-      // {
-      //   intro_drum_arrangement[i] = new int [intro_length];
-      // }
-
       bool intro_ends_in_tom_fill = (rand()%100) > 40;
 
       int second_enter_locations [5] = {0,1,2,4,8};
@@ -252,24 +222,9 @@ namespace arrangement_main
       }
       int final_enter = third_enter_locations[1+(rand()%3)];
 
-      // for (int i=0; i<intro_length; i++)
-      // {
-      //
-      //   // key_arrangement_all[i] = new int [2];
-      //   key_arrangement_all[i][0] = mode;
-      //   key_arrangement_all[i][1] = starting_note;
-      //   bass_arrangement_all[i] = 0;
-      //   drum_arrangement_all[0][i] = 0;
-      //   drum_arrangement_all[1][i] = 0;
-      //   drum_arrangement_all[2][i] = 0;
-      //   drum_arrangement_all[3][i] = -1;
-      //   drum_arrangement_all[4][i] = 0;
-      // }
-
 
       for (int i=0; i<intro_length; i++)
       {
-        // std::cout << "iterating intro (line 251). i: " << i << " intro length: " << intro_length << std::endl;
         int section = 1;
         if (alternate_sections)
         {
@@ -454,8 +409,6 @@ namespace arrangement_main
       eight_part_mid = (rand()%100 < 20);
     }
 
-    std::cout <<  "\n\nfour pt: " << four_part_mid << " six_pt: " << six_part_mid << " eight pt: " << eight_part_mid << "\n\n" << std::endl;
-
     int split = middle_length/2;
     int split2 = split/2 + ((1-(rand()%3))*(split/4));
 
@@ -469,13 +422,6 @@ namespace arrangement_main
 
     for (int i=0; i<middle_length; i++)
     {
-      // std::cout << "iterating middle (line 423). i: " << i << " middle length: " << middle_length << std::endl;
-      // drum_arrangement_all[0][i] = 0;
-      // drum_arrangement_all[1][i] = 0;
-      // drum_arrangement_all[2][i] = 0;
-      // drum_arrangement_all[3][i] = -1;
-      // drum_arrangement_all[4][i] = 0;
-      // bass_arrangement_all[i] = 0;
       if (four_part_mid)
       {
 
@@ -489,7 +435,6 @@ namespace arrangement_main
             stored_highest_hi_hat = highest_hi_hat;
             stored_highest_snare = highest_snare;
           }
-          //3
           if (i==split2 || i==split+split2)
           {
             current_mode = mode;
@@ -534,9 +479,7 @@ namespace arrangement_main
               highest_kick = stored_highest_kick + section;
             }
           }
-          // section2 here.
         } else {
-          //4
           if (i==split || i==0)
           {
             current_mode = mode;
@@ -547,7 +490,7 @@ namespace arrangement_main
           }
           key_arrangement_all[i][0] = current_mode;
           key_arrangement_all[i][1] = current_note;
-          // section 1.
+
           if (mid_continues_intro && intro_length > 0 && ((i < split) || (!eight_part_mid && !six_part_mid)))
           {
             if (alternate_sections)
@@ -729,10 +672,7 @@ namespace arrangement_main
           {
             highest_kick = stored_highest_kick + section;
           }
-          //section2
         } else {
-
-          // 1
           if (i==0 || i == split)
           {
             current_mode = mode;
@@ -743,7 +683,7 @@ namespace arrangement_main
           }
           key_arrangement_all[i][0] = current_mode;
           key_arrangement_all[i][1] = current_note;
-          //section 1
+
           if (mid_continues_intro && intro_length > 0)
           {
             if (alternate_sections)
@@ -887,7 +827,6 @@ namespace arrangement_main
 
     if (double_intro)
     {
-      std::cout << "made it to double intro part (766)"<< std::endl;
       for (int i=0; i<intro_length; i++)
       {
         drum_arrangement_all[0][i+intro_length+middle_length] =  drum_arrangement_all[0][i];
@@ -1047,10 +986,7 @@ namespace arrangement_main
       highest_snare = stored_highest_snare;
       highest_kick = stored_highest_kick;
       highest_bass = stored_highest_bass;
-      // stored_highest_hi_hat += 1;
-      // stored_highest_snare += 1;
-      // stored_highest_kick += 1;
-      // stored_highest_bass += 1;
+
       bool alternate_section4 = rand()%100 > 70;
       if (breakdown && double_middle)
       {
@@ -1132,7 +1068,7 @@ namespace arrangement_main
         }
       }
     }
-    std::cout << "made it past double intro part (946)"<< std::endl;
+
     for (int i=0; i<end_length; i++)
     {
       int location = (total_sections + i) - end_length;
@@ -1144,139 +1080,12 @@ namespace arrangement_main
       bass_arrangement_all[location] = bass_arrangement_all[i];
     }
 
-
-
-
-
-    // int total_sections = 32;
-    // int** key_arrangement = new int* [total_sections];
-    // int* chord_arrangemnt = new int [total_sections];
-    // int* bass_arrangement = new int [total_sections];
-    // int* section_length = new int [total_sections];
-    //
-    // for (int i=0; i<total_sections; i++)
-    // {
-    //   key_arrangement[i] = new int [2];
-    //   key_arrangement[i][0] = 5;
-    //   key_arrangement[i][1] = 36;
-    //   if (i >= 8 && i < 16)
-    //   {
-    //     key_arrangement[i][0] = 5;
-    //     key_arrangement[i][1] = 43;
-    //   }
-    //   chord_arrangemnt[i] = 1;
-    //   bass_arrangement[i] = 1 + (i%2);
-    //   if (i%16 >= 4 && i%16 < 8) {
-    //     bass_arrangement[i] = 3 + (i%2);
-    //     chord_arrangemnt[i] = 2;
-    //   }
-    //   if (i >= 16 && i < 24) {
-    //     bass_arrangement[i] = 5 + (i%2);
-    //     chord_arrangemnt[i] = 3;
-    //   }
-    //   section_length[i] = 1;
-    // }
-
-
-
-
-
-
-    // int drum_arrangement_stand [5][32] = {
-    //   // hi hat
-    //   {0,0,1,1,2,2,2,2,1,1,1,1,  2,2,2,2,3,4,3,4,3,4,3,4,  3,4,3,4,1,1,1,1},
-    //   // snare
-    //   {0,0,1,1,2,2,2,2,1,1,1,1,  2,2,2,2,3,4,3,4,3,4,3,4, 1,2,1,2,1,1,1,1},
-    //   // kick
-    //   {0,0,1,1,2,2,2,2,1,1,1,1,  2,2,2,2,3,4,3,4,3,4,3,4, 1,2,1,2,1,1,1,1},
-    //   // tom fills
-    //   {-1,-1,-1,8,-1,-1,-1,8,-1,-1,-1,8, -1,4,8,12,-1,-1,-1,8,-1,-1,8,12, -1,-1,8,12,-1,-1,-1,8},
-    //   // crash
-    //   {0,0,0,0,2,0,0,0,1,0,0,0, 2,0,0,2,1,0,0,0,2,0,0,2, 1,0,0,0,1,0,1,2}
-    // };
-
-    // int** drum_arr = new int* [5];
-    // for (int i=0; i<5; i++) {
-    //   drum_arr[i] = new int [32];
-    //   for (int j=0; j<32; j++)
-    //   {
-    //     drum_arr[i][j] = drum_arrangement_stand[i][j];
-    //   }
-    // }
-
-    std::cout << "intro_length: " << intro_length << std::endl;
-    std::cout << "middle_length: " << middle_length << std::endl;
-    std::cout << "end_length: " << end_length << std::endl;
-    std::cout << "breakdown_length: " << breakdown_length << std::endl;
-    std::cout << "Total Sections: " << total_sections << std::endl;
-    std::cout << "highest_bass: " << highest_bass << '\n' << std::endl;
-    for (int i=0; i<total_sections; i++)
-    {
-      std::cout << bass_arrangement_all[i] << " ";
-      if (i == intro_length-1)
-      {
-        std::cout << "   ";
-      }
-      if (i == (middle_length + intro_length-1)) {
-        std::cout << "   ";
-      }
-    }
-    std::cout << "\n\nHi_hat: " << std::endl;
-
-    for (int i=0; i<total_sections; i++)
-    {
-      std::cout << drum_arrangement_all[0][i] << " ";
-      if (i == intro_length-1)
-      {
-        std::cout << "   ";
-      }
-      if (i == (middle_length + intro_length-1)) {
-        std::cout << "   ";
-      }
-    }
-
-    std::cout << "\n\nkick: " << std::endl;
-
-    for (int i=0; i<total_sections; i++)
-    {
-      std::cout << drum_arrangement_all[2][i] << " ";
-      if (i == intro_length-1)
-      {
-        std::cout << "   ";
-      }
-      if (i == (middle_length + intro_length-1)) {
-        std::cout << "   ";
-      }
-    }
-
-    std::cout << "\n\nSnare: " << std::endl;
-
-    for (int i=0; i<total_sections; i++)
-    {
-      std::cout << drum_arrangement_all[1][i] << " ";
-      if (i == intro_length-1)
-      {
-        std::cout << "   ";
-      }
-      if (i == (middle_length + intro_length-1)) {
-        std::cout << "   ";
-      }
-    }
-    std::cout << "\n\n" << std::endl;
-
-    std::cout << "alternate1 " << alternate_sections << std::endl;
-    std::cout << "alternate2 " << alternate_section2 << std::endl;
-    std::cout << "alternate3 " << alternate_section3 << std::endl;
-    std::cout << "made it to drum creation (1018)"<< std::endl;
-
-
     int*** created_drums = drum_arrangement::create_tracks_from_arrangement(
       drum_arrangement_all,
       section_length_all,
       total_sections
     );
 
-    std::cout << "made it to bass creation (1025)"<< std::endl;
     bass_arrangement::create_tracks_from_arrangement_and_chords(
       key_arrangement_all,
       chord_arrangement_all,
@@ -1285,7 +1094,5 @@ namespace arrangement_main
       total_sections,
       created_drums
     );
-
-    std::cout << "done!"<< std::endl;
   }
 }

@@ -19,7 +19,6 @@ namespace drum_track
   extern double** main_buffer;
   extern int main_buffer_size;
   extern int main_buffer_channels;
-  // extern void test_creation();
 }
 
 namespace bass_track
@@ -27,7 +26,6 @@ namespace bass_track
   extern double** main_buffer;
   extern int main_buffer_size;
   extern int main_buffer_channels;
-  // extern void test_creation();
 }
 
 namespace audio_setup
