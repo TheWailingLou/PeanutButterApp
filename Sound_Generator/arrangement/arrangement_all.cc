@@ -167,7 +167,6 @@ namespace arrangement_all
 
   void intro_bars (int* bass_arrangement, int** drum_arrangement, int main_start)
   {
-    std::cout << "\n\n\n\nINTRO LENGTH: " << main_start << "\n\n\n\n" << std::endl;
     if (main_start == 0)
     {
       return;
@@ -175,7 +174,6 @@ namespace arrangement_all
     int what_intro = rand()%15;
     if (what_intro == 0 || what_intro == 10 || what_intro == 14)
     {
-      std::cout << "Intro 1" << std::endl;
       for (int i=0; i<main_start; i++) {
         bass_arrangement[i] = bass_arrangement[(i%4)+main_start];
         if (i >= 4) {
@@ -184,7 +182,6 @@ namespace arrangement_all
       }
 
     } else if (what_intro == 1) {
-      std::cout << "Intro 2" << std::endl;
       for (int i=0; i<main_start; i++) {
         drum_arrangement[0][i] = drum_arrangement[0][(i%4)+main_start];
         if (i >= 4) {
@@ -192,7 +189,6 @@ namespace arrangement_all
         }
       }
     } else if (what_intro == 2) {
-      std::cout << "Intro 3" << std::endl;
       for (int i=0; i<main_start; i++) {
         drum_arrangement[2][i] = drum_arrangement[2][(i%4)+main_start];
         if (i >= 4) {
@@ -200,7 +196,6 @@ namespace arrangement_all
         }
       }
     } else if (what_intro == 3) {
-      std::cout << "Intro 4" << std::endl;
       for (int i=0; i<main_start; i++) {
         drum_arrangement[2][i] = drum_arrangement[2][(i%4)+main_start];
         if (i >= 4) {
@@ -208,7 +203,6 @@ namespace arrangement_all
         }
       }
     } else if (what_intro == 4 || what_intro == 11) {
-      std::cout << "Intro 5" << std::endl;
       for (int i=0; i<main_start; i++) {
         bass_arrangement[i] = bass_arrangement[(i%4)+main_start];
         if (i >= 4) {
@@ -217,7 +211,6 @@ namespace arrangement_all
         }
       }
     } else if (what_intro == 5) {
-      std::cout << "Intro 6" << std::endl;
       for (int i=0; i<main_start; i++) {
         drum_arrangement[2][i] = drum_arrangement[2][(i%4)+main_start];
         drum_arrangement[0][i] = drum_arrangement[2][(i%4)+main_start];
@@ -226,14 +219,12 @@ namespace arrangement_all
         }
       }
     } else if (what_intro == 6) {
-      std::cout << "Intro 7" << std::endl;
       for (int i=0; i<main_start; i++) {
         drum_arrangement[2][i] = drum_arrangement[2][(i%4)+main_start];
         drum_arrangement[0][i] = drum_arrangement[2][(i%4)+main_start];
         drum_arrangement[1][i] = drum_arrangement[1][(i%4)+main_start];
       }
     } else if (what_intro == 7 || what_intro == 12) {
-      std::cout << "Intro 8" << std::endl;
       for (int i=0; i<main_start; i++) {
         bass_arrangement[i] = bass_arrangement[(i%4)+main_start];
         if (i >= 4) {
@@ -241,12 +232,10 @@ namespace arrangement_all
         }
       }
     } else if (what_intro == 8 || what_intro == 13) {
-      std::cout << "Intro 9" << std::endl;
       for (int i=0; i<main_start; i++) {
         bass_arrangement[i] = bass_arrangement[(i%4)+main_start];
       }
     } else if (what_intro == 9) {
-      std::cout << "Intro 10" << std::endl;
       for (int i=0; i<main_start; i++) {
         drum_arrangement[2][i] = drum_arrangement[2][(i%4)+main_start];
         drum_arrangement[0][i] = drum_arrangement[2][(i%4)+main_start];
@@ -259,13 +248,6 @@ namespace arrangement_all
 
   void end_bars (int* bass_arrangement, int** key_arrangement, int** drum_arrangement, int end_length, int total_length, int main_start)
   {
-    std::cout << "\n\nKEY ARR PROBLEM ??? k: " << key_arrangement[total_length-1][1] << std::endl;
-    std::cout << "total_length -1: " << total_length - 1 << std::endl;
-    std::cout << "\n\n\n\nEND LENGTH: " << end_length << "\n\n\n\n" << std::endl;
-    // if (end_length == 0)
-    // {
-    //   return;
-    // }
     int what_end = rand()%5;
     int current_bar = total_length-end_length;
     for (int i=0; i<end_length-1; i++)
@@ -285,8 +267,6 @@ namespace arrangement_all
     drum_arrangement[4][total_length-1] = 0;
     if (what_end == 0)
     {
-      std::cout << "Ending 1" << std::endl;
-      // drum intensify;
       for (int i=0; i<end_length-1; i++)
       {
 
@@ -321,8 +301,6 @@ namespace arrangement_all
       drum_arrangement[4][total_length-1] = 1;
       bass_writer::final_note(key_arrangement[total_length-1][1], 16, 1, total_length-1);
     } else if (what_end == 1) {
-      // drum intensify2;
-      std::cout << "Ending 2" << std::endl;
       for (int i=0; i<end_length-1; i++)
       {
 
@@ -355,7 +333,6 @@ namespace arrangement_all
         }
       }
       drum_arrangement[4][total_length-1] = 0;
-      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
       if (rand()%2 == 0)
       {
         int snare_end [16] = {1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -366,11 +343,7 @@ namespace arrangement_all
         snare_writer::write_from_array_at_bar(snare_end, total_length-1);
         bass_writer::final_note(key_arrangement[total_length-1][1], 1, 1, total_length-1);
       }
-      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
     } else if (what_end == 2) {
-
-      std::cout << "Ending 3" << std::endl;
-      // bass_solo_after4
       for (int i=0; i<end_length-1; i++)
       {
         if (i%4 == 0)
@@ -393,10 +366,7 @@ namespace arrangement_all
       }
 
       bass_writer::final_note(key_arrangement[total_length-1][1], 8, 1, total_length-1);
-      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
     } else if (what_end == 3) {
-      std::cout << "Ending 4" << std::endl;
-      // bass_solo_after8
       for (int i=0; i<end_length-1; i++)
       {
         if (i%4 == 0)
@@ -423,11 +393,7 @@ namespace arrangement_all
       } else {
         bass_writer::final_note(key_arrangement[total_length-1][1], 2, 1, total_length-1);
       }
-
-      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
     } else if (what_end == 4) {
-      std::cout << "Ending 5" << std::endl;
-      // bass_solo_entire
       for (int i=0; i<end_length-1; i++)
       {
         drum_arrangement[0][current_bar+i] = 0;
@@ -442,7 +408,6 @@ namespace arrangement_all
       } else {
         bass_writer::final_note(key_arrangement[total_length-1][1], 2, 1, total_length-1);
       }
-      std::cout << "\n\nMaking it past filling in of ending??\n\n" << std::endl;
     }
   }
 
@@ -450,11 +415,8 @@ namespace arrangement_all
   {
     int mod_what = rand()%13;
     int root_section = main_start + (rand()%current_section)*4;
-    std::cout << "\nROOT SECTION: " << root_section << "\n" << std::endl;
-
     int current_bar = (current_section*4) + main_start;
 
-    std::cout << "\nCURRENT_BAR: " << current_bar << "\n" << std::endl;
     if (mod_what == 0 || mod_what == 3 || mod_what == 6)
     {
       for (int i=0; i<4; i++)
@@ -473,7 +435,6 @@ namespace arrangement_all
         {
           if (normal_mod)
           {
-            std::cout << "DOING A NORMAL MOD " << std::endl;
             int current_mode = key_arrangement[i+root_section][0];
             if (current_mode == 5)
             {
@@ -487,7 +448,6 @@ namespace arrangement_all
               key_arrangement[i+current_bar][1] = key_arrangement[i+root_section][1];
             }
           } else {
-            std::cout << "\n\n\nWEIRD MOD!\n\n " << std::endl;
             if (rand()%100 > 40)
             {
               key_arrangement[i+current_bar][0] = key_arrangement[i+current_bar][0] + ((3*(i+1))%7);
@@ -512,8 +472,6 @@ namespace arrangement_all
               key_arrangement[i+current_bar][0] = key_arrangement[i+root_section][0];
               key_arrangement[i+current_bar][1] = key_arrangement[i+root_section][1] + (rand()%12);
             }
-
-            std::cout << "\n\n\nWEIRD MOD!\n\n " << std::endl;
           }
         }
         bass_arrangement[i+current_bar] = bass_arrangement[i+root_section];
@@ -523,7 +481,6 @@ namespace arrangement_all
 
 
       bool mod_chords_too = (rand()%100) > 50;
-      // bool alternate_section = (rand()%100) > 50;
       for (int i=0; i<4; i++)
       {
         key_arrangement[i+current_bar][0] = key_arrangement[i+root_section][0];
