@@ -15,7 +15,6 @@ namespace snare_writer
           for (int i=0; i<drum_imports::snare_buffer_size; i++)
           {
             drum_track::other_drum_tracks[channel][i+frame_location] += drum_imports::snare_buffer[channel][i];
-            // drum_track::snare_track[channel][i+frame_location] += drum_imports::snare_buffer[channel][i];
           }
         }
       }

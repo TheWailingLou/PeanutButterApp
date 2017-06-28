@@ -15,7 +15,6 @@ namespace crash_writer
           for (int i=0; i<drum_imports::crash1_buffer_size; i++)
           {
             drum_track::other_drum_tracks[channel][i+frame_location] += drum_imports::crash1_buffer[channel][i];
-            // drum_track::crash_track[channel][i+frame_location] += drum_imports::crash1_buffer[channel][i];
           }
         }
       } else if (teenth_array[location] == 2) {
@@ -25,7 +24,6 @@ namespace crash_writer
           for (int i=0; i<drum_imports::crash2_buffer_size; i++)
           {
             drum_track::other_drum_tracks[channel][i+frame_location] += drum_imports::crash2_buffer[channel][i];
-            // drum_track::crash_track[channel][i+frame_location] += drum_imports::crash2_buffer[channel][i];
           }
         }
       }
@@ -41,7 +39,6 @@ namespace crash_writer
         for (int i=0; i<drum_imports::crash1_buffer_size; i++)
         {
           drum_track::other_drum_tracks[channel][i+bar_frame] += drum_imports::crash1_buffer[channel][i];
-          // drum_track::crash_track[channel][i+bar_frame] += drum_imports::crash1_buffer[channel][i];
         }
       }
     } else if (crash == 2) {
@@ -50,7 +47,6 @@ namespace crash_writer
         for (int i=0; i<drum_imports::crash2_buffer_size; i++)
         {
           drum_track::other_drum_tracks[channel][i+bar_frame] += drum_imports::crash2_buffer[channel][i];
-          // drum_track::crash_track[channel][i+bar_frame] += drum_imports::crash2_buffer[channel][i];
         }
       }
     }
