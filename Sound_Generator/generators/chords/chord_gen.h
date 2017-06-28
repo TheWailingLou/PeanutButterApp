@@ -10,7 +10,6 @@ namespace scales
   extern int* get_step_pattern(int mode, bool harmonic);
 }
 
-
 namespace notes
 {
   extern int* get_single_octave(int starting_note, int mode, bool harmonic);

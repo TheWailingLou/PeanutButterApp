@@ -4,6 +4,8 @@ namespace bass_voice
 {
   void write_note_at_location(int note, int teenth_duration, int teenth_location, int bar)
   {
+    // I believe this voice is deprecated. I will likely remove it later after I run some tests.
+
     double frequency = tones::convert_note_to_tone(note);
     int teenth_as_frame = audio_helper::teenth_slice_as_frame(teenth_location);
     int bar_as_frame = audio_helper::bar_duration_in_frames() * bar;
@@ -27,59 +29,10 @@ namespace bass_voice
         }
         if (gain > 1.0)
         {
-          std::cout << "gain! " << gain << std::endl;
           gain = 0.9;
         }
-        // double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * frequency;
-        // double sin_frame = sin(sin_x);
-        // double sin_x2 = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency+4);
-        // double sin_frame2 = sin(sin_x2);
-        //
-        // double sin_x3 = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency+8);
-        // double sin_frame3 = sin(sin_x3);
-        //
-        // double sin_x4 = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency+12);
-        // double sin_frame4 = sin(sin_x4);
 
-        // if (cos(sin_x) > 0) {
-        //   // sin_frame = (4*i*frequency)/((double)audio_setup::sample_rate * M_PI);
-        //   sin_frame = 1;
-        //   sin_frame2 = 1;
-        //   sin_frame3 = 1;
-        //   sin_frame4 = 1;
-        // } else {
-        //   // sin_frame = (-4*i*frequency)/((double)audio_setup::sample_rate * M_PI);
-        //   sin_frame = -1;
-        //   sin_frame2 = -1;
-        //   sin_frame3 = -1;
-        //   sin_frame4 = -1;
-        // }
         double morpher_square = 0;
-
-        // int voices = 7;
-        // for (int voice=0; voice<voices; voice++)
-        // {
-        //   double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency + (((double)voice)*(frequency*2/((double)voices)))/(frequency*2));
-        //   double sin_frame = sin(sin_x);
-        //   if (sin_frame > 0) {
-        //     sin_frame = 1.0/((double)voices);
-        //   } else {
-        //     sin_frame = -1.0/((double)voices);
-        //   }
-        //   morpher_square += sin_frame;
-        // }
-        //
-
-
-
-        // int triangle = ((int)i)%((int)frequency);
-        // if (sin(sin_x) > 0) {
-        //   morpher_square = (4*((double)triangle))/((double)audio_setup::sample_rate * M_PI);
-        // } else {
-        //   morpher_square = (-4*((double)triangle))/((double)audio_setup::sample_rate * M_PI);
-        // }
-
-        ///// TRIANGLE :: // Fuck yeah!!
 
         int voices = 1;
 
@@ -104,47 +57,14 @@ namespace bass_voice
           morphed_triangle += triangle/(double)voices;
         }
 
-        //
-        // if (triangle > 1) {
-        //   triangle = 1;
-        // } else if (triangle < -1) {
-        //   triangle = -1;
-        // }
-
-
-
-
-
-        // double sin_x = ((M_PI*2)/((double)audio_setup::sample_rate)) * i * (frequency * 2);
-        // double sine = sin(sin_x);
-        // double square = 0;
-        // //
-        // if (sine > 0) {
-        //   square = 1;
-        // } else {
-        //   square = -1;
-        // }
-
         morpher_square = morphed_triangle;
 
-        // double
-        // if (i%3 == 0)
-        // {
-        //   morpher_square = square;
-        // } else if (i%3 == 1) {
-        //   morpher_square = (square + sine)/2.0; //+ square
-        // } else {
-        //   morpher_square = sine;
-        // }
-
-
-        // double super_square = (sin_frame + sin_frame2 + sin_frame3 + sin_frame4)/4.0;
         bass_track::bass_track_1[channel][i+frame_location] += morpher_square * gain * 0.9;
-        // bass_track::bass_track_1[channel][i+frame_location] += sin_frame * gain;
+
       }
     }
   }
-  // attack and decay are in frames;
+
   double envelope_gain(int i, int attack, int decay, int frame_duration)
   {
     double gain = 0.9;
@@ -350,7 +270,6 @@ namespace bass_voice
 
         bass_track::bass_track_1[channel][i+frame_location] += piano_attempt * gain * 0.9;
 
-
       }
     }
   }
@@ -403,8 +322,6 @@ namespace bass_voice
         piano_attempt = ((2*piano_attempt) + half_sin + (sine*2) + sine2)/6.0;
 
         bass_track::bass_track_1[channel][i+frame_location] += piano_attempt * gain * 0.9;
-
-
       }
     }
   }
@@ -430,8 +347,6 @@ namespace bass_voice
         double i_m_sr_f2 = (double)(i % sr_f2);
         double triangle = 1 - (i_m_sr_f - (i_m_sr_f2 * ((i_m_sr_f - i_m_sr_f2)/sr_f4)))/((double)sr_f4);
 
-
-
         double sr_f_sin = (double)audio_setup::sample_rate/(frequency*1.0);
         double sr_f_cos = (double)audio_setup::sample_rate/(frequency*1.0);
         double modulo = i % (int)sr_f_sin;
@@ -455,22 +370,6 @@ namespace bass_voice
         double half_sin = (2*sin(h_sin_x))-1;
 
         double sr = (double)audio_setup::sample_rate;
-
-        // double fifth = pow(2, (7.0/12.0));
-        // double fourth = pow(2, (5.0/12.0));
-
-
-
-        // double main = -189*cos((M_PI*2*i*frequency*2)/sr) + 113*sin((M_PI*2*i*frequency*2)/sr);
-        // double comp2 = 782*cos((M_PI*2*2*i*frequency*2)/sr) - 1427*sin((M_PI*2*2*i*frequency*2)/sr);
-        // double comp3 = -536*cos((M_PI*2*3*i*frequency*2)/sr) + 8*sin((M_PI*2*3*i*frequency*2)/sr);
-        // double comp4 = -37*cos((M_PI*2*4*i*frequency*2)/sr) - 76*sin((M_PI*2*4*i*frequency*2)/sr);
-        //
-        // double amp_redux =189+113+782+1427+536+8+37+76;
-        // double comp6 = cos((M_PI*2*5*i*frequency*2)/sr) + sin((M_PI*2*5*i*frequency*2)/sr);
-        // double comp7 = cos((M_PI*2*6*i*frequency*2)/sr) + sin((M_PI*2*6*i*frequency*2)/sr);
-        // double comp8 = cos((M_PI*2*7*i*frequency*2)/sr) + sin((M_PI*2*7*i*frequency*2)/sr);
-        // double comp9 = cos((M_PI*2*8*i*frequency*2)/sr) + sin((M_PI*2*8*i*frequency*2)/sr);
 
         int harmonics = 12;
         double gain_redux = 1;
@@ -499,8 +398,6 @@ namespace bass_voice
 
         double new_tone = (square + triangle)/2.0;
         bass_track::bass_track_1[channel][i+frame_location] += piano_attempt * gain * 0.9;
-
-
       }
     }
   }
