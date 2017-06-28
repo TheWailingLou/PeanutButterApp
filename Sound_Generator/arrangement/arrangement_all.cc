@@ -19,25 +19,16 @@ namespace arrangement_all
   }
   void create_tracks(int starting_note, int mode, int* section_lengths_arr)
   {
-
-
-    std::cout << "Rand test: " << rand()%10 << " " << rand()%10 << std::endl;
     int main_start = section_lengths_arr[0];
-    // int breakdown_length = 4*(rand()%3);
     int end_length = section_lengths_arr[1];
-
-    std::cout << "(14) END_LENGTH " << end_length << std::endl;
     int main_sections = section_lengths_arr[2];
 
-    // int main_start = 0;
-    // int end_length = 0;
     int breakdown_length = section_lengths_arr[3];
 
     int total_sections = section_lengths_arr[4];
 
-    // set up all the sections
-
     int** drum_arrangement = new int* [5];
+
     for (int i=0; i<5; i++)
     {
       drum_arrangement[i] = new int [total_sections];
@@ -155,25 +146,13 @@ namespace arrangement_all
       drum_arrangement[4][main_start] = 1 + (rand()%2);
     }
 
-    std::cout << "\nBASS: " << std::endl;
-    for (int i=0; i<total_sections; i++)
-    {
-      std::cout << bass_arrangement[i] << " ";
-    }
-    std::cout << '\n\n' << std::endl;
-
-    std::cout << "(129) END_LENGTH " << end_length << std::endl;
     end_bars (bass_arrangement, key_arrangement, drum_arrangement, end_length, total_sections, main_start);
-
-    std::cout << "finishing generating ending" << std::endl;
 
     int*** all_drum_tracks = drum_arrangement::create_tracks_from_arrangement(
       drum_arrangement,
       section_length,
       total_sections
     );
-
-    std::cout << "MAKING IT PAST DRUMS..." << std::endl;
 
     bass_arrangement::create_tracks_from_arrangement_and_chords(
       key_arrangement,
@@ -184,7 +163,6 @@ namespace arrangement_all
       all_drum_tracks
     );
 
-    std::cout << "MAKING IT PAST BASS... " << std::endl;
   }
 
   void intro_bars (int* bass_arrangement, int** drum_arrangement, int main_start)
