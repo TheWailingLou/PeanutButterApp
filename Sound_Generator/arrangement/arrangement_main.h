@@ -9,8 +9,6 @@
 
 namespace bass_arrangement
 {
-  // extern int bass_arrangement_standard_1 [5][7];
-  // extern int bass_arrangement_standard_2 [5][12];
   extern void create_tracks_from_arrangement_and_chords(
     int** key_arrangement,
     int* chord_arrangemnt,
@@ -39,7 +37,6 @@ namespace arrangement_main
 
   int num_of_unique_sections(int* arrangement, int total_sections);
 
-  // void generate_arrangements_and_create_tracks();
   void generate_arrangements_and_create_tracks(int mode, int starting_note);
 
 }
