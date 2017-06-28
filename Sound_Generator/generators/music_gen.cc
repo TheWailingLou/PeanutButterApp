@@ -15,6 +15,7 @@ namespace music_gen
     int** teenth_array = new int* [16];
     for (int i=0; i<16; i++)
     {
+      teenth_array[i] = new int [2];
 
       if (chords[i][0] != -1) {
         current_chord = chords[i];
@@ -24,9 +25,7 @@ namespace music_gen
         quarter_lock = false;
         half_lock = false;
       }
-      teenth_array[i] = new int [2];
-      // std::cout << "\n\nremaining duration: " << note_remaining_duration << std::endl;
-      // std::cout << "current_chord_duration: " << current_chord_duration << std::endl;
+
       if (note_remaining_duration > 0) {
         teenth_array[i][0] = -1;
         teenth_array[i][1] = 1;
@@ -59,7 +58,6 @@ namespace music_gen
           eighth_lock = false;
           teenth_lock = true;
         }
-
 
         if (half_lock) {
             duration = 8;
@@ -100,11 +98,6 @@ namespace music_gen
       current_chord_duration -= 1;
       note_remaining_duration -= 1;
     }
-    // for (int i=0; i<16; i++)
-    // {
-    //   std::cout << "{  " << teenth_array[i][0] <<" " << teenth_array[i][1] << " }" << std::endl;
-    //
-    // }
 
     return teenth_array;
   }
@@ -122,6 +115,8 @@ namespace music_gen
     int** teenth_array = new int* [16];
     for (int i=0; i<16; i++)
     {
+      teenth_array[i] = new int [2];
+
       if (chords[i][0] != -1) {
         current_chord = chords[i];
         current_chord_duration = current_chord[0];
@@ -130,9 +125,7 @@ namespace music_gen
         quarter_lock = false;
         half_lock = false;
       }
-      teenth_array[i] = new int [2];
-      // std::cout << "\n\nremaining duration: " << note_remaining_duration << std::endl;
-      // std::cout << "current_chord_duration: " << current_chord_duration << std::endl;
+
       if (note_remaining_duration > 0) {
         teenth_array[i][0] = -1;
         teenth_array[i][1] = 1;
@@ -185,11 +178,6 @@ namespace music_gen
             duration = rand()%current_chord_duration + 1;
           }
         }
-        // if (rand()%100 < 10 && !eighth_lock && !teenth_lock && !half_lock && !quarter_lock)
-        // {
-        //   note = -1;
-        //   duration = 1;
-        // }
 
         if (duration > current_chord_duration) {
           duration = current_chord_duration;
@@ -402,10 +390,8 @@ namespace music_gen
 
   int** modify_bar_to_new_mode_or_key(int** bar, int mode, int starting_note, int new_mode, int new_starting_note, int octave)
   {
-    // std::cout << "\nNEW MODE " << new_mode << "CURRENT MODE " << mode << std::endl;
     if (mode == new_mode && starting_note == new_starting_note)
     {
-      // std::cout << "\nReturning bar...\n" << std::endl;
       return bar;
     }
     int** new_bar = new int* [16];
@@ -420,8 +406,7 @@ namespace music_gen
       {
         int note_val = notes::convert_to_note_value(note, mode, starting_note);
         int new_note = new_scale[note_val] + 12*octave;
-        // std::cout << " " << note << " NEW_NOTE: " << new_note << std::endl;
-        // std::cout << "note_val: " << note_val << std::endl;
+        
         new_bar[i][0] = new_note;
         new_bar[i][1] = duration;
       } else {
