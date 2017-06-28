@@ -102,7 +102,6 @@ namespace drum_arrangement
     int* section_length,
     int total_sections
   );
-  // int num_of_unique_sections(int* arrangement, int total_sections);
 }
 
 #endif
